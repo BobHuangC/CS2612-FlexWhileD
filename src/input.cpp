@@ -83,10 +83,24 @@ void processFlexFile(
 
 }
 
-int main() {
-    std::string filename = "input_file.l"; // 替换为你的 Flex 文件名
-    std::string outputRegexFilename = "regex.txt";
-    std::string outputSyntaxFilename = "syntax.txt";
+
+
+int main(int argc, char* argv[]) {
+    if (argc != 4) {
+        std::cerr << "Usage: " << argv[0] << " <input_file> <output_regex_file> <output_syntax_file>" << std::endl;
+        return 1;
+    }
+    std::string filename = argv[1];
+    std::string outputRegexFilename = argv[2];
+    std::string outputSyntaxFilename = argv[3];
     processFlexFile(filename, outputRegexFilename, outputSyntaxFilename);
     return 0;
 }
+
+// int main() {
+//     std::string filename = "input_file.l"; // 替换为你的 Flex 文件名
+//     std::string outputRegexFilename = "regex.txt";
+//     std::string outputSyntaxFilename = "syntax.txt";
+//     processFlexFile(filename, outputRegexFilename, outputSyntaxFilename);
+//     return 0;
+// }
