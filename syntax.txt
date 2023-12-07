@@ -1,0 +1,75 @@
+
+{ 
+    return TM_STRUCT;
+}
+
+{ 
+    return TM_ENUM;
+}
+
+{ 
+    return TM_UNION;
+}
+
+{ 
+    return TM_TYPEDEF;
+}
+
+{ 
+    return TM_INT;
+}
+
+{ 
+    return TM_CHAR;
+}
+
+{ 
+    return TM_DEREF;
+}
+
+{ 
+    return TM_LEFT_SQUARE;
+}
+
+{ 
+    return TM_RIGHT_SQUARE;
+}
+
+{ 
+    return TM_COMMA;
+}
+
+{ 
+    yylval.n = build_nat(yytext, yyleng);
+    return TM_NAT;
+}
+
+{ 
+    yylval.i = new_str(yytext, yyleng);
+    return TM_IDENT;
+}
+
+{ 
+    return TM_SEMICOL;
+    }
+
+{ 
+    return TM_LEFT_PAREN;
+    }
+
+{ 
+    return TM_RIGHT_PAREN;
+    }
+
+"{"  {
+    return TM_LEFT_BRACE;
+    }
+
+"}" {
+    return TM_RIGHT_BRACE;
+    }
+
+{  };
+
+{printf("%s",yytext); 
+     return -1; }
