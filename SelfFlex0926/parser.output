@@ -1,0 +1,1108 @@
+Grammar
+
+    0 $accept: NT_WHOLE $end
+
+    1 NT_WHOLE: NT_GLOB_ITEM_LIST
+
+    2 NT_GLOB_ITEM_LIST: NT_GLOB_ITEM
+    3                  | NT_GLOB_ITEM NT_GLOB_ITEM_LIST
+
+    4 NT_ARGUMENT_TYPE_LIST_inner: TM_LEFT_PAREN NT_ARGUMENT_TYPE_LIST TM_RIGHT_PAREN
+
+    5 NT_ARGUMENT_TYPE_LIST: ε
+    6                      | NT_LEFT_TYPE NT_ANNON_RIGHT_TYPE_EXPR TM_COMMA NT_ARGUMENT_TYPE_LIST
+    7                      | NT_LEFT_TYPE TM_COMMA NT_ARGUMENT_TYPE_LIST
+    8                      | NT_LEFT_TYPE NT_ANNON_RIGHT_TYPE_EXPR
+    9                      | NT_LEFT_TYPE
+
+   10 NT_ENUM_ELE_LIST: TM_IDENT
+   11                 | TM_IDENT TM_COMMA NT_ENUM_ELE_LIST
+
+   12 NT_FIELD_LIST: ε
+   13              | NT_LEFT_TYPE NT_NAMED_RIGHT_TYPE_EXPR TM_SEMICOL NT_FIELD_LIST
+
+   14 NT_ANNON_RIGHT_TYPE_EXPR: TM_LEFT_PAREN NT_ANNON_RIGHT_TYPE_EXPR TM_RIGHT_PAREN
+   15                         | TM_DEREFERENCE NT_ANNON_RIGHT_TYPE_EXPR
+   16                         | TM_DEREFERENCE
+   17                         | NT_ANNON_RIGHT_TYPE_EXPR TM_LEFT_BRACKET TM_NAT TM_RIGHT_BRACKET
+   18                         | NT_ANNON_RIGHT_TYPE_EXPR NT_ARGUMENT_TYPE_LIST_inner
+   19                         | NT_ARGUMENT_TYPE_LIST_inner
+
+   20 NT_NAMED_RIGHT_TYPE_EXPR: TM_LEFT_PAREN NT_NAMED_RIGHT_TYPE_EXPR TM_RIGHT_PAREN
+   21                         | TM_IDENT
+   22                         | TM_DEREFERENCE NT_NAMED_RIGHT_TYPE_EXPR
+   23                         | NT_NAMED_RIGHT_TYPE_EXPR TM_LEFT_BRACKET TM_NAT TM_RIGHT_BRACKET
+   24                         | NT_NAMED_RIGHT_TYPE_EXPR NT_ARGUMENT_TYPE_LIST_inner
+
+   25 NT_LEFT_TYPE: TM_STRUCT_TYPE TM_IDENT TM_LEFT_BRACE NT_FIELD_LIST TM_RIGHT_BRACE
+   26             | TM_STRUCT_TYPE TM_LEFT_BRACE NT_FIELD_LIST TM_RIGHT_BRACE
+   27             | TM_STRUCT_TYPE TM_IDENT
+   28             | TM_UNION_TYPE TM_IDENT TM_LEFT_BRACE NT_FIELD_LIST TM_RIGHT_BRACE
+   29             | TM_UNION_TYPE TM_LEFT_BRACE NT_FIELD_LIST TM_RIGHT_BRACE
+   30             | TM_UNION_TYPE TM_IDENT
+   31             | TM_ENUM_TYPE TM_IDENT TM_LEFT_BRACE NT_ENUM_ELE_LIST TM_RIGHT_BRACE
+   32             | TM_ENUM_TYPE TM_LEFT_BRACE NT_ENUM_ELE_LIST TM_RIGHT_BRACE
+   33             | TM_ENUM_TYPE TM_IDENT
+   34             | TM_INT_TYPE
+   35             | TM_CHAR_TYPE
+   36             | TM_IDENT
+
+   37 NT_GLOB_ITEM: TM_STRUCT_TYPE TM_IDENT TM_LEFT_BRACE NT_FIELD_LIST TM_RIGHT_BRACE TM_SEMICOL
+   38             | TM_STRUCT_TYPE TM_IDENT TM_SEMICOL
+   39             | TM_UNION_TYPE TM_IDENT TM_LEFT_BRACE NT_FIELD_LIST TM_RIGHT_BRACE TM_SEMICOL
+   40             | TM_UNION_TYPE TM_IDENT TM_SEMICOL
+   41             | TM_ENUM_TYPE TM_IDENT TM_LEFT_BRACE NT_ENUM_ELE_LIST TM_RIGHT_BRACE TM_SEMICOL
+   42             | TM_ENUM_TYPE TM_IDENT TM_SEMICOL
+   43             | TM_TYPEDEF_TYPE NT_LEFT_TYPE NT_NAMED_RIGHT_TYPE_EXPR TM_SEMICOL
+   44             | NT_LEFT_TYPE NT_NAMED_RIGHT_TYPE_EXPR TM_SEMICOL
+
+
+Terminals, with rules where they appear
+
+    $end (0) 0
+    error (256)
+    TM_NAT <n> (258) 17 23
+    TM_INT_TYPE <none> (259) 34
+    TM_CHAR_TYPE <none> (260) 35
+    TM_ENUM_TYPE <none> (261) 31 32 33 41 42
+    TM_STRUCT_TYPE <none> (262) 25 26 27 37 38
+    TM_UNION_TYPE <none> (263) 28 29 30 39 40
+    TM_TYPEDEF_TYPE <none> (264) 43
+    TM_DEREFERENCE <none> (265) 15 16 22
+    TM_COMMA <none> (266) 6 7 11
+    TM_LEFT_BRACE <none> (267) 25 26 28 29 31 32 37 39 41
+    TM_RIGHT_BRACE <none> (268) 25 26 28 29 31 32 37 39 41
+    TM_LEFT_PAREN <none> (269) 4 14 20
+    TM_RIGHT_PAREN <none> (270) 4 14 20
+    TM_LEFT_BRACKET <none> (271) 17 23
+    TM_RIGHT_BRACKET <none> (272) 17 23
+    TM_SEMICOL <none> (273) 13 37 38 39 40 41 42 43 44
+    TM_IDENT <i> (274) 10 11 21 25 27 28 30 31 33 36 37 38 39 40 41 42
+
+
+Nonterminals, with rules where they appear
+
+    $accept (20)
+        on left: 0
+    NT_WHOLE <e> (21)
+        on left: 1
+        on right: 0
+    NT_GLOB_ITEM_LIST <e> (22)
+        on left: 2 3
+        on right: 1 3
+    NT_ARGUMENT_TYPE_LIST_inner <e> (23)
+        on left: 4
+        on right: 18 19 24
+    NT_ARGUMENT_TYPE_LIST <e> (24)
+        on left: 5 6 7 8 9
+        on right: 4 6 7
+    NT_ENUM_ELE_LIST <e> (25)
+        on left: 10 11
+        on right: 11 31 32 41
+    NT_FIELD_LIST <e> (26)
+        on left: 12 13
+        on right: 13 25 26 28 29 37 39
+    NT_ANNON_RIGHT_TYPE_EXPR <e> (27)
+        on left: 14 15 16 17 18 19
+        on right: 6 8 14 15 17 18
+    NT_NAMED_RIGHT_TYPE_EXPR <e> (28)
+        on left: 20 21 22 23 24
+        on right: 13 20 22 23 24 43 44
+    NT_LEFT_TYPE <e> (29)
+        on left: 25 26 27 28 29 30 31 32 33 34 35 36
+        on right: 6 7 8 9 13 43 44
+    NT_GLOB_ITEM <e> (30)
+        on left: 37 38 39 40 41 42 43 44
+        on right: 2 3
+
+
+State 0
+
+    0 $accept: • NT_WHOLE $end
+
+    TM_INT_TYPE      shift, and go to state 1
+    TM_CHAR_TYPE     shift, and go to state 2
+    TM_ENUM_TYPE     shift, and go to state 3
+    TM_STRUCT_TYPE   shift, and go to state 4
+    TM_UNION_TYPE    shift, and go to state 5
+    TM_TYPEDEF_TYPE  shift, and go to state 6
+    TM_IDENT         shift, and go to state 7
+
+    NT_WHOLE           go to state 8
+    NT_GLOB_ITEM_LIST  go to state 9
+    NT_LEFT_TYPE       go to state 10
+    NT_GLOB_ITEM       go to state 11
+
+
+State 1
+
+   34 NT_LEFT_TYPE: TM_INT_TYPE •
+
+    $default  reduce using rule 34 (NT_LEFT_TYPE)
+
+
+State 2
+
+   35 NT_LEFT_TYPE: TM_CHAR_TYPE •
+
+    $default  reduce using rule 35 (NT_LEFT_TYPE)
+
+
+State 3
+
+   31 NT_LEFT_TYPE: TM_ENUM_TYPE • TM_IDENT TM_LEFT_BRACE NT_ENUM_ELE_LIST TM_RIGHT_BRACE
+   32             | TM_ENUM_TYPE • TM_LEFT_BRACE NT_ENUM_ELE_LIST TM_RIGHT_BRACE
+   33             | TM_ENUM_TYPE • TM_IDENT
+   41 NT_GLOB_ITEM: TM_ENUM_TYPE • TM_IDENT TM_LEFT_BRACE NT_ENUM_ELE_LIST TM_RIGHT_BRACE TM_SEMICOL
+   42             | TM_ENUM_TYPE • TM_IDENT TM_SEMICOL
+
+    TM_LEFT_BRACE  shift, and go to state 12
+    TM_IDENT       shift, and go to state 13
+
+
+State 4
+
+   25 NT_LEFT_TYPE: TM_STRUCT_TYPE • TM_IDENT TM_LEFT_BRACE NT_FIELD_LIST TM_RIGHT_BRACE
+   26             | TM_STRUCT_TYPE • TM_LEFT_BRACE NT_FIELD_LIST TM_RIGHT_BRACE
+   27             | TM_STRUCT_TYPE • TM_IDENT
+   37 NT_GLOB_ITEM: TM_STRUCT_TYPE • TM_IDENT TM_LEFT_BRACE NT_FIELD_LIST TM_RIGHT_BRACE TM_SEMICOL
+   38             | TM_STRUCT_TYPE • TM_IDENT TM_SEMICOL
+
+    TM_LEFT_BRACE  shift, and go to state 14
+    TM_IDENT       shift, and go to state 15
+
+
+State 5
+
+   28 NT_LEFT_TYPE: TM_UNION_TYPE • TM_IDENT TM_LEFT_BRACE NT_FIELD_LIST TM_RIGHT_BRACE
+   29             | TM_UNION_TYPE • TM_LEFT_BRACE NT_FIELD_LIST TM_RIGHT_BRACE
+   30             | TM_UNION_TYPE • TM_IDENT
+   39 NT_GLOB_ITEM: TM_UNION_TYPE • TM_IDENT TM_LEFT_BRACE NT_FIELD_LIST TM_RIGHT_BRACE TM_SEMICOL
+   40             | TM_UNION_TYPE • TM_IDENT TM_SEMICOL
+
+    TM_LEFT_BRACE  shift, and go to state 16
+    TM_IDENT       shift, and go to state 17
+
+
+State 6
+
+   43 NT_GLOB_ITEM: TM_TYPEDEF_TYPE • NT_LEFT_TYPE NT_NAMED_RIGHT_TYPE_EXPR TM_SEMICOL
+
+    TM_INT_TYPE     shift, and go to state 1
+    TM_CHAR_TYPE    shift, and go to state 2
+    TM_ENUM_TYPE    shift, and go to state 18
+    TM_STRUCT_TYPE  shift, and go to state 19
+    TM_UNION_TYPE   shift, and go to state 20
+    TM_IDENT        shift, and go to state 7
+
+    NT_LEFT_TYPE  go to state 21
+
+
+State 7
+
+   36 NT_LEFT_TYPE: TM_IDENT •
+
+    $default  reduce using rule 36 (NT_LEFT_TYPE)
+
+
+State 8
+
+    0 $accept: NT_WHOLE • $end
+
+    $end  shift, and go to state 22
+
+
+State 9
+
+    1 NT_WHOLE: NT_GLOB_ITEM_LIST •
+
+    $default  reduce using rule 1 (NT_WHOLE)
+
+
+State 10
+
+   44 NT_GLOB_ITEM: NT_LEFT_TYPE • NT_NAMED_RIGHT_TYPE_EXPR TM_SEMICOL
+
+    TM_DEREFERENCE  shift, and go to state 23
+    TM_LEFT_PAREN   shift, and go to state 24
+    TM_IDENT        shift, and go to state 25
+
+    NT_NAMED_RIGHT_TYPE_EXPR  go to state 26
+
+
+State 11
+
+    2 NT_GLOB_ITEM_LIST: NT_GLOB_ITEM •
+    3                  | NT_GLOB_ITEM • NT_GLOB_ITEM_LIST
+
+    TM_INT_TYPE      shift, and go to state 1
+    TM_CHAR_TYPE     shift, and go to state 2
+    TM_ENUM_TYPE     shift, and go to state 3
+    TM_STRUCT_TYPE   shift, and go to state 4
+    TM_UNION_TYPE    shift, and go to state 5
+    TM_TYPEDEF_TYPE  shift, and go to state 6
+    TM_IDENT         shift, and go to state 7
+
+    $default  reduce using rule 2 (NT_GLOB_ITEM_LIST)
+
+    NT_GLOB_ITEM_LIST  go to state 27
+    NT_LEFT_TYPE       go to state 10
+    NT_GLOB_ITEM       go to state 11
+
+
+State 12
+
+   32 NT_LEFT_TYPE: TM_ENUM_TYPE TM_LEFT_BRACE • NT_ENUM_ELE_LIST TM_RIGHT_BRACE
+
+    TM_IDENT  shift, and go to state 28
+
+    NT_ENUM_ELE_LIST  go to state 29
+
+
+State 13
+
+   31 NT_LEFT_TYPE: TM_ENUM_TYPE TM_IDENT • TM_LEFT_BRACE NT_ENUM_ELE_LIST TM_RIGHT_BRACE
+   33             | TM_ENUM_TYPE TM_IDENT •
+   41 NT_GLOB_ITEM: TM_ENUM_TYPE TM_IDENT • TM_LEFT_BRACE NT_ENUM_ELE_LIST TM_RIGHT_BRACE TM_SEMICOL
+   42             | TM_ENUM_TYPE TM_IDENT • TM_SEMICOL
+
+    TM_LEFT_BRACE  shift, and go to state 30
+    TM_SEMICOL     shift, and go to state 31
+
+    $default  reduce using rule 33 (NT_LEFT_TYPE)
+
+
+State 14
+
+   26 NT_LEFT_TYPE: TM_STRUCT_TYPE TM_LEFT_BRACE • NT_FIELD_LIST TM_RIGHT_BRACE
+
+    TM_INT_TYPE     shift, and go to state 1
+    TM_CHAR_TYPE    shift, and go to state 2
+    TM_ENUM_TYPE    shift, and go to state 18
+    TM_STRUCT_TYPE  shift, and go to state 19
+    TM_UNION_TYPE   shift, and go to state 20
+    TM_IDENT        shift, and go to state 7
+
+    $default  reduce using rule 12 (NT_FIELD_LIST)
+
+    NT_FIELD_LIST  go to state 32
+    NT_LEFT_TYPE   go to state 33
+
+
+State 15
+
+   25 NT_LEFT_TYPE: TM_STRUCT_TYPE TM_IDENT • TM_LEFT_BRACE NT_FIELD_LIST TM_RIGHT_BRACE
+   27             | TM_STRUCT_TYPE TM_IDENT •
+   37 NT_GLOB_ITEM: TM_STRUCT_TYPE TM_IDENT • TM_LEFT_BRACE NT_FIELD_LIST TM_RIGHT_BRACE TM_SEMICOL
+   38             | TM_STRUCT_TYPE TM_IDENT • TM_SEMICOL
+
+    TM_LEFT_BRACE  shift, and go to state 34
+    TM_SEMICOL     shift, and go to state 35
+
+    $default  reduce using rule 27 (NT_LEFT_TYPE)
+
+
+State 16
+
+   29 NT_LEFT_TYPE: TM_UNION_TYPE TM_LEFT_BRACE • NT_FIELD_LIST TM_RIGHT_BRACE
+
+    TM_INT_TYPE     shift, and go to state 1
+    TM_CHAR_TYPE    shift, and go to state 2
+    TM_ENUM_TYPE    shift, and go to state 18
+    TM_STRUCT_TYPE  shift, and go to state 19
+    TM_UNION_TYPE   shift, and go to state 20
+    TM_IDENT        shift, and go to state 7
+
+    $default  reduce using rule 12 (NT_FIELD_LIST)
+
+    NT_FIELD_LIST  go to state 36
+    NT_LEFT_TYPE   go to state 33
+
+
+State 17
+
+   28 NT_LEFT_TYPE: TM_UNION_TYPE TM_IDENT • TM_LEFT_BRACE NT_FIELD_LIST TM_RIGHT_BRACE
+   30             | TM_UNION_TYPE TM_IDENT •
+   39 NT_GLOB_ITEM: TM_UNION_TYPE TM_IDENT • TM_LEFT_BRACE NT_FIELD_LIST TM_RIGHT_BRACE TM_SEMICOL
+   40             | TM_UNION_TYPE TM_IDENT • TM_SEMICOL
+
+    TM_LEFT_BRACE  shift, and go to state 37
+    TM_SEMICOL     shift, and go to state 38
+
+    $default  reduce using rule 30 (NT_LEFT_TYPE)
+
+
+State 18
+
+   31 NT_LEFT_TYPE: TM_ENUM_TYPE • TM_IDENT TM_LEFT_BRACE NT_ENUM_ELE_LIST TM_RIGHT_BRACE
+   32             | TM_ENUM_TYPE • TM_LEFT_BRACE NT_ENUM_ELE_LIST TM_RIGHT_BRACE
+   33             | TM_ENUM_TYPE • TM_IDENT
+
+    TM_LEFT_BRACE  shift, and go to state 12
+    TM_IDENT       shift, and go to state 39
+
+
+State 19
+
+   25 NT_LEFT_TYPE: TM_STRUCT_TYPE • TM_IDENT TM_LEFT_BRACE NT_FIELD_LIST TM_RIGHT_BRACE
+   26             | TM_STRUCT_TYPE • TM_LEFT_BRACE NT_FIELD_LIST TM_RIGHT_BRACE
+   27             | TM_STRUCT_TYPE • TM_IDENT
+
+    TM_LEFT_BRACE  shift, and go to state 14
+    TM_IDENT       shift, and go to state 40
+
+
+State 20
+
+   28 NT_LEFT_TYPE: TM_UNION_TYPE • TM_IDENT TM_LEFT_BRACE NT_FIELD_LIST TM_RIGHT_BRACE
+   29             | TM_UNION_TYPE • TM_LEFT_BRACE NT_FIELD_LIST TM_RIGHT_BRACE
+   30             | TM_UNION_TYPE • TM_IDENT
+
+    TM_LEFT_BRACE  shift, and go to state 16
+    TM_IDENT       shift, and go to state 41
+
+
+State 21
+
+   43 NT_GLOB_ITEM: TM_TYPEDEF_TYPE NT_LEFT_TYPE • NT_NAMED_RIGHT_TYPE_EXPR TM_SEMICOL
+
+    TM_DEREFERENCE  shift, and go to state 23
+    TM_LEFT_PAREN   shift, and go to state 24
+    TM_IDENT        shift, and go to state 25
+
+    NT_NAMED_RIGHT_TYPE_EXPR  go to state 42
+
+
+State 22
+
+    0 $accept: NT_WHOLE $end •
+
+    $default  accept
+
+
+State 23
+
+   22 NT_NAMED_RIGHT_TYPE_EXPR: TM_DEREFERENCE • NT_NAMED_RIGHT_TYPE_EXPR
+
+    TM_DEREFERENCE  shift, and go to state 23
+    TM_LEFT_PAREN   shift, and go to state 24
+    TM_IDENT        shift, and go to state 25
+
+    NT_NAMED_RIGHT_TYPE_EXPR  go to state 43
+
+
+State 24
+
+   20 NT_NAMED_RIGHT_TYPE_EXPR: TM_LEFT_PAREN • NT_NAMED_RIGHT_TYPE_EXPR TM_RIGHT_PAREN
+
+    TM_DEREFERENCE  shift, and go to state 23
+    TM_LEFT_PAREN   shift, and go to state 24
+    TM_IDENT        shift, and go to state 25
+
+    NT_NAMED_RIGHT_TYPE_EXPR  go to state 44
+
+
+State 25
+
+   21 NT_NAMED_RIGHT_TYPE_EXPR: TM_IDENT •
+
+    $default  reduce using rule 21 (NT_NAMED_RIGHT_TYPE_EXPR)
+
+
+State 26
+
+   23 NT_NAMED_RIGHT_TYPE_EXPR: NT_NAMED_RIGHT_TYPE_EXPR • TM_LEFT_BRACKET TM_NAT TM_RIGHT_BRACKET
+   24                         | NT_NAMED_RIGHT_TYPE_EXPR • NT_ARGUMENT_TYPE_LIST_inner
+   44 NT_GLOB_ITEM: NT_LEFT_TYPE NT_NAMED_RIGHT_TYPE_EXPR • TM_SEMICOL
+
+    TM_LEFT_PAREN    shift, and go to state 45
+    TM_LEFT_BRACKET  shift, and go to state 46
+    TM_SEMICOL       shift, and go to state 47
+
+    NT_ARGUMENT_TYPE_LIST_inner  go to state 48
+
+
+State 27
+
+    3 NT_GLOB_ITEM_LIST: NT_GLOB_ITEM NT_GLOB_ITEM_LIST •
+
+    $default  reduce using rule 3 (NT_GLOB_ITEM_LIST)
+
+
+State 28
+
+   10 NT_ENUM_ELE_LIST: TM_IDENT •
+   11                 | TM_IDENT • TM_COMMA NT_ENUM_ELE_LIST
+
+    TM_COMMA  shift, and go to state 49
+
+    $default  reduce using rule 10 (NT_ENUM_ELE_LIST)
+
+
+State 29
+
+   32 NT_LEFT_TYPE: TM_ENUM_TYPE TM_LEFT_BRACE NT_ENUM_ELE_LIST • TM_RIGHT_BRACE
+
+    TM_RIGHT_BRACE  shift, and go to state 50
+
+
+State 30
+
+   31 NT_LEFT_TYPE: TM_ENUM_TYPE TM_IDENT TM_LEFT_BRACE • NT_ENUM_ELE_LIST TM_RIGHT_BRACE
+   41 NT_GLOB_ITEM: TM_ENUM_TYPE TM_IDENT TM_LEFT_BRACE • NT_ENUM_ELE_LIST TM_RIGHT_BRACE TM_SEMICOL
+
+    TM_IDENT  shift, and go to state 28
+
+    NT_ENUM_ELE_LIST  go to state 51
+
+
+State 31
+
+   42 NT_GLOB_ITEM: TM_ENUM_TYPE TM_IDENT TM_SEMICOL •
+
+    $default  reduce using rule 42 (NT_GLOB_ITEM)
+
+
+State 32
+
+   26 NT_LEFT_TYPE: TM_STRUCT_TYPE TM_LEFT_BRACE NT_FIELD_LIST • TM_RIGHT_BRACE
+
+    TM_RIGHT_BRACE  shift, and go to state 52
+
+
+State 33
+
+   13 NT_FIELD_LIST: NT_LEFT_TYPE • NT_NAMED_RIGHT_TYPE_EXPR TM_SEMICOL NT_FIELD_LIST
+
+    TM_DEREFERENCE  shift, and go to state 23
+    TM_LEFT_PAREN   shift, and go to state 24
+    TM_IDENT        shift, and go to state 25
+
+    NT_NAMED_RIGHT_TYPE_EXPR  go to state 53
+
+
+State 34
+
+   25 NT_LEFT_TYPE: TM_STRUCT_TYPE TM_IDENT TM_LEFT_BRACE • NT_FIELD_LIST TM_RIGHT_BRACE
+   37 NT_GLOB_ITEM: TM_STRUCT_TYPE TM_IDENT TM_LEFT_BRACE • NT_FIELD_LIST TM_RIGHT_BRACE TM_SEMICOL
+
+    TM_INT_TYPE     shift, and go to state 1
+    TM_CHAR_TYPE    shift, and go to state 2
+    TM_ENUM_TYPE    shift, and go to state 18
+    TM_STRUCT_TYPE  shift, and go to state 19
+    TM_UNION_TYPE   shift, and go to state 20
+    TM_IDENT        shift, and go to state 7
+
+    $default  reduce using rule 12 (NT_FIELD_LIST)
+
+    NT_FIELD_LIST  go to state 54
+    NT_LEFT_TYPE   go to state 33
+
+
+State 35
+
+   38 NT_GLOB_ITEM: TM_STRUCT_TYPE TM_IDENT TM_SEMICOL •
+
+    $default  reduce using rule 38 (NT_GLOB_ITEM)
+
+
+State 36
+
+   29 NT_LEFT_TYPE: TM_UNION_TYPE TM_LEFT_BRACE NT_FIELD_LIST • TM_RIGHT_BRACE
+
+    TM_RIGHT_BRACE  shift, and go to state 55
+
+
+State 37
+
+   28 NT_LEFT_TYPE: TM_UNION_TYPE TM_IDENT TM_LEFT_BRACE • NT_FIELD_LIST TM_RIGHT_BRACE
+   39 NT_GLOB_ITEM: TM_UNION_TYPE TM_IDENT TM_LEFT_BRACE • NT_FIELD_LIST TM_RIGHT_BRACE TM_SEMICOL
+
+    TM_INT_TYPE     shift, and go to state 1
+    TM_CHAR_TYPE    shift, and go to state 2
+    TM_ENUM_TYPE    shift, and go to state 18
+    TM_STRUCT_TYPE  shift, and go to state 19
+    TM_UNION_TYPE   shift, and go to state 20
+    TM_IDENT        shift, and go to state 7
+
+    $default  reduce using rule 12 (NT_FIELD_LIST)
+
+    NT_FIELD_LIST  go to state 56
+    NT_LEFT_TYPE   go to state 33
+
+
+State 38
+
+   40 NT_GLOB_ITEM: TM_UNION_TYPE TM_IDENT TM_SEMICOL •
+
+    $default  reduce using rule 40 (NT_GLOB_ITEM)
+
+
+State 39
+
+   31 NT_LEFT_TYPE: TM_ENUM_TYPE TM_IDENT • TM_LEFT_BRACE NT_ENUM_ELE_LIST TM_RIGHT_BRACE
+   33             | TM_ENUM_TYPE TM_IDENT •
+
+    TM_LEFT_BRACE  shift, and go to state 57
+
+    $default  reduce using rule 33 (NT_LEFT_TYPE)
+
+
+State 40
+
+   25 NT_LEFT_TYPE: TM_STRUCT_TYPE TM_IDENT • TM_LEFT_BRACE NT_FIELD_LIST TM_RIGHT_BRACE
+   27             | TM_STRUCT_TYPE TM_IDENT •
+
+    TM_LEFT_BRACE  shift, and go to state 58
+
+    $default  reduce using rule 27 (NT_LEFT_TYPE)
+
+
+State 41
+
+   28 NT_LEFT_TYPE: TM_UNION_TYPE TM_IDENT • TM_LEFT_BRACE NT_FIELD_LIST TM_RIGHT_BRACE
+   30             | TM_UNION_TYPE TM_IDENT •
+
+    TM_LEFT_BRACE  shift, and go to state 59
+
+    $default  reduce using rule 30 (NT_LEFT_TYPE)
+
+
+State 42
+
+   23 NT_NAMED_RIGHT_TYPE_EXPR: NT_NAMED_RIGHT_TYPE_EXPR • TM_LEFT_BRACKET TM_NAT TM_RIGHT_BRACKET
+   24                         | NT_NAMED_RIGHT_TYPE_EXPR • NT_ARGUMENT_TYPE_LIST_inner
+   43 NT_GLOB_ITEM: TM_TYPEDEF_TYPE NT_LEFT_TYPE NT_NAMED_RIGHT_TYPE_EXPR • TM_SEMICOL
+
+    TM_LEFT_PAREN    shift, and go to state 45
+    TM_LEFT_BRACKET  shift, and go to state 46
+    TM_SEMICOL       shift, and go to state 60
+
+    NT_ARGUMENT_TYPE_LIST_inner  go to state 48
+
+
+State 43
+
+   22 NT_NAMED_RIGHT_TYPE_EXPR: TM_DEREFERENCE NT_NAMED_RIGHT_TYPE_EXPR •
+   23                         | NT_NAMED_RIGHT_TYPE_EXPR • TM_LEFT_BRACKET TM_NAT TM_RIGHT_BRACKET
+   24                         | NT_NAMED_RIGHT_TYPE_EXPR • NT_ARGUMENT_TYPE_LIST_inner
+
+    TM_LEFT_PAREN    shift, and go to state 45
+    TM_LEFT_BRACKET  shift, and go to state 46
+
+    $default  reduce using rule 22 (NT_NAMED_RIGHT_TYPE_EXPR)
+
+    NT_ARGUMENT_TYPE_LIST_inner  go to state 48
+
+
+State 44
+
+   20 NT_NAMED_RIGHT_TYPE_EXPR: TM_LEFT_PAREN NT_NAMED_RIGHT_TYPE_EXPR • TM_RIGHT_PAREN
+   23                         | NT_NAMED_RIGHT_TYPE_EXPR • TM_LEFT_BRACKET TM_NAT TM_RIGHT_BRACKET
+   24                         | NT_NAMED_RIGHT_TYPE_EXPR • NT_ARGUMENT_TYPE_LIST_inner
+
+    TM_LEFT_PAREN    shift, and go to state 45
+    TM_RIGHT_PAREN   shift, and go to state 61
+    TM_LEFT_BRACKET  shift, and go to state 46
+
+    NT_ARGUMENT_TYPE_LIST_inner  go to state 48
+
+
+State 45
+
+    4 NT_ARGUMENT_TYPE_LIST_inner: TM_LEFT_PAREN • NT_ARGUMENT_TYPE_LIST TM_RIGHT_PAREN
+
+    TM_INT_TYPE     shift, and go to state 1
+    TM_CHAR_TYPE    shift, and go to state 2
+    TM_ENUM_TYPE    shift, and go to state 18
+    TM_STRUCT_TYPE  shift, and go to state 19
+    TM_UNION_TYPE   shift, and go to state 20
+    TM_IDENT        shift, and go to state 7
+
+    $default  reduce using rule 5 (NT_ARGUMENT_TYPE_LIST)
+
+    NT_ARGUMENT_TYPE_LIST  go to state 62
+    NT_LEFT_TYPE           go to state 63
+
+
+State 46
+
+   23 NT_NAMED_RIGHT_TYPE_EXPR: NT_NAMED_RIGHT_TYPE_EXPR TM_LEFT_BRACKET • TM_NAT TM_RIGHT_BRACKET
+
+    TM_NAT  shift, and go to state 64
+
+
+State 47
+
+   44 NT_GLOB_ITEM: NT_LEFT_TYPE NT_NAMED_RIGHT_TYPE_EXPR TM_SEMICOL •
+
+    $default  reduce using rule 44 (NT_GLOB_ITEM)
+
+
+State 48
+
+   24 NT_NAMED_RIGHT_TYPE_EXPR: NT_NAMED_RIGHT_TYPE_EXPR NT_ARGUMENT_TYPE_LIST_inner •
+
+    $default  reduce using rule 24 (NT_NAMED_RIGHT_TYPE_EXPR)
+
+
+State 49
+
+   11 NT_ENUM_ELE_LIST: TM_IDENT TM_COMMA • NT_ENUM_ELE_LIST
+
+    TM_IDENT  shift, and go to state 28
+
+    NT_ENUM_ELE_LIST  go to state 65
+
+
+State 50
+
+   32 NT_LEFT_TYPE: TM_ENUM_TYPE TM_LEFT_BRACE NT_ENUM_ELE_LIST TM_RIGHT_BRACE •
+
+    $default  reduce using rule 32 (NT_LEFT_TYPE)
+
+
+State 51
+
+   31 NT_LEFT_TYPE: TM_ENUM_TYPE TM_IDENT TM_LEFT_BRACE NT_ENUM_ELE_LIST • TM_RIGHT_BRACE
+   41 NT_GLOB_ITEM: TM_ENUM_TYPE TM_IDENT TM_LEFT_BRACE NT_ENUM_ELE_LIST • TM_RIGHT_BRACE TM_SEMICOL
+
+    TM_RIGHT_BRACE  shift, and go to state 66
+
+
+State 52
+
+   26 NT_LEFT_TYPE: TM_STRUCT_TYPE TM_LEFT_BRACE NT_FIELD_LIST TM_RIGHT_BRACE •
+
+    $default  reduce using rule 26 (NT_LEFT_TYPE)
+
+
+State 53
+
+   13 NT_FIELD_LIST: NT_LEFT_TYPE NT_NAMED_RIGHT_TYPE_EXPR • TM_SEMICOL NT_FIELD_LIST
+   23 NT_NAMED_RIGHT_TYPE_EXPR: NT_NAMED_RIGHT_TYPE_EXPR • TM_LEFT_BRACKET TM_NAT TM_RIGHT_BRACKET
+   24                         | NT_NAMED_RIGHT_TYPE_EXPR • NT_ARGUMENT_TYPE_LIST_inner
+
+    TM_LEFT_PAREN    shift, and go to state 45
+    TM_LEFT_BRACKET  shift, and go to state 46
+    TM_SEMICOL       shift, and go to state 67
+
+    NT_ARGUMENT_TYPE_LIST_inner  go to state 48
+
+
+State 54
+
+   25 NT_LEFT_TYPE: TM_STRUCT_TYPE TM_IDENT TM_LEFT_BRACE NT_FIELD_LIST • TM_RIGHT_BRACE
+   37 NT_GLOB_ITEM: TM_STRUCT_TYPE TM_IDENT TM_LEFT_BRACE NT_FIELD_LIST • TM_RIGHT_BRACE TM_SEMICOL
+
+    TM_RIGHT_BRACE  shift, and go to state 68
+
+
+State 55
+
+   29 NT_LEFT_TYPE: TM_UNION_TYPE TM_LEFT_BRACE NT_FIELD_LIST TM_RIGHT_BRACE •
+
+    $default  reduce using rule 29 (NT_LEFT_TYPE)
+
+
+State 56
+
+   28 NT_LEFT_TYPE: TM_UNION_TYPE TM_IDENT TM_LEFT_BRACE NT_FIELD_LIST • TM_RIGHT_BRACE
+   39 NT_GLOB_ITEM: TM_UNION_TYPE TM_IDENT TM_LEFT_BRACE NT_FIELD_LIST • TM_RIGHT_BRACE TM_SEMICOL
+
+    TM_RIGHT_BRACE  shift, and go to state 69
+
+
+State 57
+
+   31 NT_LEFT_TYPE: TM_ENUM_TYPE TM_IDENT TM_LEFT_BRACE • NT_ENUM_ELE_LIST TM_RIGHT_BRACE
+
+    TM_IDENT  shift, and go to state 28
+
+    NT_ENUM_ELE_LIST  go to state 70
+
+
+State 58
+
+   25 NT_LEFT_TYPE: TM_STRUCT_TYPE TM_IDENT TM_LEFT_BRACE • NT_FIELD_LIST TM_RIGHT_BRACE
+
+    TM_INT_TYPE     shift, and go to state 1
+    TM_CHAR_TYPE    shift, and go to state 2
+    TM_ENUM_TYPE    shift, and go to state 18
+    TM_STRUCT_TYPE  shift, and go to state 19
+    TM_UNION_TYPE   shift, and go to state 20
+    TM_IDENT        shift, and go to state 7
+
+    $default  reduce using rule 12 (NT_FIELD_LIST)
+
+    NT_FIELD_LIST  go to state 71
+    NT_LEFT_TYPE   go to state 33
+
+
+State 59
+
+   28 NT_LEFT_TYPE: TM_UNION_TYPE TM_IDENT TM_LEFT_BRACE • NT_FIELD_LIST TM_RIGHT_BRACE
+
+    TM_INT_TYPE     shift, and go to state 1
+    TM_CHAR_TYPE    shift, and go to state 2
+    TM_ENUM_TYPE    shift, and go to state 18
+    TM_STRUCT_TYPE  shift, and go to state 19
+    TM_UNION_TYPE   shift, and go to state 20
+    TM_IDENT        shift, and go to state 7
+
+    $default  reduce using rule 12 (NT_FIELD_LIST)
+
+    NT_FIELD_LIST  go to state 72
+    NT_LEFT_TYPE   go to state 33
+
+
+State 60
+
+   43 NT_GLOB_ITEM: TM_TYPEDEF_TYPE NT_LEFT_TYPE NT_NAMED_RIGHT_TYPE_EXPR TM_SEMICOL •
+
+    $default  reduce using rule 43 (NT_GLOB_ITEM)
+
+
+State 61
+
+   20 NT_NAMED_RIGHT_TYPE_EXPR: TM_LEFT_PAREN NT_NAMED_RIGHT_TYPE_EXPR TM_RIGHT_PAREN •
+
+    $default  reduce using rule 20 (NT_NAMED_RIGHT_TYPE_EXPR)
+
+
+State 62
+
+    4 NT_ARGUMENT_TYPE_LIST_inner: TM_LEFT_PAREN NT_ARGUMENT_TYPE_LIST • TM_RIGHT_PAREN
+
+    TM_RIGHT_PAREN  shift, and go to state 73
+
+
+State 63
+
+    6 NT_ARGUMENT_TYPE_LIST: NT_LEFT_TYPE • NT_ANNON_RIGHT_TYPE_EXPR TM_COMMA NT_ARGUMENT_TYPE_LIST
+    7                      | NT_LEFT_TYPE • TM_COMMA NT_ARGUMENT_TYPE_LIST
+    8                      | NT_LEFT_TYPE • NT_ANNON_RIGHT_TYPE_EXPR
+    9                      | NT_LEFT_TYPE •
+
+    TM_DEREFERENCE  shift, and go to state 74
+    TM_COMMA        shift, and go to state 75
+    TM_LEFT_PAREN   shift, and go to state 76
+
+    $default  reduce using rule 9 (NT_ARGUMENT_TYPE_LIST)
+
+    NT_ARGUMENT_TYPE_LIST_inner  go to state 77
+    NT_ANNON_RIGHT_TYPE_EXPR     go to state 78
+
+
+State 64
+
+   23 NT_NAMED_RIGHT_TYPE_EXPR: NT_NAMED_RIGHT_TYPE_EXPR TM_LEFT_BRACKET TM_NAT • TM_RIGHT_BRACKET
+
+    TM_RIGHT_BRACKET  shift, and go to state 79
+
+
+State 65
+
+   11 NT_ENUM_ELE_LIST: TM_IDENT TM_COMMA NT_ENUM_ELE_LIST •
+
+    $default  reduce using rule 11 (NT_ENUM_ELE_LIST)
+
+
+State 66
+
+   31 NT_LEFT_TYPE: TM_ENUM_TYPE TM_IDENT TM_LEFT_BRACE NT_ENUM_ELE_LIST TM_RIGHT_BRACE •
+   41 NT_GLOB_ITEM: TM_ENUM_TYPE TM_IDENT TM_LEFT_BRACE NT_ENUM_ELE_LIST TM_RIGHT_BRACE • TM_SEMICOL
+
+    TM_SEMICOL  shift, and go to state 80
+
+    $default  reduce using rule 31 (NT_LEFT_TYPE)
+
+
+State 67
+
+   13 NT_FIELD_LIST: NT_LEFT_TYPE NT_NAMED_RIGHT_TYPE_EXPR TM_SEMICOL • NT_FIELD_LIST
+
+    TM_INT_TYPE     shift, and go to state 1
+    TM_CHAR_TYPE    shift, and go to state 2
+    TM_ENUM_TYPE    shift, and go to state 18
+    TM_STRUCT_TYPE  shift, and go to state 19
+    TM_UNION_TYPE   shift, and go to state 20
+    TM_IDENT        shift, and go to state 7
+
+    $default  reduce using rule 12 (NT_FIELD_LIST)
+
+    NT_FIELD_LIST  go to state 81
+    NT_LEFT_TYPE   go to state 33
+
+
+State 68
+
+   25 NT_LEFT_TYPE: TM_STRUCT_TYPE TM_IDENT TM_LEFT_BRACE NT_FIELD_LIST TM_RIGHT_BRACE •
+   37 NT_GLOB_ITEM: TM_STRUCT_TYPE TM_IDENT TM_LEFT_BRACE NT_FIELD_LIST TM_RIGHT_BRACE • TM_SEMICOL
+
+    TM_SEMICOL  shift, and go to state 82
+
+    $default  reduce using rule 25 (NT_LEFT_TYPE)
+
+
+State 69
+
+   28 NT_LEFT_TYPE: TM_UNION_TYPE TM_IDENT TM_LEFT_BRACE NT_FIELD_LIST TM_RIGHT_BRACE •
+   39 NT_GLOB_ITEM: TM_UNION_TYPE TM_IDENT TM_LEFT_BRACE NT_FIELD_LIST TM_RIGHT_BRACE • TM_SEMICOL
+
+    TM_SEMICOL  shift, and go to state 83
+
+    $default  reduce using rule 28 (NT_LEFT_TYPE)
+
+
+State 70
+
+   31 NT_LEFT_TYPE: TM_ENUM_TYPE TM_IDENT TM_LEFT_BRACE NT_ENUM_ELE_LIST • TM_RIGHT_BRACE
+
+    TM_RIGHT_BRACE  shift, and go to state 84
+
+
+State 71
+
+   25 NT_LEFT_TYPE: TM_STRUCT_TYPE TM_IDENT TM_LEFT_BRACE NT_FIELD_LIST • TM_RIGHT_BRACE
+
+    TM_RIGHT_BRACE  shift, and go to state 85
+
+
+State 72
+
+   28 NT_LEFT_TYPE: TM_UNION_TYPE TM_IDENT TM_LEFT_BRACE NT_FIELD_LIST • TM_RIGHT_BRACE
+
+    TM_RIGHT_BRACE  shift, and go to state 86
+
+
+State 73
+
+    4 NT_ARGUMENT_TYPE_LIST_inner: TM_LEFT_PAREN NT_ARGUMENT_TYPE_LIST TM_RIGHT_PAREN •
+
+    $default  reduce using rule 4 (NT_ARGUMENT_TYPE_LIST_inner)
+
+
+State 74
+
+   15 NT_ANNON_RIGHT_TYPE_EXPR: TM_DEREFERENCE • NT_ANNON_RIGHT_TYPE_EXPR
+   16                         | TM_DEREFERENCE •
+
+    TM_DEREFERENCE  shift, and go to state 74
+    TM_LEFT_PAREN   shift, and go to state 76
+
+    $default  reduce using rule 16 (NT_ANNON_RIGHT_TYPE_EXPR)
+
+    NT_ARGUMENT_TYPE_LIST_inner  go to state 77
+    NT_ANNON_RIGHT_TYPE_EXPR     go to state 87
+
+
+State 75
+
+    7 NT_ARGUMENT_TYPE_LIST: NT_LEFT_TYPE TM_COMMA • NT_ARGUMENT_TYPE_LIST
+
+    TM_INT_TYPE     shift, and go to state 1
+    TM_CHAR_TYPE    shift, and go to state 2
+    TM_ENUM_TYPE    shift, and go to state 18
+    TM_STRUCT_TYPE  shift, and go to state 19
+    TM_UNION_TYPE   shift, and go to state 20
+    TM_IDENT        shift, and go to state 7
+
+    $default  reduce using rule 5 (NT_ARGUMENT_TYPE_LIST)
+
+    NT_ARGUMENT_TYPE_LIST  go to state 88
+    NT_LEFT_TYPE           go to state 63
+
+
+State 76
+
+    4 NT_ARGUMENT_TYPE_LIST_inner: TM_LEFT_PAREN • NT_ARGUMENT_TYPE_LIST TM_RIGHT_PAREN
+   14 NT_ANNON_RIGHT_TYPE_EXPR: TM_LEFT_PAREN • NT_ANNON_RIGHT_TYPE_EXPR TM_RIGHT_PAREN
+
+    TM_INT_TYPE     shift, and go to state 1
+    TM_CHAR_TYPE    shift, and go to state 2
+    TM_ENUM_TYPE    shift, and go to state 18
+    TM_STRUCT_TYPE  shift, and go to state 19
+    TM_UNION_TYPE   shift, and go to state 20
+    TM_DEREFERENCE  shift, and go to state 74
+    TM_LEFT_PAREN   shift, and go to state 76
+    TM_IDENT        shift, and go to state 7
+
+    $default  reduce using rule 5 (NT_ARGUMENT_TYPE_LIST)
+
+    NT_ARGUMENT_TYPE_LIST_inner  go to state 77
+    NT_ARGUMENT_TYPE_LIST        go to state 62
+    NT_ANNON_RIGHT_TYPE_EXPR     go to state 89
+    NT_LEFT_TYPE                 go to state 63
+
+
+State 77
+
+   19 NT_ANNON_RIGHT_TYPE_EXPR: NT_ARGUMENT_TYPE_LIST_inner •
+
+    $default  reduce using rule 19 (NT_ANNON_RIGHT_TYPE_EXPR)
+
+
+State 78
+
+    6 NT_ARGUMENT_TYPE_LIST: NT_LEFT_TYPE NT_ANNON_RIGHT_TYPE_EXPR • TM_COMMA NT_ARGUMENT_TYPE_LIST
+    8                      | NT_LEFT_TYPE NT_ANNON_RIGHT_TYPE_EXPR •
+   17 NT_ANNON_RIGHT_TYPE_EXPR: NT_ANNON_RIGHT_TYPE_EXPR • TM_LEFT_BRACKET TM_NAT TM_RIGHT_BRACKET
+   18                         | NT_ANNON_RIGHT_TYPE_EXPR • NT_ARGUMENT_TYPE_LIST_inner
+
+    TM_COMMA         shift, and go to state 90
+    TM_LEFT_PAREN    shift, and go to state 45
+    TM_LEFT_BRACKET  shift, and go to state 91
+
+    $default  reduce using rule 8 (NT_ARGUMENT_TYPE_LIST)
+
+    NT_ARGUMENT_TYPE_LIST_inner  go to state 92
+
+
+State 79
+
+   23 NT_NAMED_RIGHT_TYPE_EXPR: NT_NAMED_RIGHT_TYPE_EXPR TM_LEFT_BRACKET TM_NAT TM_RIGHT_BRACKET •
+
+    $default  reduce using rule 23 (NT_NAMED_RIGHT_TYPE_EXPR)
+
+
+State 80
+
+   41 NT_GLOB_ITEM: TM_ENUM_TYPE TM_IDENT TM_LEFT_BRACE NT_ENUM_ELE_LIST TM_RIGHT_BRACE TM_SEMICOL •
+
+    $default  reduce using rule 41 (NT_GLOB_ITEM)
+
+
+State 81
+
+   13 NT_FIELD_LIST: NT_LEFT_TYPE NT_NAMED_RIGHT_TYPE_EXPR TM_SEMICOL NT_FIELD_LIST •
+
+    $default  reduce using rule 13 (NT_FIELD_LIST)
+
+
+State 82
+
+   37 NT_GLOB_ITEM: TM_STRUCT_TYPE TM_IDENT TM_LEFT_BRACE NT_FIELD_LIST TM_RIGHT_BRACE TM_SEMICOL •
+
+    $default  reduce using rule 37 (NT_GLOB_ITEM)
+
+
+State 83
+
+   39 NT_GLOB_ITEM: TM_UNION_TYPE TM_IDENT TM_LEFT_BRACE NT_FIELD_LIST TM_RIGHT_BRACE TM_SEMICOL •
+
+    $default  reduce using rule 39 (NT_GLOB_ITEM)
+
+
+State 84
+
+   31 NT_LEFT_TYPE: TM_ENUM_TYPE TM_IDENT TM_LEFT_BRACE NT_ENUM_ELE_LIST TM_RIGHT_BRACE •
+
+    $default  reduce using rule 31 (NT_LEFT_TYPE)
+
+
+State 85
+
+   25 NT_LEFT_TYPE: TM_STRUCT_TYPE TM_IDENT TM_LEFT_BRACE NT_FIELD_LIST TM_RIGHT_BRACE •
+
+    $default  reduce using rule 25 (NT_LEFT_TYPE)
+
+
+State 86
+
+   28 NT_LEFT_TYPE: TM_UNION_TYPE TM_IDENT TM_LEFT_BRACE NT_FIELD_LIST TM_RIGHT_BRACE •
+
+    $default  reduce using rule 28 (NT_LEFT_TYPE)
+
+
+State 87
+
+   15 NT_ANNON_RIGHT_TYPE_EXPR: TM_DEREFERENCE NT_ANNON_RIGHT_TYPE_EXPR •
+   17                         | NT_ANNON_RIGHT_TYPE_EXPR • TM_LEFT_BRACKET TM_NAT TM_RIGHT_BRACKET
+   18                         | NT_ANNON_RIGHT_TYPE_EXPR • NT_ARGUMENT_TYPE_LIST_inner
+
+    TM_LEFT_PAREN    shift, and go to state 45
+    TM_LEFT_BRACKET  shift, and go to state 91
+
+    $default  reduce using rule 15 (NT_ANNON_RIGHT_TYPE_EXPR)
+
+    NT_ARGUMENT_TYPE_LIST_inner  go to state 92
+
+
+State 88
+
+    7 NT_ARGUMENT_TYPE_LIST: NT_LEFT_TYPE TM_COMMA NT_ARGUMENT_TYPE_LIST •
+
+    $default  reduce using rule 7 (NT_ARGUMENT_TYPE_LIST)
+
+
+State 89
+
+   14 NT_ANNON_RIGHT_TYPE_EXPR: TM_LEFT_PAREN NT_ANNON_RIGHT_TYPE_EXPR • TM_RIGHT_PAREN
+   17                         | NT_ANNON_RIGHT_TYPE_EXPR • TM_LEFT_BRACKET TM_NAT TM_RIGHT_BRACKET
+   18                         | NT_ANNON_RIGHT_TYPE_EXPR • NT_ARGUMENT_TYPE_LIST_inner
+
+    TM_LEFT_PAREN    shift, and go to state 45
+    TM_RIGHT_PAREN   shift, and go to state 93
+    TM_LEFT_BRACKET  shift, and go to state 91
+
+    NT_ARGUMENT_TYPE_LIST_inner  go to state 92
+
+
+State 90
+
+    6 NT_ARGUMENT_TYPE_LIST: NT_LEFT_TYPE NT_ANNON_RIGHT_TYPE_EXPR TM_COMMA • NT_ARGUMENT_TYPE_LIST
+
+    TM_INT_TYPE     shift, and go to state 1
+    TM_CHAR_TYPE    shift, and go to state 2
+    TM_ENUM_TYPE    shift, and go to state 18
+    TM_STRUCT_TYPE  shift, and go to state 19
+    TM_UNION_TYPE   shift, and go to state 20
+    TM_IDENT        shift, and go to state 7
+
+    $default  reduce using rule 5 (NT_ARGUMENT_TYPE_LIST)
+
+    NT_ARGUMENT_TYPE_LIST  go to state 94
+    NT_LEFT_TYPE           go to state 63
+
+
+State 91
+
+   17 NT_ANNON_RIGHT_TYPE_EXPR: NT_ANNON_RIGHT_TYPE_EXPR TM_LEFT_BRACKET • TM_NAT TM_RIGHT_BRACKET
+
+    TM_NAT  shift, and go to state 95
+
+
+State 92
+
+   18 NT_ANNON_RIGHT_TYPE_EXPR: NT_ANNON_RIGHT_TYPE_EXPR NT_ARGUMENT_TYPE_LIST_inner •
+
+    $default  reduce using rule 18 (NT_ANNON_RIGHT_TYPE_EXPR)
+
+
+State 93
+
+   14 NT_ANNON_RIGHT_TYPE_EXPR: TM_LEFT_PAREN NT_ANNON_RIGHT_TYPE_EXPR TM_RIGHT_PAREN •
+
+    $default  reduce using rule 14 (NT_ANNON_RIGHT_TYPE_EXPR)
+
+
+State 94
+
+    6 NT_ARGUMENT_TYPE_LIST: NT_LEFT_TYPE NT_ANNON_RIGHT_TYPE_EXPR TM_COMMA NT_ARGUMENT_TYPE_LIST •
+
+    $default  reduce using rule 6 (NT_ARGUMENT_TYPE_LIST)
+
+
+State 95
+
+   17 NT_ANNON_RIGHT_TYPE_EXPR: NT_ANNON_RIGHT_TYPE_EXPR TM_LEFT_BRACKET TM_NAT • TM_RIGHT_BRACKET
+
+    TM_RIGHT_BRACKET  shift, and go to state 96
+
+
+State 96
+
+   17 NT_ANNON_RIGHT_TYPE_EXPR: NT_ANNON_RIGHT_TYPE_EXPR TM_LEFT_BRACKET TM_NAT TM_RIGHT_BRACKET •
+
+    $default  reduce using rule 17 (NT_ANNON_RIGHT_TYPE_EXPR)
