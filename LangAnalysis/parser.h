@@ -35,8 +35,8 @@
    especially those whose name start with YY_ or yy_.  They are
    private implementation details that can be changed or removed.  */
 
-#ifndef YY_YY_LANGANALYSIS_PARSER_H_INCLUDED
-# define YY_YY_LANGANALYSIS_PARSER_H_INCLUDED
+#ifndef YY_YY_PARSER_H_INCLUDED
+# define YY_YY_PARSER_H_INCLUDED
 /* Debug traces.  */
 #ifndef YYDEBUG
 # define YYDEBUG 0
@@ -55,22 +55,38 @@ extern int yydebug;
     YYerror = 256,                 /* error  */
     YYUNDEF = 257,                 /* "invalid token"  */
     TM_NAT = 258,                  /* TM_NAT  */
-    TM_INT_TYPE = 259,             /* TM_INT_TYPE  */
-    TM_CHAR_TYPE = 260,            /* TM_CHAR_TYPE  */
-    TM_ENUM_TYPE = 261,            /* TM_ENUM_TYPE  */
-    TM_STRUCT_TYPE = 262,          /* TM_STRUCT_TYPE  */
-    TM_UNION_TYPE = 263,           /* TM_UNION_TYPE  */
-    TM_TYPEDEF_TYPE = 264,         /* TM_TYPEDEF_TYPE  */
-    TM_DEREFERENCE = 265,          /* TM_DEREFERENCE  */
-    TM_COMMA = 266,                /* TM_COMMA  */
-    TM_LEFT_BRACE = 267,           /* TM_LEFT_BRACE  */
-    TM_RIGHT_BRACE = 268,          /* TM_RIGHT_BRACE  */
-    TM_LEFT_PAREN = 269,           /* TM_LEFT_PAREN  */
-    TM_RIGHT_PAREN = 270,          /* TM_RIGHT_PAREN  */
-    TM_LEFT_BRACKET = 271,         /* TM_LEFT_BRACKET  */
-    TM_RIGHT_BRACKET = 272,        /* TM_RIGHT_BRACKET  */
-    TM_SEMICOL = 273,              /* TM_SEMICOL  */
-    TM_IDENT = 274                 /* TM_IDENT  */
+    TM_IDENT = 259,                /* TM_IDENT  */
+    TM_LEFT_BRACE = 260,           /* TM_LEFT_BRACE  */
+    TM_RIGHT_BRACE = 261,          /* TM_RIGHT_BRACE  */
+    TM_LEFT_PAREN = 262,           /* TM_LEFT_PAREN  */
+    TM_RIGHT_PAREN = 263,          /* TM_RIGHT_PAREN  */
+    TM_SEMICOL = 264,              /* TM_SEMICOL  */
+    TM_MALLOC = 265,               /* TM_MALLOC  */
+    TM_RI = 266,                   /* TM_RI  */
+    TM_RC = 267,                   /* TM_RC  */
+    TM_WI = 268,                   /* TM_WI  */
+    TM_WC = 269,                   /* TM_WC  */
+    TM_VAR = 270,                  /* TM_VAR  */
+    TM_IF = 271,                   /* TM_IF  */
+    TM_THEN = 272,                 /* TM_THEN  */
+    TM_ELSE = 273,                 /* TM_ELSE  */
+    TM_WHILE = 274,                /* TM_WHILE  */
+    TM_DO = 275,                   /* TM_DO  */
+    TM_ASGNOP = 276,               /* TM_ASGNOP  */
+    TM_OR = 277,                   /* TM_OR  */
+    TM_AND = 278,                  /* TM_AND  */
+    TM_NOT = 279,                  /* TM_NOT  */
+    TM_LT = 280,                   /* TM_LT  */
+    TM_LE = 281,                   /* TM_LE  */
+    TM_GT = 282,                   /* TM_GT  */
+    TM_GE = 283,                   /* TM_GE  */
+    TM_EQ = 284,                   /* TM_EQ  */
+    TM_NE = 285,                   /* TM_NE  */
+    TM_PLUS = 286,                 /* TM_PLUS  */
+    TM_MINUS = 287,                /* TM_MINUS  */
+    TM_MUL = 288,                  /* TM_MUL  */
+    TM_DIV = 289,                  /* TM_DIV  */
+    TM_MOD = 290                   /* TM_MOD  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -79,14 +95,15 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 11 "LangAnalysis/lang.y"
+#line 11 "lang.y"
 
 unsigned int n;
 char * i;
 struct expr * e;
+struct cmd * c;
 void * none;
 
-#line 90 "LangAnalysis/parser.h"
+#line 107 "parser.h"
 
 };
 typedef union YYSTYPE YYSTYPE;
@@ -101,4 +118,4 @@ extern YYSTYPE yylval;
 int yyparse (void);
 
 
-#endif /* !YY_YY_LANGANALYSIS_PARSER_H_INCLUDED  */
+#endif /* !YY_YY_PARSER_H_INCLUDED  */
