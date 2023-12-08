@@ -12,37 +12,61 @@
     return TM_NAT;
 }
 
-"int" {
-    return TM_INT_TYPE;
+"+" {
+    return TM_PLUS;
 }
 
-"char" {
-    return TM_CHAR_TYPE;
-}
-
-"enum" {
-    return TM_ENUM_TYPE;
-}
-
-"struct" {
-    return TM_STRUCT_TYPE;
-}
-
-"union" {
-    return TM_UNION_TYPE;
-}
-
-"typedef" {
-    return TM_TYPEDEF_TYPE;
+"-" {
+    return TM_MINUS;
 }
 
 "*" {
-    return TM_DEREFERENCE;
-    }
+    return TM_TIMES_OR_DEREFERENCE;
+}
 
-"," {
-    return TM_COMMA;
-    }
+"/" {
+    return TM_DIVIDE;
+}
+
+"%" {
+    return TM_MOD;
+}
+
+"<" {
+    return TM_LT;
+}
+
+"<=" {
+    return TM_LE;
+}
+
+"==" {
+    return TM_EQ;
+}
+
+"!=" {
+    return TM_NE;
+}
+
+">=" {
+    return TM_GE;
+}
+
+">" {
+    return TM_GT;
+}
+
+"&&" {
+    return TM_AND;
+}
+
+"||" {
+    return TM_OR;
+}
+
+"!" {
+    return TM_NOT;
+}
 
 "(" {
     return TM_LEFT_PAREN;
@@ -58,14 +82,6 @@
 
 "}" {
     return TM_RIGHT_BRACE;
-    }
-
-"[" {
-    return TM_LEFT_BRACKET;
-    }
-
-"]" {
-    return TM_RIGHT_BRACKET;
     }
 
 ";" {
