@@ -35,8 +35,8 @@
    especially those whose name start with YY_ or yy_.  They are
    private implementation details that can be changed or removed.  */
 
-#ifndef YY_YY_PARSER_H_INCLUDED
-# define YY_YY_PARSER_H_INCLUDED
+#ifndef YY_YY_LANGANALYSIS_PARSER_H_INCLUDED
+# define YY_YY_LANGANALYSIS_PARSER_H_INCLUDED
 /* Debug traces.  */
 #ifndef YYDEBUG
 # define YYDEBUG 0
@@ -79,14 +79,14 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 11 "lang.y"
+#line 11 "LangAnalysis/lang.y"
 
 unsigned int n;
 char * i;
 struct expr * e;
 void * none;
 
-#line 90 "parser.h"
+#line 90 "LangAnalysis/parser.h"
 
 };
 typedef union YYSTYPE YYSTYPE;
@@ -101,4 +101,4 @@ extern YYSTYPE yylval;
 int yyparse (void);
 
 
-#endif /* !YY_YY_PARSER_H_INCLUDED  */
+#endif /* !YY_YY_LANGANALYSIS_PARSER_H_INCLUDED  */

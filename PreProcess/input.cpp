@@ -4,8 +4,6 @@
 #include <regex>
 #include <sstream>
 
-
-
 // 输入一个字符串流(.l文件), 然后返回两个字符串流
 // 一个是正则表达式, 一个是语法规则
 void processFlexFile(

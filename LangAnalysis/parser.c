@@ -67,7 +67,7 @@
 
 
 /* First part of user prologue.  */
-#line 1 "lang.y"
+#line 1 "LangAnalysis/lang.y"
 
 	// this part is copied to the beginning of the parser 
 	#include <stdio.h>
@@ -77,7 +77,7 @@
 	int yylex(void);
         struct glob_item_list * root;
 
-#line 81 "parser.c"
+#line 81 "LangAnalysis/parser.c"
 
 # ifndef YY_CAST
 #  ifdef __cplusplus
@@ -1152,358 +1152,358 @@ yyreduce:
   switch (yyn)
     {
   case 2: /* NT_WHOLE: NT_GLOB_ITEM_LIST  */
-#line 67 "lang.y"
+#line 67 "LangAnalysis/lang.y"
   {
     (yyval.e) = (yyvsp[0].e);
     root = (yyval.e);
   }
-#line 1161 "parser.c"
+#line 1161 "LangAnalysis/parser.c"
     break;
 
   case 3: /* NT_GLOB_ITEM_LIST: NT_GLOB_ITEM  */
-#line 75 "lang.y"
+#line 75 "LangAnalysis/lang.y"
   {
     (yyval.e) = TGCons((yyvsp[0].e), TGNil());
   }
-#line 1169 "parser.c"
+#line 1169 "LangAnalysis/parser.c"
     break;
 
   case 4: /* NT_GLOB_ITEM_LIST: NT_GLOB_ITEM NT_GLOB_ITEM_LIST  */
-#line 79 "lang.y"
+#line 79 "LangAnalysis/lang.y"
   {
     (yyval.e) = TGCons((yyvsp[-1].e), (yyvsp[0].e));
   }
-#line 1177 "parser.c"
+#line 1177 "LangAnalysis/parser.c"
     break;
 
   case 5: /* NT_ARGUMENT_TYPE_LIST_inner: TM_LEFT_PAREN NT_ARGUMENT_TYPE_LIST TM_RIGHT_PAREN  */
-#line 86 "lang.y"
+#line 86 "LangAnalysis/lang.y"
     {
         (yyval.e) = (yyvsp[-1].e);
     }
-#line 1185 "parser.c"
+#line 1185 "LangAnalysis/parser.c"
     break;
 
   case 6: /* NT_ARGUMENT_TYPE_LIST: %empty  */
-#line 93 "lang.y"
+#line 93 "LangAnalysis/lang.y"
     {(yyval.e) = TTNil();}
-#line 1191 "parser.c"
+#line 1191 "LangAnalysis/parser.c"
     break;
 
   case 7: /* NT_ARGUMENT_TYPE_LIST: NT_LEFT_TYPE NT_ANNON_RIGHT_TYPE_EXPR TM_COMMA NT_ARGUMENT_TYPE_LIST  */
-#line 95 "lang.y"
+#line 95 "LangAnalysis/lang.y"
   {
     (yyval.e) = TTCons((yyvsp[-3].e), (yyvsp[-2].e), (yyvsp[0].e));
   }
-#line 1199 "parser.c"
+#line 1199 "LangAnalysis/parser.c"
     break;
 
   case 8: /* NT_ARGUMENT_TYPE_LIST: NT_LEFT_TYPE TM_COMMA NT_ARGUMENT_TYPE_LIST  */
-#line 99 "lang.y"
+#line 99 "LangAnalysis/lang.y"
   {
     (yyval.e) = TTCons((yyvsp[-2].e), TOrigType(""), (yyvsp[0].e));
   }
-#line 1207 "parser.c"
+#line 1207 "LangAnalysis/parser.c"
     break;
 
   case 9: /* NT_ARGUMENT_TYPE_LIST: NT_LEFT_TYPE NT_ANNON_RIGHT_TYPE_EXPR  */
-#line 103 "lang.y"
+#line 103 "LangAnalysis/lang.y"
   {
     (yyval.e) = TTCons((yyvsp[-1].e), (yyvsp[0].e), TTNil());
   }
-#line 1215 "parser.c"
+#line 1215 "LangAnalysis/parser.c"
     break;
 
   case 10: /* NT_ARGUMENT_TYPE_LIST: NT_LEFT_TYPE  */
-#line 107 "lang.y"
+#line 107 "LangAnalysis/lang.y"
   {
     (yyval.e) = TTCons((yyvsp[0].e), TOrigType(""), TTNil());
   }
-#line 1223 "parser.c"
+#line 1223 "LangAnalysis/parser.c"
     break;
 
   case 11: /* NT_ENUM_ELE_LIST: TM_IDENT  */
-#line 115 "lang.y"
+#line 115 "LangAnalysis/lang.y"
   {
     (yyval.e) = TECons((yyvsp[0].i), TENil());
   }
-#line 1231 "parser.c"
+#line 1231 "LangAnalysis/parser.c"
     break;
 
   case 12: /* NT_ENUM_ELE_LIST: TM_IDENT TM_COMMA NT_ENUM_ELE_LIST  */
-#line 119 "lang.y"
+#line 119 "LangAnalysis/lang.y"
   {
     (yyval.e) = TECons((yyvsp[-2].i), (yyvsp[0].e));
   }
-#line 1239 "parser.c"
+#line 1239 "LangAnalysis/parser.c"
     break;
 
   case 13: /* NT_FIELD_LIST: %empty  */
-#line 127 "lang.y"
+#line 127 "LangAnalysis/lang.y"
   {
     (yyval.e) = TTNil();
   }
-#line 1247 "parser.c"
+#line 1247 "LangAnalysis/parser.c"
     break;
 
   case 14: /* NT_FIELD_LIST: NT_LEFT_TYPE NT_NAMED_RIGHT_TYPE_EXPR TM_SEMICOL NT_FIELD_LIST  */
-#line 131 "lang.y"
+#line 131 "LangAnalysis/lang.y"
   {
     (yyval.e) = TTCons((yyvsp[-3].e), (yyvsp[-2].e), (yyvsp[0].e));
   }
-#line 1255 "parser.c"
+#line 1255 "LangAnalysis/parser.c"
     break;
 
   case 15: /* NT_ANNON_RIGHT_TYPE_EXPR: TM_LEFT_PAREN NT_ANNON_RIGHT_TYPE_EXPR TM_RIGHT_PAREN  */
-#line 141 "lang.y"
+#line 141 "LangAnalysis/lang.y"
   {
     (yyval.e) = (yyvsp[-1].e);
   }
-#line 1263 "parser.c"
+#line 1263 "LangAnalysis/parser.c"
     break;
 
   case 16: /* NT_ANNON_RIGHT_TYPE_EXPR: TM_DEREFERENCE NT_ANNON_RIGHT_TYPE_EXPR  */
-#line 145 "lang.y"
+#line 145 "LangAnalysis/lang.y"
   {
     (yyval.e) = TPtrType((yyvsp[0].e));
   }
-#line 1271 "parser.c"
+#line 1271 "LangAnalysis/parser.c"
     break;
 
   case 17: /* NT_ANNON_RIGHT_TYPE_EXPR: TM_DEREFERENCE  */
-#line 149 "lang.y"
+#line 149 "LangAnalysis/lang.y"
 {
     (yyval.e) = TPtrType(TOrigType(""));
 }
-#line 1279 "parser.c"
+#line 1279 "LangAnalysis/parser.c"
     break;
 
   case 18: /* NT_ANNON_RIGHT_TYPE_EXPR: NT_ANNON_RIGHT_TYPE_EXPR TM_LEFT_BRACKET TM_NAT TM_RIGHT_BRACKET  */
-#line 153 "lang.y"
+#line 153 "LangAnalysis/lang.y"
   {
     (yyval.e) = TArrayType((yyvsp[-3].e), (yyvsp[-1].n));
   }
-#line 1287 "parser.c"
+#line 1287 "LangAnalysis/parser.c"
     break;
 
   case 19: /* NT_ANNON_RIGHT_TYPE_EXPR: NT_ANNON_RIGHT_TYPE_EXPR NT_ARGUMENT_TYPE_LIST_inner  */
-#line 157 "lang.y"
+#line 157 "LangAnalysis/lang.y"
   {
     (yyval.e) = TFuncType((yyvsp[-1].e), (yyvsp[0].e));
   }
-#line 1295 "parser.c"
+#line 1295 "LangAnalysis/parser.c"
     break;
 
   case 20: /* NT_ANNON_RIGHT_TYPE_EXPR: NT_ARGUMENT_TYPE_LIST_inner  */
-#line 161 "lang.y"
+#line 161 "LangAnalysis/lang.y"
   {
     (yyval.e) = TFuncType(TOrigType(""), (yyvsp[0].e));
   }
-#line 1303 "parser.c"
+#line 1303 "LangAnalysis/parser.c"
     break;
 
   case 21: /* NT_NAMED_RIGHT_TYPE_EXPR: TM_LEFT_PAREN NT_NAMED_RIGHT_TYPE_EXPR TM_RIGHT_PAREN  */
-#line 171 "lang.y"
+#line 171 "LangAnalysis/lang.y"
   {
     (yyval.e) = (yyvsp[-1].e);
   }
-#line 1311 "parser.c"
+#line 1311 "LangAnalysis/parser.c"
     break;
 
   case 22: /* NT_NAMED_RIGHT_TYPE_EXPR: TM_IDENT  */
-#line 175 "lang.y"
+#line 175 "LangAnalysis/lang.y"
   {
     (yyval.e) = TOrigType((yyvsp[0].i));
   }
-#line 1319 "parser.c"
+#line 1319 "LangAnalysis/parser.c"
     break;
 
   case 23: /* NT_NAMED_RIGHT_TYPE_EXPR: TM_DEREFERENCE NT_NAMED_RIGHT_TYPE_EXPR  */
-#line 179 "lang.y"
+#line 179 "LangAnalysis/lang.y"
   {
     (yyval.e) = TPtrType((yyvsp[0].e));
   }
-#line 1327 "parser.c"
+#line 1327 "LangAnalysis/parser.c"
     break;
 
   case 24: /* NT_NAMED_RIGHT_TYPE_EXPR: NT_NAMED_RIGHT_TYPE_EXPR TM_LEFT_BRACKET TM_NAT TM_RIGHT_BRACKET  */
-#line 183 "lang.y"
+#line 183 "LangAnalysis/lang.y"
   {
     (yyval.e) = TArrayType((yyvsp[-3].e), (yyvsp[-1].n));
   }
-#line 1335 "parser.c"
+#line 1335 "LangAnalysis/parser.c"
     break;
 
   case 25: /* NT_NAMED_RIGHT_TYPE_EXPR: NT_NAMED_RIGHT_TYPE_EXPR NT_ARGUMENT_TYPE_LIST_inner  */
-#line 187 "lang.y"
+#line 187 "LangAnalysis/lang.y"
   {
     (yyval.e) = TFuncType((yyvsp[-1].e), (yyvsp[0].e));
   }
-#line 1343 "parser.c"
+#line 1343 "LangAnalysis/parser.c"
     break;
 
   case 26: /* NT_LEFT_TYPE: TM_STRUCT_TYPE TM_IDENT TM_LEFT_BRACE NT_FIELD_LIST TM_RIGHT_BRACE  */
-#line 200 "lang.y"
+#line 200 "LangAnalysis/lang.y"
   {
     (yyval.e) = TNewStructType((yyvsp[-3].i), (yyvsp[-1].e));
   }
-#line 1351 "parser.c"
+#line 1351 "LangAnalysis/parser.c"
     break;
 
   case 27: /* NT_LEFT_TYPE: TM_STRUCT_TYPE TM_LEFT_BRACE NT_FIELD_LIST TM_RIGHT_BRACE  */
-#line 204 "lang.y"
+#line 204 "LangAnalysis/lang.y"
   {
     (yyval.e) = TNewStructType(NULL, (yyvsp[-1].e));
   }
-#line 1359 "parser.c"
+#line 1359 "LangAnalysis/parser.c"
     break;
 
   case 28: /* NT_LEFT_TYPE: TM_STRUCT_TYPE TM_IDENT  */
-#line 208 "lang.y"
+#line 208 "LangAnalysis/lang.y"
   {
     (yyval.e) = TStructType((yyvsp[0].i)); 
   }
-#line 1367 "parser.c"
+#line 1367 "LangAnalysis/parser.c"
     break;
 
   case 29: /* NT_LEFT_TYPE: TM_UNION_TYPE TM_IDENT TM_LEFT_BRACE NT_FIELD_LIST TM_RIGHT_BRACE  */
-#line 213 "lang.y"
+#line 213 "LangAnalysis/lang.y"
   {
     (yyval.e) = TNewUnionType((yyvsp[-3].i), (yyvsp[-1].e));
   }
-#line 1375 "parser.c"
+#line 1375 "LangAnalysis/parser.c"
     break;
 
   case 30: /* NT_LEFT_TYPE: TM_UNION_TYPE TM_LEFT_BRACE NT_FIELD_LIST TM_RIGHT_BRACE  */
-#line 217 "lang.y"
+#line 217 "LangAnalysis/lang.y"
   {
     (yyval.e) = TNewUnionType(NULL, (yyvsp[-1].e));
   }
-#line 1383 "parser.c"
+#line 1383 "LangAnalysis/parser.c"
     break;
 
   case 31: /* NT_LEFT_TYPE: TM_UNION_TYPE TM_IDENT  */
-#line 221 "lang.y"
+#line 221 "LangAnalysis/lang.y"
   {
     (yyval.e) = TUnionType((yyvsp[0].i));
   }
-#line 1391 "parser.c"
+#line 1391 "LangAnalysis/parser.c"
     break;
 
   case 32: /* NT_LEFT_TYPE: TM_ENUM_TYPE TM_IDENT TM_LEFT_BRACE NT_ENUM_ELE_LIST TM_RIGHT_BRACE  */
-#line 226 "lang.y"
+#line 226 "LangAnalysis/lang.y"
   {
     (yyval.e) = TNewEnumType((yyvsp[-3].i), (yyvsp[-1].e));
   }
-#line 1399 "parser.c"
+#line 1399 "LangAnalysis/parser.c"
     break;
 
   case 33: /* NT_LEFT_TYPE: TM_ENUM_TYPE TM_LEFT_BRACE NT_ENUM_ELE_LIST TM_RIGHT_BRACE  */
-#line 230 "lang.y"
+#line 230 "LangAnalysis/lang.y"
   {
     (yyval.e) = TNewStructType(NULL, (yyvsp[-1].e));
   }
-#line 1407 "parser.c"
+#line 1407 "LangAnalysis/parser.c"
     break;
 
   case 34: /* NT_LEFT_TYPE: TM_ENUM_TYPE TM_IDENT  */
-#line 234 "lang.y"
+#line 234 "LangAnalysis/lang.y"
   {
     (yyval.e) = TEnumType((yyvsp[0].i));
   }
-#line 1415 "parser.c"
+#line 1415 "LangAnalysis/parser.c"
     break;
 
   case 35: /* NT_LEFT_TYPE: TM_INT_TYPE  */
-#line 239 "lang.y"
+#line 239 "LangAnalysis/lang.y"
   {
     (yyval.e) = TIntType();
   }
-#line 1423 "parser.c"
+#line 1423 "LangAnalysis/parser.c"
     break;
 
   case 36: /* NT_LEFT_TYPE: TM_CHAR_TYPE  */
-#line 243 "lang.y"
+#line 243 "LangAnalysis/lang.y"
   {
     (yyval.e) = TCharType();
   }
-#line 1431 "parser.c"
+#line 1431 "LangAnalysis/parser.c"
     break;
 
   case 37: /* NT_LEFT_TYPE: TM_IDENT  */
-#line 247 "lang.y"
+#line 247 "LangAnalysis/lang.y"
   {
     (yyval.e) = TDefinedType((yyvsp[0].i));
   }
-#line 1439 "parser.c"
+#line 1439 "LangAnalysis/parser.c"
     break;
 
   case 38: /* NT_GLOB_ITEM: TM_STRUCT_TYPE TM_IDENT TM_LEFT_BRACE NT_FIELD_LIST TM_RIGHT_BRACE TM_SEMICOL  */
-#line 258 "lang.y"
+#line 258 "LangAnalysis/lang.y"
   {
     (yyval.e) = TStructDef((yyvsp[-4].i), (yyvsp[-2].e));
   }
-#line 1447 "parser.c"
+#line 1447 "LangAnalysis/parser.c"
     break;
 
   case 39: /* NT_GLOB_ITEM: TM_STRUCT_TYPE TM_IDENT TM_SEMICOL  */
-#line 262 "lang.y"
+#line 262 "LangAnalysis/lang.y"
   {
     (yyval.e) = TStructDecl((yyvsp[-1].i));
   }
-#line 1455 "parser.c"
+#line 1455 "LangAnalysis/parser.c"
     break;
 
   case 40: /* NT_GLOB_ITEM: TM_UNION_TYPE TM_IDENT TM_LEFT_BRACE NT_FIELD_LIST TM_RIGHT_BRACE TM_SEMICOL  */
-#line 267 "lang.y"
+#line 267 "LangAnalysis/lang.y"
   {
     (yyval.e) = TUnionDef((yyvsp[-4].i), (yyvsp[-2].e));
   }
-#line 1463 "parser.c"
+#line 1463 "LangAnalysis/parser.c"
     break;
 
   case 41: /* NT_GLOB_ITEM: TM_UNION_TYPE TM_IDENT TM_SEMICOL  */
-#line 271 "lang.y"
+#line 271 "LangAnalysis/lang.y"
   {
     (yyval.e) = TUnionDecl((yyvsp[-1].i));
   }
-#line 1471 "parser.c"
+#line 1471 "LangAnalysis/parser.c"
     break;
 
   case 42: /* NT_GLOB_ITEM: TM_ENUM_TYPE TM_IDENT TM_LEFT_BRACE NT_ENUM_ELE_LIST TM_RIGHT_BRACE TM_SEMICOL  */
-#line 276 "lang.y"
+#line 276 "LangAnalysis/lang.y"
   {
     (yyval.e) = TEnumDef((yyvsp[-4].i), (yyvsp[-2].e));
   }
-#line 1479 "parser.c"
+#line 1479 "LangAnalysis/parser.c"
     break;
 
   case 43: /* NT_GLOB_ITEM: TM_ENUM_TYPE TM_IDENT TM_SEMICOL  */
-#line 280 "lang.y"
+#line 280 "LangAnalysis/lang.y"
   {
     (yyval.e) = TEnumDecl((yyvsp[-1].i));
   }
-#line 1487 "parser.c"
+#line 1487 "LangAnalysis/parser.c"
     break;
 
   case 44: /* NT_GLOB_ITEM: TM_TYPEDEF_TYPE NT_LEFT_TYPE NT_NAMED_RIGHT_TYPE_EXPR TM_SEMICOL  */
-#line 285 "lang.y"
+#line 285 "LangAnalysis/lang.y"
   {
     (yyval.e) = TTypeDef((yyvsp[-2].e), (yyvsp[-1].e));
   }
-#line 1495 "parser.c"
+#line 1495 "LangAnalysis/parser.c"
     break;
 
   case 45: /* NT_GLOB_ITEM: NT_LEFT_TYPE NT_NAMED_RIGHT_TYPE_EXPR TM_SEMICOL  */
-#line 290 "lang.y"
+#line 290 "LangAnalysis/lang.y"
   {
     (yyval.e) = TVarDef((yyvsp[-2].e), (yyvsp[-1].e));
   }
-#line 1503 "parser.c"
+#line 1503 "LangAnalysis/parser.c"
     break;
 
 
-#line 1507 "parser.c"
+#line 1507 "LangAnalysis/parser.c"
 
       default: break;
     }
@@ -1696,7 +1696,7 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 300 "lang.y"
+#line 300 "LangAnalysis/lang.y"
 
 
 void yyerror(char* s)

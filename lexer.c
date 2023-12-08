@@ -502,8 +502,8 @@ int yy_flex_debug = 0;
 #define YY_MORE_ADJ 0
 #define YY_RESTORE_YY_MORE_OFFSET
 char *yytext;
-#line 1 "lang.l"
-#line 4 "lang.l"
+#line 1 "LangAnalysis/lang.l"
+#line 4 "LangAnalysis/lang.l"
 #include "lang.h"
 #include "parser.h"
 #line 510 "lexer.c"
@@ -724,7 +724,7 @@ YY_DECL
 		}
 
 	{
-#line 8 "lang.l"
+#line 8 "LangAnalysis/lang.l"
 
 
 #line 731 "lexer.c"
@@ -796,7 +796,7 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 10 "lang.l"
+#line 10 "LangAnalysis/lang.l"
 {
     yylval.n = build_nat(yytext, yyleng);
     return TM_NAT;
@@ -804,112 +804,112 @@ YY_RULE_SETUP
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 15 "lang.l"
+#line 15 "LangAnalysis/lang.l"
 {
     return TM_INT_TYPE;
 }
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 19 "lang.l"
+#line 19 "LangAnalysis/lang.l"
 {
     return TM_CHAR_TYPE;
 }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 23 "lang.l"
+#line 23 "LangAnalysis/lang.l"
 {
     return TM_ENUM_TYPE;
 }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 27 "lang.l"
+#line 27 "LangAnalysis/lang.l"
 {
     return TM_STRUCT_TYPE;
 }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 31 "lang.l"
+#line 31 "LangAnalysis/lang.l"
 {
     return TM_UNION_TYPE;
 }
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 35 "lang.l"
+#line 35 "LangAnalysis/lang.l"
 {
     return TM_TYPEDEF_TYPE;
 }
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 39 "lang.l"
+#line 39 "LangAnalysis/lang.l"
 {
     return TM_DEREFERENCE;
     }
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 43 "lang.l"
+#line 43 "LangAnalysis/lang.l"
 {
     return TM_COMMA;
     }
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 47 "lang.l"
+#line 47 "LangAnalysis/lang.l"
 {
     return TM_LEFT_PAREN;
     }
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 51 "lang.l"
+#line 51 "LangAnalysis/lang.l"
 {
     return TM_RIGHT_PAREN;
     }
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 55 "lang.l"
+#line 55 "LangAnalysis/lang.l"
 {
     return TM_LEFT_BRACE;
     }
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 59 "lang.l"
+#line 59 "LangAnalysis/lang.l"
 {
     return TM_RIGHT_BRACE;
     }
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 63 "lang.l"
+#line 63 "LangAnalysis/lang.l"
 {
     return TM_LEFT_BRACKET;
     }
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 67 "lang.l"
+#line 67 "LangAnalysis/lang.l"
 {
     return TM_RIGHT_BRACKET;
     }
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 71 "lang.l"
+#line 71 "LangAnalysis/lang.l"
 {
     return TM_SEMICOL;
     }
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 75 "lang.l"
+#line 75 "LangAnalysis/lang.l"
 {
     yylval.i = new_str(yytext, yyleng);
     return TM_IDENT;
@@ -918,18 +918,18 @@ YY_RULE_SETUP
 case 18:
 /* rule 18 can match eol */
 YY_RULE_SETUP
-#line 80 "lang.l"
+#line 80 "LangAnalysis/lang.l"
 { };
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 82 "lang.l"
+#line 82 "LangAnalysis/lang.l"
 {printf("%s",yytext);
      return -1; }
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 84 "lang.l"
+#line 84 "LangAnalysis/lang.l"
 ECHO;
 	YY_BREAK
 #line 936 "lexer.c"
@@ -1949,6 +1949,6 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 84 "lang.l"
+#line 84 "LangAnalysis/lang.l"
 
 

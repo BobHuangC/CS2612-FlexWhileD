@@ -92,6 +92,10 @@ input module usage:
 ./input examples/input_file.l regex.txt syntax.txt
 ```
 
+GeneralAnalyzer usage:    
+```sh
+./main /home/bob/CScode/PLCode/Project/SelfProject/SelfFlex0926/sample_src00.c
+```
    <!-- To generate new images, run InST.ipynb -->
    
 <p align="right">(<a href="#top">back to top</a>)</p>
