@@ -69,11 +69,11 @@
     return TM_RIGHT_PAREN;
     }
 
-"{" {
+"\{" {
     return TM_LEFT_BRACE;
     }
 
-"}" {
+"\}" {
     return TM_RIGHT_BRACE;
     }
 
