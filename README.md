@@ -89,7 +89,7 @@ For packages, see environment.yaml.
 
 input module usage:    
 ```sh
-./input examples/input_file.l regex.txt syntax.txt
+./input examples/input_file.l
 ```
 
 GeneralAnalyzer usage:    
