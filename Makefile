@@ -1,3 +1,6 @@
+main: PreProcess/input.cpp NFADFA/main.cpp NFADFA/NFA.cpp NFADFA/RE.cpp
+    g++ $^ -o $@
+
 input: PreProcess/input.cpp
 	g++ PreProcess/input.cpp -o PreProcess/input
 
