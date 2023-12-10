@@ -2,3 +2,6 @@
 
 # .o文件, bin文件
 *.o
+
+# Attachment0926.zip
+Attachment*.zip

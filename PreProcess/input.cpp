@@ -4,21 +4,13 @@
 #include <regex>
 #include <sstream>
 #include <vector>
+#include "input.h"
 
 // 输入一个字符串流(.l文件), 然后返回一个vector, vector中的每一个元素都是一个rule
 // 一个是正则表达式, 一个是语法规则
 
-class rule
-{
-    private:
-    public:
-        std::string regex;
-        std::string syntax;
-};
 
 int countSubstring(const std::string& str, const std::string& sub);
-std::vector<rule> processFlexFile(const std::string&filename);
-
 
 int countSubstring(const std::string& str, const std::string& sub) {
     std::size_t pos = 0;
@@ -128,27 +120,4 @@ std::vector<rule> processFlexFile(const std::string&filename){
     file.close();
     
     return rules;
-}
-
-
-
-int main(int argc, char* argv[]) {
-    if (argc != 2) {
-        std::cerr << "Usage: " << argv[0] << " <input_file> <output_regex_file> <output_syntax_file>" << std::endl;
-        return 1;
-    }
-    std::string filename = argv[1];
-    std::vector<rule> rules;
-
-    rules = processFlexFile(filename);
-    
-    // 遍历rules, 在控制台输出rules
-    for (auto r : rules){
-        std::cout << r.regex ;
-        std::cout << r.syntax;
-        std::cout << '\n';
-        std::cout << '\n';
-    }
-    
-    return 0;
 }
