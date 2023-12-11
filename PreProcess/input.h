@@ -12,6 +12,7 @@ class rule
         std::string regex;
         // syntax in WhileDeref
         std::string syntax;
+        // The AST of the syntax
         std::string ast;
 };
 
