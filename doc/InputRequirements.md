@@ -9,3 +9,5 @@ The input of this program should be a .l file, below is some requirements for th
 2. For each rule, the syntax part (which explains the rule to process the regular expression) should starts with a  "{" and ends with a"}".
 
 3. For each rule, if the regular expression contains a "{" or a "}", it should be escaped by a "\".
+
+4. For each rule, the length of the syntax should be less than 1000 characters.

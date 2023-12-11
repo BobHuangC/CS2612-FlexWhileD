@@ -19,13 +19,9 @@ int main(int argc, char* argv[]) {
 
     rules = processFlexFile(filename);
     
-    // 遍历rules, 在控制台输出rules
-    for (auto r : rules){
-        std::cout << r.regex ;
-        std::cout << r.syntax;
-        std::cout << '\n';
-        std::cout << '\n';
-    }
+
+
+
     
     return 0;
 }
