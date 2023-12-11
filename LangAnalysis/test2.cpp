@@ -16,7 +16,7 @@ int main() {
     std::string filename = "sample_src01.jtl";
     char* file = new char[filename.length() + 1];
     strcpy(file, filename.c_str());
-    get_syntax_tree(file, ret);
+    get_abstract_syntax_tree(file, ret);
     std::cout << ret << std::endl;
     return 0;
 }

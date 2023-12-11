@@ -10,7 +10,7 @@ int yyparse();
 
 // file_name is the name of the file to be parsed
 // ret is the string to be returned
-void get_syntax_tree(char* file_name, char* ret) {
+void get_abstract_syntax_tree(char* file_name, char* ret) {
     FILE *file = fopen(file_name, "r");
     yyin = file;
     yyparse();

@@ -12,10 +12,10 @@ extern "C" {
 #include "parser.h"
 #include "string.h"
 
-// get_syntax_tree: get the syntax tree of the file
+// get_abstract_syntax_tree: get the syntax tree of the file
 // file_name is the name of the file to be parsed
 // ret is the string to be stored and returned
-void get_syntax_tree(char* file_name, char* ret);
+void get_abstract_syntax_tree(char* file_name, char* ret);
 
 #ifdef __cplusplus
 }

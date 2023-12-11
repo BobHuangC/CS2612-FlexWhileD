@@ -12,7 +12,7 @@ int yyparse();
 int main(int argc, char **argv) {
 
     char ret[3000];
-    get_syntax_tree("sample_src00.jtl", ret);
+    get_abstract_syntax_tree("sample_src00.jtl", ret);
 
     for (int i = 0; i < 100; i++) {
         printf("\n");
