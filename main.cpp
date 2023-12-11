@@ -1,12 +1,9 @@
 #include "NFADFA/DFA.h"
 #include "PreProcess/input.h"
-#include "LangAnalysis/analysis.h"
 #include <iostream>
 #include <string>
 #include <stack>
 #include <vector>
-
-using namespace std;
 
 // Main funtion
 int main(int argc, char* argv[]) 
