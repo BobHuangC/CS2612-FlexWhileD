@@ -25,10 +25,16 @@ analysis.o: analysis.c analysis.h parser.h lexer.h lang.h
 main.o: main.c lexer.h parser.h lang.h analysis.h
 	gcc -c main.c
 
+test2.o: test2.cpp lexer.h parser.h lang.h analysis.h
+	g++ -c test2.cpp
+
 main: lang.o parser.o lexer.o analysis.o main.o
 	gcc lang.o parser.o lexer.o analysis.o main.o -o main
 
-all: main
+test2: lang.o parser.o lexer.o analysis.o test2.o
+	g++ lang.o parser.o lexer.o analysis.o test2.o -o test2
+
+all: test2
 
 clean:
 	rm -f lexer.h lexer.c parser.h parser.c *.o main
