@@ -22,7 +22,7 @@ int main(int argc, char* argv[])
 		tree_node *RE_tree_root = RE2Tree(rules[k].regex);
 		cout << "--------------------------------------------" << endl;
 		pretty_printing_RE_tree(RE_tree_root);
-		Tree2NFA(RE_tree_root, rules[k].syntax);
+		Tree2NFA(RE_tree_root, rules[k].syntax, k);
 	}
 	
 	vector<head_NFA_node*> NFA = merge_nodes();
