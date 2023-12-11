@@ -12,6 +12,7 @@ class rule
         std::string regex;
         // syntax in WhileDeref
         std::string syntax;
+        std::string ast;
 };
 
 // 输入一个字符串流(.l文件), 然后返回一个vector, vector中的每一个元素都是一个rule

@@ -5,7 +5,7 @@
 #include "NFA.h"
 using namespace std;
 
-int N = 0; // the global serial number
+int NFA_series = 0; // the global serial number
 
 // To simplify the following codes, several functions are implemented
 // Return and pop the top value of node_stack 
@@ -37,9 +37,9 @@ vector<string> tree_analysis(tree_node *t)
 NFA_node *create_new_NFA_node()
 {
 	NFA_node *p = new NFA_node;
-	p->n = N++;
+	p->n = NFA_series++;
 	p->isend = false;
-	head_node *head = new head_node;
+	head_NFA_node *head = new head_NFA_node;
 	head->node = p;
 	head->next = NULL;
 	NFA_list.push_back(head);
@@ -48,9 +48,9 @@ NFA_node *create_new_NFA_node()
 }
 
 // Connect two nodes
-void connect_nodes(NFA_node *p, string str, NFA_node *q)
+void connect_NFA_nodes(NFA_node *p, string str, NFA_node *q)
 {
-	list_node *p_next = new list_node;
+	list_NFA_node *p_next = new list_NFA_node;
 	p_next->edge_info = str;
 	p_next->node = q->n;
 	p_next->next = NFA_list[p->n]->next;
@@ -59,20 +59,20 @@ void connect_nodes(NFA_node *p, string str, NFA_node *q)
 }
 
 // Merge all NFAs and return the overall NFA_list
-vector<head_node*> merge_nodes()
+vector<head_NFA_node*> merge_nodes()
 {
 	NFA_node *init_node = create_new_NFA_node();
 	
 	while (!st.empty())
 	{
 		NFA_node *st_top_node = pop(st);
-		connect_nodes(init_node, EPSILON, st_top_node);
+		connect_NFA_nodes(init_node, EPSILON, st_top_node);
 	}
 	return NFA_list;
 }
 
 // Transform the RE tree into an NFA
-void Tree2NFA(tree_node *root, string end_info)
+void Tree2NFA(tree_node *root, string end_info, int priority)
 {
 	vector<string> order = tree_analysis(root);
 	
@@ -86,10 +86,10 @@ void Tree2NFA(tree_node *root, string end_info)
 			NFA_node *e1 = pop(en);
 			NFA_node *s = create_new_NFA_node();
 			NFA_node *e = create_new_NFA_node();
-			connect_nodes(s, EPSILON, s1);
-			connect_nodes(s, EPSILON, s2);
-			connect_nodes(e1, EPSILON, e);
-			connect_nodes(e2, EPSILON, e);
+			connect_NFA_nodes(s, EPSILON, s1);
+			connect_NFA_nodes(s, EPSILON, s2);
+			connect_NFA_nodes(e1, EPSILON, e);
+			connect_NFA_nodes(e2, EPSILON, e);
 			st.push(s);
 			en.push(e);
 		}
@@ -99,7 +99,7 @@ void Tree2NFA(tree_node *root, string end_info)
 			NFA_node *s = pop(st);
 			NFA_node *e2 = pop(en);
 			NFA_node *e1 = pop(en);
-			connect_nodes(e1, EPSILON, s);
+			connect_NFA_nodes(e1, EPSILON, s);
 			en.push(e2);
 		}
 			
@@ -108,8 +108,8 @@ void Tree2NFA(tree_node *root, string end_info)
 			NFA_node *s = st.top();
 			NFA_node *e = pop(en);
 			NFA_node *new_e = create_new_NFA_node();
-			connect_nodes(e, EPSILON, s);
-			connect_nodes(s, EPSILON, new_e);
+			connect_NFA_nodes(e, EPSILON, s);
+			connect_NFA_nodes(s, EPSILON, new_e);
 			en.push(new_e);
 		}
 		
@@ -117,26 +117,28 @@ void Tree2NFA(tree_node *root, string end_info)
 		{
 			NFA_node *p = create_new_NFA_node();
 			NFA_node *q = create_new_NFA_node();
-			connect_nodes(p, order[i], q);
+			connect_NFA_nodes(p, order[i], q);
 			st.push(p);
 			en.push(q);
 		}
 	}
 	
+	// deal with the final state
 	NFA_node *en_top = en.top();
 	en_top->isend = true;
 	en_top->endinfo = end_info;
+	en_top->priority = priority;
 }
 
 
 // Pretty printing for NFA
-void pretty_printing_NFA(vector<head_node*> NFA_list)
+void pretty_printing_NFA(vector<head_NFA_node*> NFA_list)
 {
 	for (int k = 0; k < NFA_list.size(); k++)
 	{
 		if (NFA_list[k]->node->isend) cout << (k < 10 ? " " : "") << k << " is a final state. Endinfo: " 
 										   << NFA_list[k]->node->endinfo << endl;
-		list_node *p = NFA_list[k]->next;
+		list_NFA_node *p = NFA_list[k]->next;
 		while (p)
 		{
 			cout << (k < 10 ? " " : "") << k << " ----> " << p->node << (p->node < 10 ? " " : "")

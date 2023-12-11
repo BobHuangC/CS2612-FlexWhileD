@@ -15,7 +15,7 @@ int main(int argc, char* argv[]) {
     std::string filename = "LangAnalysis/sample_src00.jtl";
     char* file = new char[filename.length() + 1];
     strcpy(file, filename.c_str());
-    get_syntax_tree(file, ret);
+    get_abstract_syntax_tree(file, ret);
     std::cout << ret << std::endl;
    
     return 0;

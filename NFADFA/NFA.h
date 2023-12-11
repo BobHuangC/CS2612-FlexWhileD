@@ -7,28 +7,31 @@
 using namespace std;
 
 // The structure of nodes in NFA
-struct NFA_node{
-	int n;          // serial number of the node
+struct NFA_node
+{
+	int n;          // serial number of NFA node
 	bool isend;     // true if the node is a final state in NFA
 	string endinfo; // returned information when isend=true
+	int priority;   // returned priority of the endinfo when isend=true
+					// The smaller the number, the higher the priority
 };
 
 // Adjacency list used for NFA
-// head_node -> list_node -> list_node -> ...
-struct list_node
+// head_NFA_node -> list_NFA_node -> list_NFA_node -> ...
+struct list_NFA_node
 {
 	string edge_info; // value of the edge
 	int node;         // the current node
-	list_node *next;
+	list_NFA_node *next;
 };
 
-struct head_node
+struct head_NFA_node
 {
 	NFA_node *node;
-	list_node *next; 
+	list_NFA_node *next; 
 };
 
-static vector<head_node*> NFA_list;
+static vector<head_NFA_node*> NFA_list;
 
 // Two stacks are used for construct the NFA
 static stack<NFA_node*> st;
@@ -36,12 +39,12 @@ static stack<NFA_node*> en;
 
 // Functions
 // Merge all NFAs and return the overall NFA_list
-vector<head_node*> merge_nodes();
+vector<head_NFA_node*> merge_nodes();
 
 // Transform the RE tree into an NFA
-void Tree2NFA(tree_node *root, string end_info);
+void Tree2NFA(tree_node *root, string end_info, int priority);
 
 // Pretty printing for NFA
-void pretty_printing_NFA(vector<head_node*> NFA_list);
+void pretty_printing_NFA(vector<head_NFA_node*> NFA_list);
 
 #endif

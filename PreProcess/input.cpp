@@ -1,4 +1,5 @@
 #include "input.h"
+#include "../LangAnalysis/analysis.h"
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -19,6 +20,13 @@ int countSubstring(const std::string& str, const std::string& sub) {
         pos += sub.length();
     }
     return count;
+}
+
+std::string str_get_abstract_syntax_tree(const std::string& syntax){
+    char tmp_ast[3000] = "\0";
+    get_abstract_syntax_tree(syntax.c_str(), tmp_ast);
+    std::string ast(tmp_ast);
+    return ast;
 }
 
 std::vector<rule> processFlexFile(const std::string&filename){
@@ -56,9 +64,17 @@ std::vector<rule> processFlexFile(const std::string&filename){
                 
                 // If the number of left braces and the number of right braces are equal, it means that this rule has been read
                 if (SyntaxLeftRightBraceDiff == 0){
+                    std::string tmp_syntax = tmp_r.syntax;
+                    // 将tmp_syntax头部的{去掉
+                    tmp_syntax = tmp_syntax.substr(1, tmp_syntax.size() - 1);
+                    // 将tmp_syntax尾部的}去掉
+                    tmp_syntax.pop_back();
+
+                    tmp_r.ast = str_get_abstract_syntax_tree(tmp_syntax);
                     rules.push_back(tmp_r);
                     tmp_r.regex = "";
                     tmp_r.syntax = "";
+                    tmp_r.ast = "";
                     ProcessSyntax = false;
                 }
             }
@@ -115,4 +131,17 @@ std::vector<rule> processFlexFile(const std::string&filename){
     file.close();
     
     return rules;
+}
+
+
+int main()
+{
+    std::string filename = "examples/input_file1.l";
+    std::vector<rule> rules = processFlexFile(filename);
+    for (int i = 0; i < rules.size(); i++){
+        std::cout << rules[i].regex << std::endl;
+        std::cout << rules[i].syntax << std::endl;
+        std::cout << rules[i].ast << std::endl;
+    }
+    return 0;
 }
