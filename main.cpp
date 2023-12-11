@@ -1,4 +1,5 @@
 #include "PreProcess/input.h"
+#include "LangAnalysis/analysis.h"
 #include <iostream>
 #include <fstream>
 #include <string>

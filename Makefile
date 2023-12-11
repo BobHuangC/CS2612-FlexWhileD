@@ -1,7 +1,7 @@
-main: PreProcess/input.cpp NFADFA/main.cpp NFADFA/NFA.cpp NFADFA/RE.cpp
-    g++ $^ -o $@
+OUTPUT_DIR = bin
+TARGET = $(OUTPUT_DIR)/flexWhileD
 
-input: PreProcess/input.cpp
+bin/flexWhileD: PreProcess/input.cpp
 	g++ PreProcess/input.cpp -o PreProcess/input
 
 LangAnalysis/lexer.h: LangAnalysis/lang.l
@@ -31,7 +31,7 @@ LangAnalysis/main.o: LangAnalysis/main.c LangAnalysis/lexer.h LangAnalysis/parse
 LangAnalysis/main: LangAnalysis/lang.o LangAnalysis/parser.o LangAnalysis/lexer.o LangAnalysis/main.o
 	gcc LangAnalysis/lang.o LangAnalysis/parser.o LangAnalysis/lexer.o LangAnalysis/main.o -o LangAnalysis/main
 
-all: LangAnalysis/main
+all: $(TARGET)
 
 clean:
 	rm -f lexer.h lexer.c parser.h parser.c *.o main
