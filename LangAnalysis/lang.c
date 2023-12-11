@@ -59,13 +59,6 @@ struct expr * TDeref(struct expr * arg) {
   return res;
 }
 
-struct cmd * TDecl(char * name) {
-  struct cmd * res = new_cmd_ptr();
-  res -> t = T_DECL;
-  res -> d.DECL.name = name;
-  return res;
-}
-
 struct cmd * TAsgn(struct expr * left, struct expr * right) {
   struct cmd * res = new_cmd_ptr();
   res -> t = T_ASGN;
@@ -97,50 +90,6 @@ struct cmd * TWhile(struct expr * cond, struct cmd * body) {
   res -> d.WHILE.cond = cond;
   res -> d.WHILE.body = body;
   return res;
-}
-
-void print_binop(enum BinOpType op) {
-  switch (op) {
-  case T_PLUS:
-    printf("PLUS");
-    break;
-  case T_MINUS:
-    printf("MINUS");
-    break;
-  case T_MUL:
-    printf("MUL");
-    break;
-  case T_DIV:
-    printf("DIV");
-    break;
-  case T_MOD:
-    printf("MOD");
-    break;
-  case T_LT:
-    printf("LT");
-    break;
-  case T_GT:
-    printf("GT");
-    break;
-  case T_LE:
-    printf("LE");
-    break;
-  case T_GE:
-    printf("GE");
-    break;
-  case T_EQ:
-    printf("EQ");
-    break;
-  case T_NE:
-    printf("NE");
-    break;
-  case T_AND:
-    printf("AND");
-    break;
-  case T_OR:
-    printf("OR");
-    break;
-  }
 }
 
 void get_binop(enum BinOpType op, char* binop_return) {
@@ -188,17 +137,6 @@ void get_binop(enum BinOpType op, char* binop_return) {
   }
 }
 
-void print_unop(enum UnOpType op) {
-  switch (op) {
-  case T_UMINUS:
-    printf("UMINUS");
-    break;
-  case T_NOT:
-    printf("NOT");
-    break;
-  }
-}
-
 void get_unop(enum UnOpType op, char* unop_return) {
   char* ret = unop_return;
   switch (op) {
@@ -207,36 +145,6 @@ void get_unop(enum UnOpType op, char* unop_return) {
     break;
   case T_NOT:
     strcat(ret, "NOT");
-    break;
-  }
-}
-
-void print_expr(struct expr * e) {
-  switch (e -> t) {
-  case T_CONST:
-    printf("CONST(%d)", e -> d.CONST.value);
-    break;
-  case T_VAR:
-    printf("VAR(%s)", e -> d.VAR.name);
-    break;
-  case T_BINOP:
-    print_binop(e -> d.BINOP.op);
-    printf("(");
-    print_expr(e -> d.BINOP.left);
-    printf(",");
-    print_expr(e -> d.BINOP.right);
-    printf(")");
-    break;
-  case T_UNOP:
-    print_unop(e -> d.UNOP.op);
-    printf("(");
-    print_expr(e -> d.UNOP.arg);
-    printf(")");
-    break;
-  case T_DEREF:
-    printf("DEREF(");
-    print_expr(e -> d.DEREF.arg);
-    printf(")");
     break;
   }
 }
@@ -278,54 +186,10 @@ void get_expr(struct expr *e, char* expr_return) {
   }
 }
 
-
-void print_cmd(struct cmd * c) {
-  switch (c -> t) {
-  case T_DECL:
-    printf("DECL(%s)", c -> d.DECL.name);
-    break;
-  case T_ASGN:
-    printf("ASGN(");
-    print_expr(c -> d.ASGN.left);
-    printf(",");
-    print_expr(c -> d.ASGN.right);
-    printf(")");
-    break;
-  case T_SEQ:
-    printf("SEQ(");
-    print_cmd(c -> d.SEQ.left);
-    printf(",");
-    print_cmd(c -> d.SEQ.right);
-    printf(")");
-    break;
-  case T_IF:
-    printf("IF(");
-    print_expr(c -> d.IF.cond);
-    printf(",");
-    print_cmd(c -> d.IF.left);
-    printf(",");
-    print_cmd(c -> d.IF.right);
-    printf(")");
-    break;
-  case T_WHILE:
-    printf("WHILE(");
-    print_expr(c -> d.WHILE.cond);
-    printf(",");
-    print_cmd(c -> d.WHILE.body);
-    printf(")");
-    break;
-  }
-}
-
 // get_cmd is a function that takes a pointer to a struct cmd and a pointer to a char array
 void* get_cmd(struct cmd * c, char* cmd_return) {
   char* ret = cmd_return;
   switch (c -> t) {
-  case T_DECL:
-    strcat(ret, "DECL(");
-    strcat(ret, c -> d.DECL.name);
-    strcat(ret, ")");
-    break;
   case T_ASGN:    
     strcat(ret, "ASGN(");
     get_expr(c -> d.ASGN.left, ret);

@@ -35,8 +35,7 @@ enum ExprType {
 };
 
 enum CmdType {
-  T_DECL = 0,
-  T_ASGN,
+  T_ASGN = 0,
   T_SEQ,
   T_IF,
   T_WHILE,
@@ -59,7 +58,6 @@ struct expr {
 struct cmd {
   enum CmdType t;
   union {
-    struct {char * name; } DECL;
     struct {struct expr * left; struct expr * right; } ASGN;
     struct {struct cmd * left; struct cmd * right; } SEQ;
     struct {struct expr * cond; struct cmd * left; struct cmd * right; } IF;
@@ -72,16 +70,11 @@ struct expr * TVar(char * name);
 struct expr * TBinOp(enum BinOpType op, struct expr * left, struct expr * right);
 struct expr * TUnOp(enum UnOpType op, struct expr * arg);
 struct expr * TDeref(struct expr * arg);
-struct cmd * TDecl(char * name);
 struct cmd * TAsgn(struct expr * left, struct expr * right);
 struct cmd * TSeq(struct cmd * left, struct cmd * right);
 struct cmd * TIf(struct expr * cond, struct cmd * left, struct cmd * right);
 struct cmd * TWhile(struct expr * cond, struct cmd * body);
 
-void print_binop(enum BinOpType op);
-void print_unop(enum UnOpType op);
-void print_expr(struct expr * e);
-void print_cmd(struct cmd * c);
 void* get_cmd(struct cmd * c, char* cmd_return);
 
 unsigned int build_nat(char * c, int len);

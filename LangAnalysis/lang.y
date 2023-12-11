@@ -60,11 +60,7 @@ NT_WHOLE:
 ;
 
 NT_CMD:
-  TM_VAR TM_IDENT
-  {
-    $$ = (TDecl($2));
-  }
-| NT_EXPR TM_ASGNOP NT_EXPR
+  NT_EXPR TM_ASGNOP NT_EXPR
   {
     $$ = (TAsgn($1,$3));
   }

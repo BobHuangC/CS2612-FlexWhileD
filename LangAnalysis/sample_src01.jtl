@@ -1,5 +1,3 @@
-  var n;
-  var m;
   n = 100;
   m = 10;
   m = - n * n;
