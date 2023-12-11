@@ -59,6 +59,12 @@ struct expr * TDeref(struct expr * arg) {
   return res;
 }
 
+struct cmd * TSkip() {
+  struct cmd * res = new_cmd_ptr();
+  res -> t = T_SKIP;
+  return res;
+}
+
 struct cmd * TAsgn(struct expr * left, struct expr * right) {
   struct cmd * res = new_cmd_ptr();
   res -> t = T_ASGN;
@@ -190,6 +196,9 @@ void get_expr(struct expr *e, char* expr_return) {
 void* get_cmd(struct cmd * c, char* cmd_return) {
   char* ret = cmd_return;
   switch (c -> t) {
+  case T_SKIP:
+    strcat(ret, "SKIP");
+    break;
   case T_ASGN:    
     strcat(ret, "ASGN(");
     get_expr(c -> d.ASGN.left, ret);

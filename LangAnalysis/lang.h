@@ -35,7 +35,8 @@ enum ExprType {
 };
 
 enum CmdType {
-  T_ASGN = 0,
+  T_SKIP = 0,
+  T_ASGN,
   T_SEQ,
   T_IF,
   T_WHILE,
@@ -58,6 +59,7 @@ struct expr {
 struct cmd {
   enum CmdType t;
   union {
+    struct {} SKIP;
     struct {struct expr * left; struct expr * right; } ASGN;
     struct {struct cmd * left; struct cmd * right; } SEQ;
     struct {struct expr * cond; struct cmd * left; struct cmd * right; } IF;
@@ -70,6 +72,8 @@ struct expr * TVar(char * name);
 struct expr * TBinOp(enum BinOpType op, struct expr * left, struct expr * right);
 struct expr * TUnOp(enum UnOpType op, struct expr * arg);
 struct expr * TDeref(struct expr * arg);
+
+struct cmd * TSkip();
 struct cmd * TAsgn(struct expr * left, struct expr * right);
 struct cmd * TSeq(struct cmd * left, struct cmd * right);
 struct cmd * TIf(struct expr * cond, struct cmd * left, struct cmd * right);

@@ -23,7 +23,7 @@ void * none;
 %token <none> TM_LEFT_PAREN TM_RIGHT_PAREN
 %token <none> TM_SEMICOL
 %token <none> TM_MALLOC TM_RI TM_RC TM_WI TM_WC
-%token <none> TM_VAR TM_IF TM_THEN TM_ELSE TM_WHILE TM_DO
+%token <none> TM_IF TM_THEN TM_ELSE TM_WHILE TM_DO
 %token <none> TM_ASGNOP
 %token <none> TM_OR
 %token <none> TM_AND
@@ -31,6 +31,7 @@ void * none;
 %token <none> TM_LT TM_LE TM_GT TM_GE TM_EQ TM_NE
 %token <none> TM_PLUS TM_MINUS
 %token <none> TM_MUL TM_DIV TM_MOD
+%token <c> TM_SKIP
 
 // Nonterminals
 %type <c> NT_WHOLE
@@ -60,7 +61,11 @@ NT_WHOLE:
 ;
 
 NT_CMD:
-  NT_EXPR TM_ASGNOP NT_EXPR
+  TM_SKIP
+  {
+    $$ = (TSkip());
+  }
+|  NT_EXPR TM_ASGNOP NT_EXPR
   {
     $$ = (TAsgn($1,$3));
   }
