@@ -25,14 +25,14 @@ analysis.o: analysis.c analysis.h parser.h lexer.h lang.h
 main.o: main.c lexer.h parser.h lang.h analysis.h
 	gcc -c main.c
 
-test2.o: LAtest2.cpp lexer.h parser.h lang.h analysis.h
+LAtest2.o: LAtest2.cpp lexer.h parser.h lang.h analysis.h
 	g++ -c LAtest2.cpp
 
 main: lang.o parser.o lexer.o analysis.o main.o
 	gcc lang.o parser.o lexer.o analysis.o main.o -o main
 
-LAtest2: lang.o parser.o lexer.o analysis.o test2.o
-	g++ lang.o parser.o lexer.o analysis.o test2.o -o LAtest2
+LAtest2: lang.o parser.o lexer.o analysis.o LAtest2.o sample_src02.jtl
+	g++ lang.o parser.o lexer.o analysis.o LAtest2.o -o LAtest2
 
 all: LAtest2
 

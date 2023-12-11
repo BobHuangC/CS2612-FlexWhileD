@@ -1,6 +1,7 @@
-  n = 100;
-  m = 10;
-  m = - n * n;
+  nn = 1;
+  mm = 10;
+  mki = - nn * nn;
+  ski = 0;
+  mm = * nn - 1;
   skip;
-  m = * n - 1;
   skip

@@ -11,9 +11,15 @@
 extern struct cmd * root;
 int yyparse();
 
-int main() {
-    
-    std::string filename = "sample_src02.jtl";
+int main(int argc, char* argv[]) {
+    // 通过main函数的参数获取文件名
+    if (argc != 2) {
+        std::cerr << "Usage: " << argv[0] << " <filename>\n";
+        return 1;
+    }
+    std::string filename = argv[1];
+
+    // std::string filename = "sample_src02.jtl";
     std::ifstream file(filename);
     if (!file) {
         std::cerr << "Failed to open file\n";
