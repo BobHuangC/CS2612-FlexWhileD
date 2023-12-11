@@ -32,8 +32,6 @@ enum ExprType {
   T_UNOP,
   T_DEREF,
   T_MALLOC,
-  T_RI,
-  T_RC
 };
 
 enum CmdType {
@@ -42,8 +40,6 @@ enum CmdType {
   T_SEQ,
   T_IF,
   T_WHILE,
-  T_WI,
-  T_WC
 };
 
 struct expr {
@@ -68,8 +64,6 @@ struct cmd {
     struct {struct cmd * left; struct cmd * right; } SEQ;
     struct {struct expr * cond; struct cmd * left; struct cmd * right; } IF;
     struct {struct expr * cond; struct cmd * body; } WHILE;
-    struct {struct expr * arg; } WI;
-    struct {struct expr * arg; } WC;
   } d;
 };
 
@@ -78,16 +72,11 @@ struct expr * TVar(char * name);
 struct expr * TBinOp(enum BinOpType op, struct expr * left, struct expr * right);
 struct expr * TUnOp(enum UnOpType op, struct expr * arg);
 struct expr * TDeref(struct expr * arg);
-struct expr * TMalloc(struct expr * arg);
-struct expr * TReadInt();
-struct expr * TReadChar();
 struct cmd * TDecl(char * name);
 struct cmd * TAsgn(struct expr * left, struct expr * right);
 struct cmd * TSeq(struct cmd * left, struct cmd * right);
 struct cmd * TIf(struct expr * cond, struct cmd * left, struct cmd * right);
 struct cmd * TWhile(struct expr * cond, struct cmd * body);
-struct cmd * TWriteInt(struct expr * arg);
-struct cmd * TWriteChar(struct expr * arg);
 
 void print_binop(enum BinOpType op);
 void print_unop(enum UnOpType op);

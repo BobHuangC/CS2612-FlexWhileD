@@ -80,14 +80,6 @@ NT_CMD:
   {
     $$ = (TWhile($2,$5));
   }
-| TM_WI TM_LEFT_PAREN NT_EXPR TM_RIGHT_PAREN
-  {
-    $$ = (TWriteInt($3));
-  }
-| TM_WC TM_LEFT_PAREN NT_EXPR TM_RIGHT_PAREN
-  {
-    $$ = (TWriteChar($3));
-  }
 ;
 
 
@@ -103,18 +95,6 @@ NT_EXPR_2:
 | TM_IDENT
   {
     $$ = (TVar($1));
-  }
-| TM_RI TM_LEFT_PAREN TM_RIGHT_PAREN
-  {
-    $$ = (TReadInt());
-  }
-| TM_RC TM_LEFT_PAREN TM_RIGHT_PAREN
-  {
-    $$ = (TReadChar());
-  }
-| TM_MALLOC TM_LEFT_PAREN NT_EXPR TM_RIGHT_PAREN
-  {
-    $$ = (TMalloc($3));
   }
 | TM_NOT NT_EXPR_2
   {

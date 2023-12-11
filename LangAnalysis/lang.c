@@ -59,25 +59,6 @@ struct expr * TDeref(struct expr * arg) {
   return res;
 }
 
-struct expr * TMalloc(struct expr * arg) {
-  struct expr * res = new_expr_ptr();
-  res -> t = T_MALLOC;
-  res -> d.MALLOC.arg = arg;
-  return res;
-}
-
-struct expr * TReadInt() {
-  struct expr * res = new_expr_ptr();
-  res -> t = T_RI;
-  return res;
-}
-
-struct expr * TReadChar() {
-  struct expr * res = new_expr_ptr();
-  res -> t = T_RC;
-  return res;
-}
-
 struct cmd * TDecl(char * name) {
   struct cmd * res = new_cmd_ptr();
   res -> t = T_DECL;
@@ -115,20 +96,6 @@ struct cmd * TWhile(struct expr * cond, struct cmd * body) {
   res -> t = T_WHILE;
   res -> d.WHILE.cond = cond;
   res -> d.WHILE.body = body;
-  return res;
-}
-
-struct cmd * TWriteInt(struct expr * arg) {
-  struct cmd * res = new_cmd_ptr();
-  res -> t = T_WI;
-  res -> d.WI.arg = arg;
-  return res;
-}
-
-struct cmd * TWriteChar(struct expr * arg) {
-  struct cmd * res = new_cmd_ptr();
-  res -> t = T_WC;
-  res -> d.WC.arg = arg;
   return res;
 }
 
@@ -271,17 +238,6 @@ void print_expr(struct expr * e) {
     print_expr(e -> d.DEREF.arg);
     printf(")");
     break;
-  case T_MALLOC:
-    printf("MALLOC(");
-    print_expr(e -> d.MALLOC.arg);
-    printf(")");
-    break;
-  case T_RI:
-    printf("READ_INT()");
-    break;
-  case T_RC:
-    printf("READ_CHAR()");
-    break;
   }
 }
 
@@ -318,17 +274,6 @@ void get_expr(struct expr *e, char* expr_return) {
     strcat(ret, "DEREF(");
     get_expr(e -> d.DEREF.arg, ret);
     strcat(ret, ")");
-    break;
-  case T_MALLOC:
-    strcat(ret, "MALLOC(");
-    get_expr(e -> d.MALLOC.arg, ret);
-    strcat(ret, ")");
-    break;
-  case T_RI:
-    strcat(ret, "READ_INT()");
-    break;
-  case T_RC:
-    strcat(ret, "READ_CHAR()");
     break;
   }
 }
@@ -367,16 +312,6 @@ void print_cmd(struct cmd * c) {
     print_expr(c -> d.WHILE.cond);
     printf(",");
     print_cmd(c -> d.WHILE.body);
-    printf(")");
-    break;
-  case T_WI:
-    printf("WRITE_INT(");
-    print_expr(c -> d.WI.arg);
-    printf(")");
-    break;
-  case T_WC:
-    printf("WRITE_CHAR(");
-    print_expr(c -> d.WC.arg);
     printf(")");
     break;
   }
@@ -419,16 +354,6 @@ void* get_cmd(struct cmd * c, char* cmd_return) {
     get_expr(c -> d.WHILE.cond, ret);
     strcat(ret, ",");
     get_cmd(c -> d.WHILE.body, ret);
-    strcat(ret, ")");
-    break;
-  case T_WI:
-    strcat(ret, "WRITE_INT(");
-    get_expr(c -> d.WI.arg, ret);
-    strcat(ret, ")");
-    break;
-  case T_WC:
-    strcat(ret, "WRITE_CHAR(");
-    get_expr(c -> d.WC.arg, ret);
     strcat(ret, ")");
     break;
   }
