@@ -12,10 +12,6 @@
     return TM_NAT;
 }
 
-"var" {
-    return TM_VAR;
-}
-
 "if" {
     return TM_IF;
 }
@@ -34,6 +30,10 @@
 
 "do" {
     return TM_DO;
+}
+
+"skip" {
+    return TM_SKIP;
 }
 
 [_A-Za-z][_A-Za-z0-9]* {
