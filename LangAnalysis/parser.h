@@ -61,28 +61,32 @@ extern int yydebug;
     TM_LEFT_PAREN = 262,           /* TM_LEFT_PAREN  */
     TM_RIGHT_PAREN = 263,          /* TM_RIGHT_PAREN  */
     TM_SEMICOL = 264,              /* TM_SEMICOL  */
-    TM_VAR = 265,                  /* TM_VAR  */
-    TM_IF = 266,                   /* TM_IF  */
-    TM_THEN = 267,                 /* TM_THEN  */
-    TM_ELSE = 268,                 /* TM_ELSE  */
-    TM_WHILE = 269,                /* TM_WHILE  */
-    TM_DO = 270,                   /* TM_DO  */
-    TM_ASGNOP = 271,               /* TM_ASGNOP  */
-    TM_OR = 272,                   /* TM_OR  */
-    TM_AND = 273,                  /* TM_AND  */
-    TM_NOT = 274,                  /* TM_NOT  */
-    TM_LT = 275,                   /* TM_LT  */
-    TM_LE = 276,                   /* TM_LE  */
-    TM_GT = 277,                   /* TM_GT  */
-    TM_GE = 278,                   /* TM_GE  */
-    TM_EQ = 279,                   /* TM_EQ  */
-    TM_NE = 280,                   /* TM_NE  */
-    TM_PLUS = 281,                 /* TM_PLUS  */
-    TM_MINUS = 282,                /* TM_MINUS  */
-    TM_MUL = 283,                  /* TM_MUL  */
-    TM_DIV = 284,                  /* TM_DIV  */
-    TM_MOD = 285,                  /* TM_MOD  */
-    TM_SKIP = 286                  /* TM_SKIP  */
+    TM_MALLOC = 265,               /* TM_MALLOC  */
+    TM_RI = 266,                   /* TM_RI  */
+    TM_RC = 267,                   /* TM_RC  */
+    TM_WI = 268,                   /* TM_WI  */
+    TM_WC = 269,                   /* TM_WC  */
+    TM_VAR = 270,                  /* TM_VAR  */
+    TM_IF = 271,                   /* TM_IF  */
+    TM_THEN = 272,                 /* TM_THEN  */
+    TM_ELSE = 273,                 /* TM_ELSE  */
+    TM_WHILE = 274,                /* TM_WHILE  */
+    TM_DO = 275,                   /* TM_DO  */
+    TM_ASGNOP = 276,               /* TM_ASGNOP  */
+    TM_OR = 277,                   /* TM_OR  */
+    TM_AND = 278,                  /* TM_AND  */
+    TM_NOT = 279,                  /* TM_NOT  */
+    TM_LT = 280,                   /* TM_LT  */
+    TM_LE = 281,                   /* TM_LE  */
+    TM_GT = 282,                   /* TM_GT  */
+    TM_GE = 283,                   /* TM_GE  */
+    TM_EQ = 284,                   /* TM_EQ  */
+    TM_NE = 285,                   /* TM_NE  */
+    TM_PLUS = 286,                 /* TM_PLUS  */
+    TM_MINUS = 287,                /* TM_MINUS  */
+    TM_MUL = 288,                  /* TM_MUL  */
+    TM_DIV = 289,                  /* TM_DIV  */
+    TM_MOD = 290                   /* TM_MOD  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -99,7 +103,7 @@ struct expr * e;
 struct cmd * c;
 void * none;
 
-#line 103 "parser.h"
+#line 107 "parser.h"
 
 };
 typedef union YYSTYPE YYSTYPE;

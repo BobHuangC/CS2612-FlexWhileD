@@ -19,11 +19,14 @@ parser.o: parser.c parser.h lexer.h lang.h
 lexer.o: lexer.c lexer.h parser.h lang.h
 	gcc -c lexer.c
 
-main.o: main.c lexer.h parser.h lang.h
+analysis.o: analysis.c analysis.h parser.h lexer.h lang.h
+	gcc -c analysis.c
+
+main.o: main.c lexer.h parser.h lang.h analysis.h
 	gcc -c main.c
 
-main: lang.o parser.o lexer.o main.o
-	gcc lang.o parser.o lexer.o main.o -o main
+main: lang.o parser.o lexer.o analysis.o main.o
+	gcc lang.o parser.o lexer.o analysis.o main.o -o main
 
 all: main
 

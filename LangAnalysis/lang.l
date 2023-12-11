@@ -12,6 +12,10 @@
     return TM_NAT;
 }
 
+"var" {
+    return TM_VAR;
+}
+
 "if" {
     return TM_IF;
 }
@@ -32,8 +36,24 @@
     return TM_DO;
 }
 
-"skip" {
-    return TM_SKIP;
+"malloc" {
+    return TM_MALLOC;
+}
+
+"read_int" {
+    return TM_RI;
+}
+
+"read_char" {
+    return TM_RC;
+}
+
+"write_int" {
+    return TM_WI;
+}
+
+"write_char" {
+    return TM_WC;
 }
 
 [_A-Za-z][_A-Za-z0-9]* {
