@@ -44,6 +44,12 @@ vector<head_NFA_node*> merge_nodes();
 // Transform the RE tree into an NFA
 void Tree2NFA(tree_node *root, string end_info, int priority);
 
+// Calculate all nodes that can be reached through epsilon edges from current node
+vector<NFA_node*> epsilon_closure(NFA_node *current_node);
+
+// Compare if two vectors are equal
+bool compare_vectors(vector<NFA_node*> v1, vector<NFA_node*> v2); 
+
 // Pretty printing for NFA
 void pretty_printing_NFA(vector<head_NFA_node*> NFA_list);
 

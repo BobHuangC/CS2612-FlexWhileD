@@ -61,7 +61,7 @@ void connect_NFA_nodes(NFA_node *p, string str, NFA_node *q)
 // Merge all NFAs and return the overall NFA_list
 vector<head_NFA_node*> merge_nodes()
 {
-	NFA_node *init_node = create_new_NFA_node();
+	NFA_node *init_node = NFA_list[0]->node;
 	
 	while (!st.empty())
 	{
@@ -75,6 +75,8 @@ vector<head_NFA_node*> merge_nodes()
 void Tree2NFA(tree_node *root, string end_info, int priority)
 {
 	vector<string> order = tree_analysis(root);
+	
+	NFA_node *init_node = create_new_NFA_node();
 	
 	for (int i = 0; i < order.size(); i++)
 	{
@@ -130,6 +132,43 @@ void Tree2NFA(tree_node *root, string end_info, int priority)
 	en_top->priority = priority;
 }
 
+// Calculate all nodes that can be reached through epsilon edges from current node
+vector<NFA_node*> epsilon_closure(NFA_node *current_node)
+{
+	vector<NFA_node*> closure;
+	stack<NFA_node*> epsilon_stack;
+	epsilon_stack.push(current_node);
+	
+	while (!epsilon_stack.empty())
+	{
+		NFA_node *q = pop(st);
+		closure.push_back(q);
+		
+		list_NFA_node *q_next = NFA_list[q->n]->next;
+		while (q_next)
+		{
+			if (q_next->edge_info == EPSILON)
+				epsilon_stack.push(NFA_list[q_next->node]->node);
+			q_next = q_next->next;
+		}
+	}
+	return closure;
+}
+
+// Compare if two vectors are equal
+bool compare_vectors(vector<NFA_node*> v1, vector<NFA_node*> v2)
+{
+	if (v1.size() != v2.size()) return false;
+	
+	sort(v1.begin(), v1.end(), [](NFA_node* &a, NFA_node* &b){return a->n < b->n;});
+	sort(v2.begin(), v2.end(), [](NFA_node* &a, NFA_node* &b){return a->n < b->n;});
+	
+	for (int i = 0; i < v1.size(); i++)
+	{
+		if (v1[i]->n != v2[i]->n) return false;
+	}
+	return true;
+}
 
 // Pretty printing for NFA
 void pretty_printing_NFA(vector<head_NFA_node*> NFA_list)
