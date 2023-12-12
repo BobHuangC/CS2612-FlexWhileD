@@ -3,29 +3,42 @@
 #include <stack>
 #include <vector>
 #include "DFA.h"
-using namespace std;
 
-int DFA_series = 0; // the global serial number
+// The state of DFA is the epison closure of NFA states
 
+// Declaration 1: declare those functions imported from NFA.h, the functions are all based on epsilon closure
 
-// input a vector of NFA nodes, output the epsilon closure of these nodes
-vector<NFA_node*> epsilon_closure(vector<NFA_node*> NFAvec);
-
-
-// intput a vector of NFA nodes(this vector is a epsilon closure), output all the strings that can be absorbed by these nodes
+// input a vec of epsilon closure NFA nodes, 
+// output a vec of strings that this closure NFA nodes can absorb
 // these strings must be different
-vector<string> get_next_strings(vector<NFA_node*> ClosNFAvec);
+vector<std::string> get_NFAvec_next_strings(const std::vector<NFA_node*> ClosNFAvec);
 
 
-bool compare_NFA_vec(vector<NFA_node*> v1, vector<NFA_node*> v2);
+// input 2 vec of NFA node(epsilon closure),
+// output a bool value to determine if these 2 vec are the same
+bool compare_NFA_vec(const std::vector<NFA_node*> NFAv1, const std::vector<NFA_node*> NFAv2);
 
 
-// input a vector of NFA nodes, and a string, the NFA vec absorb the string, 
-// output the epsilon closure of the new NFA vec
-vector<NFA_node*> get_new_NFAvec(vector<NFA_node*> NFAvec, string str);
+// input a vector of NFA nodes(epsilon closure), and a string, the NFA vec absorb the string, 
+// output the epsilon closure of the new NFA vec, the new NFA vec was the epsilon closure of the NFA vec absorb the string
+std::vector<NFA_node*> get_new_NFAvec(std::vector<NFA_node*> NFAvec, string str);
 
 
+// input a vector of NFA nodes(epsilon closure),
+// 
+std::vector<NFA_node*> get_init_NFAvec(std::vector<head_NFA_node*> NFA_list);
+
+
+// Declaration 2: declare the global variables declared in NFA.h
+
+// DFA_index to record the index of DFA node
+int DFA_index = 0;
+// DFA_node_next_strings to record the strings that the DFA node can absorb
+// DFA[i] stores all the strings that DFA_node i can absorb
 vector<vector<string>> DFA_node_next_strings;
+
+
+// Declaration 3: declare the local functions in this file
 
 // 新建一个节点
 // 创建这个节点之前, 已经确定了这个节点之前没有出现过, 所以可以直接给这个节点分配一个编号

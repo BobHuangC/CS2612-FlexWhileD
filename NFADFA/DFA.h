@@ -16,17 +16,6 @@ struct DFA_node
 };
 
 
-
-// // Adjacency list used for DFA
-// // head_DFA_node -> list_DFA_node -> list_DFA_node -> ...
-// struct list_DFA_node
-// {
-// 	string edge_info; // value of the edge
-// 	int node;         // the current node
-// 	list_DFA_node *next;
-// };
-
-
 // 新建一个结构体, 表示DFA节点转换时的字符
 struct DFA_relation_node
 {
