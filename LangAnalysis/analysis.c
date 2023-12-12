@@ -1,8 +1,8 @@
-#include "lang.h"
-#include "lexer.h"
-#include "parser.h"
+#include "../LangAnalysis/lang.h"
+#include "../lexer.h"
+#include "../parser.h"
+#include "../LangAnalysis/analysis.h"
 #include "string.h"
-#include "analysis.h"
 #include <stdio.h>
 
 

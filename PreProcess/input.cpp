@@ -69,8 +69,14 @@ std::vector<rule> processFlexFile(const std::string&filename){
                     assert(tmp_syntax[0] == '{');
                     tmp_syntax = tmp_syntax.substr(1, tmp_syntax.size() - 1);
                     // 将tmp_syntax尾部的}去掉
-                    assert(tmp_syntax.back() == '}');
+
+                    // assert, 如果assert失败, 输出tmp_syntax                    
+                    while (tmp_syntax.back() != '}'){
+                        tmp_syntax.pop_back();
+                    }
                     tmp_syntax.pop_back();
+                    // assert(tmp_syntax.back() == '}');
+                    // tmp_syntax.pop_back();
 
                     tmp_r.ast = str_get_abstract_syntax_tree(tmp_syntax);
                     rules.push_back(tmp_r);
@@ -133,17 +139,4 @@ std::vector<rule> processFlexFile(const std::string&filename){
     file.close();
     
     return rules;
-}
-
-
-int main()
-{
-    std::string filename = "examples/input_file1.l";
-    std::vector<rule> rules = processFlexFile(filename);
-    for (int i = 0; i < rules.size(); i++){
-        std::cout << rules[i].regex << std::endl;
-        std::cout << rules[i].syntax << std::endl;
-        std::cout << rules[i].ast << std::endl;
-    }
-    return 0;
 }

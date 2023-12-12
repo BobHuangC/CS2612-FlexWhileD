@@ -1,4 +1,4 @@
-#include "analysis.h"
+#include "../LangAnalysis/analysis.h"
 
 #include <iostream>
 #include <fstream>

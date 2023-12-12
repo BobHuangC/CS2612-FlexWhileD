@@ -8,8 +8,8 @@ extern "C" {
 
 #include <stdio.h>
 #include "lang.h"
-#include "lexer.h"
-#include "parser.h"
+#include "../lexer.h"
+#include "../parser.h"
 #include "string.h"
 
 // get_abstract_syntax_tree: get the syntax tree of the file

@@ -1,7 +1,7 @@
 %option noyywrap yylineno
 %option outfile="lexer.c" header-file="lexer.h"
 %{
-#include "lang.h"
+#include "LangAnalysis/lang.h"
 #include "parser.h"
 %}
 

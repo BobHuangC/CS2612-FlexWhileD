@@ -1,4 +1,4 @@
-#include "PreProcess/input.h"
+#include "../PreProcess/input.h"
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -20,8 +20,9 @@ int main(int argc, char* argv[]) {
     
     // 遍历rules, 在控制台输出rules
     for (auto r : rules){
-        std::cout << r.regex ;
-        std::cout << r.syntax;
+        std::cout << r.regex << std::endl;
+        std::cout << r.syntax << std::endl; 
+        std::cout << r.ast << std::endl;
         std::cout << '\n';
         std::cout << '\n';
     }
