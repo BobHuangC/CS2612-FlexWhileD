@@ -23,10 +23,6 @@ DFA_node *new_DFA_node_from_NFAvec(std::vector<NFA_node*> NFAvec);
 
 
 
-
-
-
-
 // implementation 3: implement the local functions in this file
 
 // 新建一个节点
@@ -80,11 +76,11 @@ void connect_DFA_nodes(DFA_node *p, string str, DFA_node *q)
 // 如果没有出现过, 就创建一个新的DFA节点(创建的时候就编号), 并且把这个NFAvector压入栈中, 并且记录这个DFA节点下一步可以吸收的字符到DFA_NODE_NEXT_STRINGS中
 // 在确定压栈之前, 再给这个DFA节点分配一个编号, 并且把他能够吸收的字符记录下来(新建DFA节点的时候就已经完成了)
 // 这里存在一点问题就是初始化的时候, 传入什么
-vector<DFA_node*> NFA2DFA(NFA nfa)
+DFA::DFA(NFA nfa)
 {
+	DFA_node_index = 0;
 	stack <DFA_node*> DFA_waiting_stack;
-	vector<NFA_node*> start_NFA_node_set = get_init_NFAvec(nfa);
-
+	vector<NFA_node*> start_NFA_node_set = nfa.get_init_NFAvec();
 	DFA_node *start_DFA_node = new_DFA_node_from_NFAvec(start_NFA_node_set);
 
 	DFA_waiting_stack.push(start_DFA_node);
@@ -94,11 +90,11 @@ vector<DFA_node*> NFA2DFA(NFA nfa)
 		DFA_waiting_stack.pop();
 		for (int i = 0; i < DFA_node_next_strings[p->n].size(); i++)
 		{
-			vector<NFA_node*> next_NFA_node_set = get_new_NFAvec(nfa, p->NFA_node_set, DFA_node_next_strings[p->n][i]);
+			vector<NFA_node*> next_NFA_node_set = nfa.get_new_NFAvec(p->NFA_node_set, DFA_node_next_strings[p->n][i]);
 			bool found = false;
 			for (int j = 0; j < DFA_list.size(); j++)
 			{
-				if (compare_NFA_vec(nfa, next_NFA_node_set, DFA_list[j]->NFA_node_set))
+				if (nfa.compare_NFA_vec(next_NFA_node_set, DFA_list[j]->NFA_node_set))
 				{
 					found = true;
 					break;
@@ -110,8 +106,10 @@ vector<DFA_node*> NFA2DFA(NFA nfa)
 			connect_DFA_nodes(p, DFA_node_next_strings[p->n][i], q);
 		}
 	}
-	return DFA_list;
+	
 }
+
+
 
 
 // Pretty printing for DFA

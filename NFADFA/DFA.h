@@ -7,6 +7,38 @@
 using namespace std;
 
 
+class DFA
+{
+private:
+public:
+	int DFA_node_index = 0;
+	// store all the strings that DFA_node can absorb
+	// DFA_node_next_strings[i][j] represents the jth string that the ith DFA node can absorb
+	std::vector<vector<string>> DFA_node_next_strings;
+	DFA(){
+		DFA_node_index = 0;
+	}
+	
+	DFA(NFA nfa);
+
+
+
+};
+
+
+vector<vector<string>> DFA_node_next_strings;
+
+
+DFA::DFA(NFA nfa)
+{
+	DFA_node_index = 0;
+}
+
+
+
+
+
+
 // The structure of nodes in DFA
 struct DFA_node
 {
@@ -18,14 +50,7 @@ struct DFA_node
 
 
 
-// // Adjacency list used for DFA
-// // head_DFA_node -> list_DFA_node -> list_DFA_node -> ...
-// struct list_DFA_node
-// {
-// 	string edge_info; // value of the edge
-// 	int node;         // the current node
-// 	list_DFA_node *next;
-// };
+
 
 
 // 新建一个结构体, 表示DFA节点转换时的字符
@@ -60,9 +85,7 @@ vector<DFA_node*> NFA2DFA(vector<head_NFA_node*> NFA_list);
 void pretty_printing_DFA(vector<DFA_node*> DFA_list);
 
 
-// 保存每一个DFA节点下一步可以吸收的字符
-// DFA_node_next_char[i][j]表示第i个DFA节点, 下一步可以吸收的第j个字符
-vector<vector<string>> DFA_node_next_strings;
+
 
 
 

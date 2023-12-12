@@ -15,32 +15,30 @@ class NFA
 {
 private:
 public:
-
-};
-
-// build a class of NFA(finish the below class and corresponding functions)
-// Implement the following functions
+	// build a class of NFA(finish the below class and corresponding functions)
+	// Implement the following functions
 
 
-// input a vec of epsilon closure NFA nodes, 
-// output a vec of strings that this closure NFA nodes can absorb
-// these strings must be different
-std::vector<std::string> get_NFAvec_next_strings(NFA nfa, const std::vector<NFA_node*> ClosNFAvec);
+	// input a vec of epsilon closure NFA nodes, 
+	// output a vec of strings that this closure NFA nodes can absorb
+	// these strings must be different
+	std::vector<std::string> get_NFAvec_next_strings(const std::vector<NFA_node*> ClosNFAvec);
 
 
-// input 2 vec of NFA node(epsilon closure),
-// output a bool value to determine if these 2 vec are the same
-bool compare_NFA_vec(NFA nfa, const std::vector<NFA_node*> NFAv1, const std::vector<NFA_node*> NFAv2);
+	// input 2 vec of NFA node(epsilon closure),
+	// output a bool value to determine if these 2 vec are the same
+	bool compare_NFA_vec(const std::vector<NFA_node*> NFAv1, const std::vector<NFA_node*> NFAv2);
 
 
-// input a vector of NFA nodes(epsilon closure), and a string, the NFA vec absorb the string, 
-// output the epsilon closure of the new NFA vec, the new NFA vec was the epsilon closure of the NFA vec absorb the string
-std::vector<NFA_node*> get_new_NFAvec(NFA nfa, std::vector<NFA_node*> NFAvec, string str);
+	// input a vector of NFA nodes(epsilon closure), and a string, the NFA vec absorb the string, 
+	// output the epsilon closure of the new NFA vec, the new NFA vec was the epsilon closure of the NFA vec absorb the string
+	std::vector<NFA_node*> get_new_NFAvec(std::vector<NFA_node*> NFAvec, string str);
 
 
-// output the init epsilon closure of the NFA
-std::vector<NFA_node*> get_init_NFAvec(NFA nfa);
+	// output the init epsilon closure of the NFA
+	std::vector<NFA_node*> get_init_NFAvec();
 	
+};
 
 // TODO END
 
