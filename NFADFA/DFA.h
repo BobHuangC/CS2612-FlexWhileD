@@ -29,6 +29,17 @@ public:
 	// store all the strings that DFA_node can absorb
 	// DFA_node_next_strings[i][j] represents the jth string that the ith DFA node can absorb
 	std::vector<vector<string>> DFA_node_next_strings;
+
+	// DFA_nodes_list to record all the DFA nodes
+	std::vector<DFA_node*> DFA_nodes_list;
+
+	// DFA_trans_list to record all the transitions of DFA
+	// DFA_trans_list[i][j] is a pair of string and int,
+	// means that the j-th transition rule of i-the DFA node is:
+	// i-th DFA node absorb the string, and trans to the int-th node.
+	std::vector<std::vector<std::pair<string, int>>> DFA_trans_list;
+	
+
 	DFA(){
 		DFA_node_index = 0;
 	}
@@ -37,68 +48,18 @@ public:
 
 	// input a epsilon closure NFA node, 
 	// output a DFA_node built from this NFA node
-	DFA_node new_DFA_node_from_NFAvec(NFA nfa, std::vector<NFA_node*> NFAvec);
+	DFA_node* new_DFA_node_from_NFAvec(NFA nfa, std::vector<NFA_node*> NFAvec);
+	void pretty_printing_DFA();
 
 };
 
 
-
-
-
-vector<vector<string>> DFA_node_next_strings;
 
 
 DFA::DFA(NFA nfa)
 {
 	DFA_node_index = 0;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-// 新建一个结构体, 表示DFA节点转换时的字符
-struct DFA_relation_node
-{
-	int node; // 当前节点
-	string edge_info; // 转换字符
-	int next_node; // 下一个节点
-};
-
-
-// DFA节点之间的关系
-vector<DFA_relation_node> DFA_relation;
-
-
-// DFA_list to record all the DFA nodes
-vector<DFA_node*> DFA_list;
-
-// struct head_DFA_node
-// {
-// 	DFA_node *node;
-// 	list_DFA_node *next; 
-// };
-
-// static vector<head_DFA_node*> DFA_list;
-
-
-
-
-
-// Pretty printing for DFA
-void pretty_printing_DFA(vector<DFA_node*> DFA_list);
-
-
-
-
-
 
 
 #endif
