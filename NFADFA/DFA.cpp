@@ -28,9 +28,14 @@ DFA::DFA(NFA nfa)
 
 		DFA_node* p = DFA_waiting_queue.front();
 		DFA_waiting_queue.pop();
+
+		// iterate over all strings that can be absorbed from this node
 		for (int i = 0; i < DFA_node_next_strings[p->n].size(); i++)
 		{
+			// calculate the next NFA vector of this node after absorbing the string
 			vector<NFA_node*> next_NFA_node_set = nfa.get_new_NFAvec(p->NFA_node_set, DFA_node_next_strings[p->n][i]);
+			
+			// determine if this NFA vector has appeared before
 			bool found = false;
 			for (int j = 0; j < DFA_nodes_list.size(); j++)
 			{
@@ -40,13 +45,16 @@ DFA::DFA(NFA nfa)
 					break;
 				}
 			}
-			if (found) continue;
-			DFA_node* q = new_DFA_node_from_NFAvec(nfa, next_NFA_node_set);
 
+			if (found) continue;
+			
+			// if not found, create a new DFA node
+			DFA_node* q = new_DFA_node_from_NFAvec(nfa, next_NFA_node_set);
 			// add the node to the list
 			DFA_nodes_list.push_back(q);
 			// add the node to the queue
 			DFA_waiting_queue.push(q);
+
 			//	add the trans 
 			DFA_trans_list[p->n].push_back(make_pair(DFA_node_next_strings[p->n][i], q->n));
 		}
@@ -68,20 +76,23 @@ DFA_node* DFA::new_DFA_node_from_NFAvec(NFA nfa, std::vector<NFA_node*> NFAvec)
 	p->NFA_node_set = NFAvec;
 	p->isend = false;
 
-	// Determine if the node is a final state
-	for (int k = 0; k < NFAvec.size(); k++)
-	{
-		int priority = INF;
-		if (NFAvec[k]->isend)
-		{
-			p->isend = true;
-			if (NFAvec[k]->priority < priority)
-			{
-				p->endinfo = NFAvec[k]->endinfo;
-				priority = NFAvec[k]->priority;
-			}
-		}
-	}
+
+	// future to implement the function about the priority and the terminal state
+	// // Determine if the node is a final state
+	// for (int k = 0; k < NFAvec.size(); k++)
+	// {
+	// 	int priority = INF;
+	// 	if (NFAvec[k]->isend)
+	// 	{
+	// 		p->isend = true;
+	// 		if (NFAvec[k]->priority < priority)
+	// 		{
+	// 			p->endinfo = NFAvec[k]->endinfo;
+	// 			priority = NFAvec[k]->priority;
+	// 		}
+	// 	}
+	// }
+
 	DFA_node_next_strings.push_back(nfa.get_NFAvec_next_strings(NFAvec));
 	return p;
 }
