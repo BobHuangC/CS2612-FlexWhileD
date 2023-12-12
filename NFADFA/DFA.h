@@ -6,6 +6,7 @@
 
 using namespace std;
 
+
 // The structure of nodes in DFA
 struct DFA_node
 {
