@@ -8,37 +8,28 @@ using namespace std;
 int DFA_series = 0; // the global serial number
 
 
+// input a vector of NFA nodes, output the epsilon closure of these nodes
+vector<NFA_node*> epsilon_closure(vector<NFA_node*> NFAvec);
 
 
-// NFA_node的epsilon闭包计算函数
-// 不确定是否实现正确, 但是假设实现了
-vector<NFA_node*> epsilon_closure(NFA_node *p)
-{
-	vector<NFA_node*> result;
-	stack<NFA_node*> st;
-	st.push(p);
-	while (!st.empty())
-	{
-		NFA_node *q = st.top();
-		st.pop();
-		result.push_back(q);
-		list_NFA_node *p_list = NFA_list[q->n]->next;
-		while (p_list != NULL)
-		{
-			if (p_list->edge_info == EPSILON)
-			{
-				st.push(NFA_list[p_list->node]->node);
-			}
-			p_list = p_list->next;
-		}
-	}
-	return result;
-}
+// intput a vector of NFA nodes(this vector is a epsilon closure), output all the strings that can be absorbed by these nodes
+// these strings must be different
+vector<string> get_next_strings(vector<NFA_node*> ClosNFAvec);
 
 
+bool compare_NFA_vec(vector<NFA_node*> v1, vector<NFA_node*> v2);
 
+
+// input a vector of NFA nodes, and a string, the NFA vec absorb the string, 
+// output the epsilon closure of the new NFA vec
+vector<NFA_node*> get_new_NFAvec(vector<NFA_node*> NFAvec, string str);
+
+
+vector<vector<string>> DFA_node_next_strings;
 
 // 新建一个节点
+// 创建这个节点之前, 已经确定了这个节点之前没有出现过, 所以可以直接给这个节点分配一个编号
+// 在创建这个节点的时候, 就把这个节点下一步可以吸收的字符记录下来
 DFA_node *create_new_DFA_node(vector<NFA_node*> NFAvec)
 {
 	DFA_node *p = new DFA_node;
@@ -60,10 +51,10 @@ DFA_node *create_new_DFA_node(vector<NFA_node*> NFAvec)
 			}
 		}
 	}
+	DFA_node_next_strings.push_back(get_next_strings(NFAvec));
 	
 	return p;
 }
-
 
 
 // Connect two nodes
@@ -79,124 +70,43 @@ void connect_DFA_nodes(DFA_node *p, string str, DFA_node *q)
 }
 
 
-// Compare if two vectors are equal
-bool compare_vectors(vector<NFA_node*> v1, vector<NFA_node*> v2)
-{
-	if (v1.size() != v2.size()) return false;
-	
-	for (int i = 0; i < v1.size(); i++)
-	{
-		bool found = false;
-		for (int j = 0; j < v2.size(); j++)
-		{
-			if (v1[i] == v2[j]) 
-			{
-				found = true;
-				break;
-			}
-		}
-		if (!found) return false;
-	}
-	return true;
-}
-
-
-// 输入一个DFA节点, 输出这个DFA节点下一步可以吸收的字符
-// 不一定正确, 假设完成了
-vector<string> get_next_strings(DFA_node *p)
-{
-	vector<string> result;
-	for (int i = 0; i < p->NFA_node_set.size(); i++)
-	{
-		list_NFA_node *p_list = NFA_list[p->NFA_node_set[i]->n]->next;
-		while (p_list != NULL)
-		{
-			if (p_list->edge_info != EPSILON)
-			{
-				bool found = false;
-				for (int j = 0; j < result.size(); j++)
-				{
-					if (result[j] == p_list->edge_info)
-					{
-						found = true;
-						break;
-					}
-				}
-				if (!found) result.push_back(p_list->edge_info);
-			}
-			p_list = p_list->next;
-		}
-	}
-	return result;
-}
-
-
-
-
-
-// Transform the NFA into a DFA
+// implemented the NFA2DFA using the newly defined data structure
+// 转移得到下一个NFAvector之后, 先判定这个NFAvector是否已经出现过, 如果出现过, 就不用再创建一个新的DFA节点了
+// 如果没有出现过, 就创建一个新的DFA节点(创建的时候就编号), 并且把这个NFAvector压入栈中, 并且记录这个DFA节点下一步可以吸收的字符到DFA_NODE_NEXT_STRINGS中
+// 在确定压栈之前, 再给这个DFA节点分配一个编号, 并且把他能够吸收的字符记录下来(新建DFA节点的时候就已经完成了)
 vector<DFA_node*> NFA2DFA(vector<head_NFA_node*> NFA_list)
-{	
-	// 等待处理的DFA节点
+{
 	stack <DFA_node*> DFA_waiting_stack;
-	// 新建一个DFA节点, 用来表示起始节点
-	// 先根据NFA的起始状态，找到从初始状态出发, 经过epsilon边所有可以到达的状态, 构造起始DFA节点
-	// 上述两个步骤, 可以通过epsilon_closure函数实现
 	vector<NFA_node*> start_NFA_node_set = epsilon_closure(NFA_list[0]->node);
-	
-	// 计算起始DFA节点下一步可以吸收的字符
-	DFA_node_next_strings.push_back(get_next_strings(create_new_DFA_node(start_NFA_node_set)));
-
-	// 初始化一个栈, 将起始DFA节点压入栈中
-	DFA_waiting_stack.push(create_new_DFA_node(start_NFA_node_set));
-
-	// while 栈不为空
-	while(!DFA_waiting_stack.empty())
+	DFA_node *start_DFA_node = create_new_DFA_node(start_NFA_node_set);
+	DFA_waiting_stack.push(start_DFA_node);
+	while (!DFA_waiting_stack.empty())
 	{
-		// 从栈中弹出一个DFA节点, 对这个节点进行处理
 		DFA_node *p = DFA_waiting_stack.top();
 		DFA_waiting_stack.pop();
-		// 对这个节点下一步可以吸收的字符, 依次进行处理
-		for (int i = 0; i < DFA_node_next_strings[p->n].size(); i++){
-			// 对于每一个字符, 计算这个字符下一步可以到达的状态集合
-			vector<NFA_node*> next_NFA_node_set;
-			for (int j = 0; j < p->NFA_node_set.size(); j++)
-			{
-				list_NFA_node *p_list = NFA_list[p->NFA_node_set[j]->n]->next;
-				while (p_list != NULL)
-				{
-					if (p_list->edge_info == DFA_node_next_strings[p->n][i])
-					{
-						next_NFA_node_set.push_back(NFA_list[p_list->node]->node);
-					}
-					p_list = p_list->next;
-				}
-			}
-			// 如果这个状态集合出现过, 就continue
+		for (int i = 0; i < DFA_node_next_strings[p->n].size(); i++)
+		{
+			vector<NFA_node*> next_NFA_node_set = get_new_NFAvec(p->NFA_node_set, DFA_node_next_strings[p->n][i]);
 			bool found = false;
 			for (int j = 0; j < DFA_list.size(); j++)
 			{
-				if (compare_vectors(next_NFA_node_set, DFA_list[j]->NFA_node_set))
+				if (compare_NFA_vec(next_NFA_node_set, DFA_list[j]->NFA_node_set))
 				{
 					found = true;
 					break;
 				}
 			}
 			if (found) continue;
-			// 如果这个状态集合没有出现过, 就创建一个新的DFA节点, 并且记录这个状态下一步可以吸收的字符
 			DFA_node *q = create_new_DFA_node(next_NFA_node_set);
-			DFA_node_next_strings.push_back(get_next_strings(q));
-			// 将这个新的DFA节点压入栈中
 			DFA_waiting_stack.push(q);
-			// 将这个新的DFA节点与原来的DFA节点连接起来
 			connect_DFA_nodes(p, DFA_node_next_strings[p->n][i], q);
 		}
-
+	
 	}
+	return DFA_list;
 
-
-	// 
 }
+
 
 // Pretty printing for DFA
 void pretty_printing_DFA(vector<DFA_node*> DFA_list)
