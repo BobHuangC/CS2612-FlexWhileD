@@ -66,8 +66,10 @@ std::vector<rule> processFlexFile(const std::string&filename){
                 if (SyntaxLeftRightBraceDiff == 0){
                     std::string tmp_syntax = tmp_r.syntax;
                     // 将tmp_syntax头部的{去掉
+                    assert(tmp_syntax[0] == '{');
                     tmp_syntax = tmp_syntax.substr(1, tmp_syntax.size() - 1);
                     // 将tmp_syntax尾部的}去掉
+                    assert(tmp_syntax.back() == '}');
                     tmp_syntax.pop_back();
 
                     tmp_r.ast = str_get_abstract_syntax_tree(tmp_syntax);

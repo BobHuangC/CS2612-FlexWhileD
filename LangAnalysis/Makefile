@@ -44,4 +44,3 @@ clean:
 %.c: %.l
 
 .DEFAULT_GOAL := all
-
