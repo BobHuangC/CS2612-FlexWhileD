@@ -15,28 +15,55 @@ struct DFA_node
 	string endinfo; // returned information when isend=true
 };
 
-// Adjacency list used for DFA
-// head_DFA_node -> list_DFA_node -> list_DFA_node -> ...
-struct list_DFA_node
+
+
+// // Adjacency list used for DFA
+// // head_DFA_node -> list_DFA_node -> list_DFA_node -> ...
+// struct list_DFA_node
+// {
+// 	string edge_info; // value of the edge
+// 	int node;         // the current node
+// 	list_DFA_node *next;
+// };
+
+
+// 新建一个结构体, 表示DFA节点转换时的字符
+struct DFA_relation_node
 {
-	string edge_info; // value of the edge
-	int node;         // the current node
-	list_DFA_node *next;
+	int node; // 当前节点
+	string edge_info; // 转换字符
+	int next_node; // 下一个节点
 };
 
-struct head_DFA_node
-{
-	DFA_node *node;
-	list_DFA_node *next; 
-};
 
-static vector<head_DFA_node*> DFA_list;
+// DFA节点之间的关系
+vector<DFA_relation_node> DFA_relation;
+
+
+// DFA_list to record all the DFA nodes
+vector<DFA_node*> DFA_list;
+
+// struct head_DFA_node
+// {
+// 	DFA_node *node;
+// 	list_DFA_node *next; 
+// };
+
+// static vector<head_DFA_node*> DFA_list;
 
 // Functions
 // Transform the NFA into a DFA
-vector<head_DFA_node*> NFA2DFA(vector<head_NFA_node*> NFA_list);
+vector<DFA_node*> NFA2DFA(vector<head_NFA_node*> NFA_list);
 
 // Pretty printing for DFA
-void pretty_printing_DFA(vector<head_DFA_node*> DFA_list);
+void pretty_printing_DFA(vector<DFA_node*> DFA_list);
+
+
+// 保存每一个DFA节点下一步可以吸收的字符
+// DFA_node_next_char[i][j]表示第i个DFA节点, 下一步可以吸收的第j个字符
+vector<vector<string>> DFA_node_next_strings;
+
+
+
 
 #endif
