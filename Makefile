@@ -25,17 +25,32 @@ analysis.o: LangAnalysis/analysis.c LangAnalysis/analysis.h parser.h lexer.h Lan
 input.o: PreProcess/input.cpp LangAnalysis/lang.h parser.h lexer.h LangAnalysis/analysis.h
 	g++ -c PreProcess/input.cpp
 
+RE.o: NFADFA/RE.cpp
+	g++ -c NFADFA/RE.cpp
+
+NFA.o: NFADFA/NFA.cpp RE.o
+	g++ -c NFADFA/NFA.cpp
+
+DFA.o: NFADFA/DFA.cpp NFA.o
+	g++ -c NFADFA/DFA.cpp
+
 INtest.o: test/INtest.cpp LangAnalysis/lang.h parser.h lexer.h LangAnalysis/analysis.h
 	g++ -c test/INtest.cpp
 
 LAtest2.o: test/LAtest2.cpp lexer.h parser.h LangAnalysis/lang.h LangAnalysis/analysis.h
 	g++ -c test/LAtest2.cpp
 
+DFAtest.o: test/DFAtest.cpp PreProcess/input.h NFADFA/DFA.h NFADFA/NFA.h
+	g++ -c test/DFAtest.cpp
+
 INtest: lang.o parser.o lexer.o analysis.o INtest.o input.o
 	g++ lang.o parser.o lexer.o analysis.o INtest.o input.o -o INtest
 
 LAtest2: lang.o parser.o lexer.o analysis.o LAtest2.o
 	g++ lang.o parser.o lexer.o analysis.o LAtest2.o -o LAtest2
+
+DFAtest: DFAtest.o DFA.o NFA.o RE.o lang.o parser.o lexer.o analysis.o input.o
+	g++ DFAtest.o DFA.o NFA.o RE.o lang.o parser.o lexer.o analysis.o input.o -o DFAtest
 
 main.o: main.c lexer.h parser.h lang.h analysis.h
 	gcc -c main.c

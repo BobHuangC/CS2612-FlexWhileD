@@ -74,11 +74,11 @@ std::vector<rule> processFlexFile(const std::string&filename){
                     while (tmp_syntax.back() != '}'){
                         tmp_syntax.pop_back();
                     }
-                    tmp_syntax.pop_back();
-                    // assert(tmp_syntax.back() == '}');
                     // tmp_syntax.pop_back();
+                    assert(tmp_syntax.back() == '}');
+                    tmp_syntax.pop_back();
 
-                    tmp_r.ast = str_get_abstract_syntax_tree(tmp_syntax);
+                    // tmp_r.ast = str_get_abstract_syntax_tree(tmp_syntax);
                     rules.push_back(tmp_r);
                     tmp_r.regex = "";
                     tmp_r.syntax = "";

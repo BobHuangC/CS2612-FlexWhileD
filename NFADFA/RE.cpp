@@ -2,7 +2,6 @@
 #include <string>
 #include <stack>
 #include "RE.h"
-using namespace std;
 
 // The special sizes for these stacks
 int node_stack_size = 0;
@@ -42,15 +41,15 @@ char pop_op_stack()
 }
 
 // Turn a char into a same string
-string char2str(char ch)
+std::string char2str(char ch)
 {
-	string str = "";
+	std::string str = "";
 	str.push_back(ch);
 	return str;
 }
 
 // Create a new node for RE tree
-tree_node *create_new_tree_node(string v, tree_node *l, tree_node *r)
+tree_node *create_new_tree_node(std::string v, tree_node *l, tree_node *r)
 {
 	tree_node *new_node = new tree_node;
 	new_node->value = v;
@@ -92,11 +91,12 @@ void merge_nodes(char ch)
 
 // Functions that can be called
 // Transform the orignial RE into a RE tree and return the root
-tree_node *RE2Tree(string RE)
+tree_node *RE2Tree(std::string RE)
 {
 	tree_node *t;
 	for (int i = 0; i < RE.size(); i++)
 	{
+		int j;
 		switch (RE[i])
 		{
 			case LEFT_PAREN:
@@ -123,21 +123,25 @@ tree_node *RE2Tree(string RE)
 				push_node_stack(t);
 				break;
 				
+			case DOUBLE_QUOTA:
+				j = i--;
+				RE[j] = LEFT_PAREN;
+				while (RE[++j] != DOUBLE_QUOTA) {}
+				RE[j] = RIGHT_PAREN;
+				break;
+				
 			default:
-				string str = char2str(RE[i]);
+				std::string str = "";
 				
 				if (RE[i] == LEFT_BRACK)
 				{
-					do 
-						str.push_back(RE[++i]);
-					while (RE[i] != RIGHT_BRACK);
+					while (RE[++i] != RIGHT_BRACK)
+						str.push_back(RE[i]);
 				}
 				
-				if (RE[i] == DOUBLE_QUOTA)
+				else
 				{
-					do 
-						str.push_back(RE[++i]);
-					while (RE[i] != DOUBLE_QUOTA);
+					str.push_back(RE[i]);
 				}
 			
 				if (node_stack_size - op_stack_size >= 1)
@@ -158,11 +162,11 @@ tree_node *RE2Tree(string RE)
 }
 
 // Print the RE tree in a pretty form
-void pretty_printing_RE_tree(string prefix, tree_node *t, bool isBottom)
+void pretty_printing_RE_tree(std::string prefix, tree_node *t, bool isBottom)
 {
 	if(!t) return;
 	
-    cout << prefix << (isBottom ? "\u2514\u2500\u2500  " : "\u251C\u2500\u2500  " ) << t->value << endl;
+    std::cout << prefix << (isBottom ? "\u2514\u2500\u2500  " : "\u251C\u2500\u2500  " ) << t->value << std::endl;
 
     // enter the next tree level - left and right branch
     if (t->value == char2str(STAR))

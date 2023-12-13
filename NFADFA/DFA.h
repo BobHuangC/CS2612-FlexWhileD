@@ -53,13 +53,4 @@ public:
 
 };
 
-
-
-
-DFA::DFA(NFA nfa)
-{
-	DFA_node_index = 0;
-}
-
-
 #endif

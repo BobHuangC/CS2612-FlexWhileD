@@ -2,9 +2,8 @@
 #include <string>
 #include <stack>
 #include <vector>
-#include "DFA.h"
 #include <queue>
-
+#include "DFA.h"
 
 // after transfer to the next NFA vector, 
 // first determine whether this NFA vector has appeared before,
@@ -100,5 +99,15 @@ DFA_node* DFA::new_DFA_node_from_NFAvec(NFA nfa, std::vector<NFA_node*> NFAvec)
 
 void DFA::pretty_printing_DFA()
 {
+	// print the nodes
+	for (int i = 0; i < DFA_nodes_list.size(); i++)
+	{
+		cout << "DFA node " << i << " : ";
+		for (int j = 0; j < DFA_nodes_list[i]->NFA_node_set.size(); j++)
+		{
+			cout << DFA_nodes_list[i]->NFA_node_set[j]->n << " ";
+		}
+		cout << endl;
+	}
 	
 }
