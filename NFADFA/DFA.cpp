@@ -75,22 +75,20 @@ DFA_node* DFA::new_DFA_node_from_NFAvec(NFA nfa, std::vector<NFA_node*> NFAvec)
 	p->NFA_node_set = NFAvec;
 	p->isend = false;
 
-
-	// future to implement the function about the priority and the terminal state
-	// // Determine if the node is a final state
-	// for (int k = 0; k < NFAvec.size(); k++)
-	// {
-	// 	int priority = INF;
-	// 	if (NFAvec[k]->isend)
-	// 	{
-	// 		p->isend = true;
-	// 		if (NFAvec[k]->priority < priority)
-	// 		{
-	// 			p->endinfo = NFAvec[k]->endinfo;
-	// 			priority = NFAvec[k]->priority;
-	// 		}
-	// 	}
-	// }
+	// Determine if the node is a final state and set the priority to mark the corresponding processing syntax
+	for (int k = 0; k < NFAvec.size(); k++)
+	{
+		int priority = INF;
+		if (NFAvec[k]->isend)
+		{
+			p->isend = true;
+			if (NFAvec[k]->priority < priority)
+			{
+				p->endinfo = NFAvec[k]->endinfo;
+				priority = NFAvec[k]->priority;
+			}
+		}
+	}
 
 	DFA_node_next_strings.push_back(nfa.get_NFAvec_next_strings(NFAvec));
 	return p;
@@ -103,11 +101,24 @@ void DFA::pretty_printing_DFA()
 	for (int i = 0; i < DFA_nodes_list.size(); i++)
 	{
 		cout << "DFA node " << i << " : ";
+		std::cout << "The NFA nodes of this DFA node are:" << endl;
 		for (int j = 0; j < DFA_nodes_list[i]->NFA_node_set.size(); j++)
 		{
 			cout << DFA_nodes_list[i]->NFA_node_set[j]->n << " ";
 		}
 		cout << endl;
 	}
+
+	// print all the transitions
+	// 遍历DFA_trans_list
+	for (int i = 0; i < DFA_trans_list.size(); i++)
+	{
+		std::cout << "The transitions of DFA node " << i << " are:" << endl;
+		for (int j = 0; j < DFA_trans_list[i].size(); j++){
+			std::cout << i << " ---- " << DFA_trans_list[i][j].first << " ----- " << DFA_trans_list[i][j].second << endl;
+		}
+		std::cout << "\n"<<endl;
+	}
+
 	
 }

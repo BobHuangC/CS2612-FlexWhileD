@@ -43,23 +43,26 @@ LAtest2.o: test/LAtest2.cpp lexer.h parser.h LangAnalysis/lang.h LangAnalysis/an
 DFAtest.o: test/DFAtest.cpp PreProcess/input.h NFADFA/DFA.h NFADFA/NFA.h
 	g++ -c test/DFAtest.cpp
 
+main.o: main.cpp PreProcess/input.h NFADFA/DFA.h NFADFA/NFA.h
+	g++ -c main.cpp
+
+# input: PreProcess/input.cpp lang.o parser.o lexer.o analysis.o
+# 	g++ PreProcess/input.cpp lang.o parser.o lexer.o analysis.o -o bin/input
+
 INtest: lang.o parser.o lexer.o analysis.o INtest.o input.o
-	g++ lang.o parser.o lexer.o analysis.o INtest.o input.o -o INtest
+	g++ lang.o parser.o lexer.o analysis.o INtest.o input.o -o bin/INtest
 
 LAtest2: lang.o parser.o lexer.o analysis.o LAtest2.o
-	g++ lang.o parser.o lexer.o analysis.o LAtest2.o -o LAtest2
+	g++ lang.o parser.o lexer.o analysis.o LAtest2.o -o bin/LAtest2
 
 DFAtest: DFAtest.o DFA.o NFA.o RE.o lang.o parser.o lexer.o analysis.o input.o
-	g++ DFAtest.o DFA.o NFA.o RE.o lang.o parser.o lexer.o analysis.o input.o -o DFAtest
+	g++ DFAtest.o DFA.o NFA.o RE.o lang.o parser.o lexer.o analysis.o input.o -o bin/DFAtest
 
-main.o: main.c lexer.h parser.h lang.h analysis.h
-	gcc -c main.c
+main: main.o DFA.o NFA.o RE.o lang.o parser.o lexer.o analysis.o input.o
+	g++ main.o DFA.o NFA.o RE.o lang.o parser.o lexer.o analysis.o input.o -o bin/flexWhileD
 
-main: lang.o parser.o lexer.o analysis.o main.o
-	gcc lang.o parser.o lexer.o analysis.o main.o -o main
-
-input: PreProcess/input.cpp LangAnalysis/lang.o LangAnalysis/parser.o LangAnalysis/lexer.o LangAnalysis/analysis.o
-	g++ PreProcess/input.cpp LangAnalysis/lang.o LangAnalysis/parser.o LangAnalysis/lexer.o LangAnalysis/analysis.o -o input
+flexWhileD: main.o DFA.o NFA.o RE.o lang.o parser.o lexer.o analysis.o input.o
+	g++ main.o DFA.o NFA.o RE.o lang.o parser.o lexer.o analysis.o input.o -o bin/flexWhileD
 
 clean:
 	rm -f parser.output lexer.h lexer.c parser.h parser.c *.o main
@@ -68,4 +71,4 @@ clean:
 
 %.c: %.l
 
-.DEFAULT_GOAL := all
+.DEFAULT_GOAL := main
