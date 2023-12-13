@@ -91,7 +91,7 @@ void merge_nodes(char ch)
 
 // Functions that can be called
 // Transform the orignial RE into a RE tree and return the root
-tree_node *RE2Tree(std::string RE)
+tree_node *RE2Tree(std::string RE, bool isstr)
 {
 	tree_node *t;
 	for (int i = 0; i < RE.size(); i++)
@@ -100,49 +100,69 @@ tree_node *RE2Tree(std::string RE)
 		switch (RE[i])
 		{
 			case LEFT_PAREN:
-				if (node_stack_size - op_stack_size >= 1)
+				if (!isstr)
 				{
-					merge_nodes(PLUS);
-					push_op_stack(PLUS);
+					if (node_stack_size - op_stack_size >= 1)
+					{
+						merge_nodes(PLUS);
+						push_op_stack(PLUS);
+					}
+					push_op_stack(RE[i]);
+					break;
 				}
-				push_op_stack(RE[i]);
-				break;
 				
 			case RIGHT_PAREN:
-				merge_nodes(RIGHT_PAREN);
-				op_stack.pop();
-				break;
+				if (!isstr)
+				{
+					merge_nodes(RIGHT_PAREN);
+					op_stack.pop();
+					break;	
+				}
 				
 			case VERTICAL_BAR:
-				merge_nodes(VERTICAL_BAR);
-				push_op_stack(VERTICAL_BAR);
-				break;
+				if (!isstr)
+				{
+					merge_nodes(VERTICAL_BAR);
+					push_op_stack(VERTICAL_BAR);
+					break;	
+				}
 				
 			case STAR:
-				t = create_new_tree_node(char2str(STAR), pop_node_stack(), NULL);
-				push_node_stack(t);
-				break;
+				if (!isstr)
+				{
+					t = create_new_tree_node(char2str(STAR), pop_node_stack(), NULL);
+					push_node_stack(t);
+					break;	
+				}
 				
 			case DOUBLE_QUOTA:
-				j = i--;
-				RE[j] = LEFT_PAREN;
-				while (RE[++j] != DOUBLE_QUOTA) {}
-				RE[j] = RIGHT_PAREN;
-				break;
+				if (!isstr)
+				{
+					std::string str = "";
+					while (RE[++i] != DOUBLE_QUOTA)
+						str.push_back(RE[i]);
+						
+					if (node_stack_size - op_stack_size >= 1)
+					{
+						merge_nodes(PLUS);
+						push_op_stack(PLUS);
+					}
+					
+					t = RE2Tree(str, true);
+					push_node_stack(t);
+					break;	
+				}
+				
 				
 			default:
 				std::string str = "";
 				
-				if (RE[i] == LEFT_BRACK)
-				{
+				if (RE[i] == LEFT_BRACK && !isstr)
 					while (RE[++i] != RIGHT_BRACK)
 						str.push_back(RE[i]);
-				}
 				
 				else
-				{
 					str.push_back(RE[i]);
-				}
 			
 				if (node_stack_size - op_stack_size >= 1)
 				{
@@ -159,6 +179,11 @@ tree_node *RE2Tree(std::string RE)
 		merge_two_nodes();
 	
 	return pop_node_stack();
+}
+
+tree_node *RE2Tree(std::string RE)
+{
+	return RE2Tree(RE, false);
 }
 
 // Print the RE tree in a pretty form

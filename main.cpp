@@ -27,6 +27,8 @@ int main(int argc, char* argv[])
 		pretty_printing_RE_tree(RE_tree_root);
 		std::vector<head_NFA_node*> NFA_list = Tree2NFA(RE_tree_root, rules[k].syntax, k);
 	}
+
+	std::cout << "WELL DONE 0.5" << std::endl;
 	
 	std::vector<head_NFA_node*> NFA_list = merge_nodes(NFA_list);
 	
