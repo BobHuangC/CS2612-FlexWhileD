@@ -22,8 +22,13 @@ int countSubstring(const std::string& str, const std::string& sub) {
     return count;
 }
 
+// special processing
+// if the input syntax is empty, then the output ast is empty
 std::string str_get_abstract_syntax_tree(const std::string& syntax){
     char tmp_ast[3000] = "\0";
+    if (std::all_of(syntax.begin(), syntax.end(), [](unsigned char c){ return std::isspace(c); })) {
+        return "";
+    }
     get_abstract_syntax_tree(syntax.c_str(), tmp_ast);
     std::string ast(tmp_ast);
     return ast;
@@ -78,7 +83,7 @@ std::vector<rule> processFlexFile(const std::string&filename){
                     assert(tmp_syntax.back() == '}');
                     tmp_syntax.pop_back();
 
-                    // tmp_r.ast = str_get_abstract_syntax_tree(tmp_syntax);
+                    tmp_r.ast = str_get_abstract_syntax_tree(tmp_syntax);
                     rules.push_back(tmp_r);
                     tmp_r.regex = "";
                     tmp_r.syntax = "";

@@ -11,3 +11,5 @@ The input of this program should be a .l file, below is some requirements for th
 3. For each rule, if the regular expression contains a "{" or a "}", it should be escaped by a "\".
 
 4. For each rule, the length of the syntax should be less than 1000 characters.
+
+5. The syntax shouldn't be empty.
