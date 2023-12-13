@@ -26,14 +26,16 @@ int main(int argc, char* argv[])
 		std::cout << "--------------------------------------------" << std::endl;
 		pretty_printing_RE_tree(RE_tree_root);
 		std::vector<head_NFA_node*> NFA_list = Tree2NFA(RE_tree_root, rules[k].syntax, k);
+		pretty_printing_NFA(NFA_list);
 	}
+
 
 	std::cout << "WELL DONE 0.5" << std::endl;
 	
-	std::vector<head_NFA_node*> NFA_list = merge_nodes(NFA_list);
+	std::vector<head_NFA_node*> NFA_vec = merge_nodes(NFA_list);
 	
 	std::cout << "--------------------------------------------" << std::endl;
-	pretty_printing_NFA(NFA_list);
+	pretty_printing_NFA(NFA_vec);
 
 	std::cout << "WELL DONE 1" << std::endl;
 

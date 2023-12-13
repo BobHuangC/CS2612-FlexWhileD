@@ -17,19 +17,20 @@ NFA_node *pop(std::stack<NFA_node*> &s)
 }
 
 // Transform the abstract structure tree into a list by postorder 
-void tree_analysis(tree_node *t, std::vector<std::string> &order)
+void tree_analysis(tree_node *t, std::vector<std::string> &order, std::vector<bool> &isleaf)
 {   
     if (!t) return;
     
-    tree_analysis(t->left, order);
-    tree_analysis(t->right, order);
+    tree_analysis(t->left, order, isleaf);
+    tree_analysis(t->right, order, isleaf);
     order.push_back(t->value);
+    isleaf.push_back(((!t->left) && (!t->right)));
 }
 
-std::vector<std::string> tree_analysis(tree_node *t)
+std::vector<std::string> tree_analysis(tree_node *t, std::vector<bool> &isleaf)
 {
     std::vector<std::string> order;
-    tree_analysis(t, order);
+    tree_analysis(t, order, isleaf);
     return order;
 }
 
@@ -61,10 +62,13 @@ void connect_NFA_nodes(NFA_node *p, std::string str, NFA_node *q)
 // Merge all NFAs and return the overall NFA_list
 std::vector<head_NFA_node*> merge_nodes(std::vector<head_NFA_node*> NFA_list)
 {
+	std::cout << "nimei" << std::endl;
 	NFA_node *init_node = NFA_list[0]->node;
+	std::cout << "ninainaide" << std::endl;
 	
 	while (!st.empty())
 	{
+		std::cout << "nima" << std::endl;
 		NFA_node *st_top_node = pop(st);
 		connect_NFA_nodes(init_node, EPSILON, st_top_node);
 	}
@@ -74,13 +78,14 @@ std::vector<head_NFA_node*> merge_nodes(std::vector<head_NFA_node*> NFA_list)
 // Transform the RE tree into an NFA
 std::vector<head_NFA_node*> Tree2NFA(tree_node *root, std::string end_info, int priority)
 {
-	std::vector<std::string> order = tree_analysis(root);
+	std::vector<bool> isleaf;
+	std::vector<std::string> order = tree_analysis(root, isleaf);
 	
-	NFA_node *init_node = create_new_NFA_node();
+	if (NFA_series == 0) create_new_NFA_node();
 	
 	for (int i = 0; i < order.size(); i++)
 	{
-		if (order[i] == "|")
+		if (order[i] == "|" && !isleaf[i])
 		{
 			NFA_node *s2 = pop(st);
 			NFA_node *s1 = pop(st);
@@ -96,7 +101,7 @@ std::vector<head_NFA_node*> Tree2NFA(tree_node *root, std::string end_info, int 
 			en.push(e);
 		}
 		
-		else if (order[i] == "+")
+		else if (order[i] == "+" && !isleaf[i])
 		{
 			NFA_node *s = pop(st);
 			NFA_node *e2 = pop(en);
@@ -105,7 +110,7 @@ std::vector<head_NFA_node*> Tree2NFA(tree_node *root, std::string end_info, int 
 			en.push(e2);
 		}
 			
-		else if (order[i] == "*")
+		else if (order[i] == "*" && !isleaf[i])
 		{
 			NFA_node *s = st.top();
 			NFA_node *e = pop(en);
@@ -130,8 +135,8 @@ std::vector<head_NFA_node*> Tree2NFA(tree_node *root, std::string end_info, int 
 	en_top->isend = true;
 	en_top->endinfo = end_info;
 	en_top->priority = priority;
-	
-	return NFA_list; 
+
+	return NFA_list;
 }
 
 // Pretty printing for NFA
