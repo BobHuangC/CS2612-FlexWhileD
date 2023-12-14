@@ -18,8 +18,6 @@ int main(int argc, char* argv[])
 
     rules = processFlexFile(filename);
 
-	std::cout << "WELL DONE 0" << std::endl;
-
 	NFA nfa;
     
     for (int k = 0; k < rules.size(); k++)
@@ -39,11 +37,9 @@ int main(int argc, char* argv[])
 	std::cout << "--------------------------------------------" << std::endl;
 	// nfa.pretty_printing_NFA(NFA_vec);
 
-	std::cout << "WELL DONE 1" << std::endl;
 
 	DFA dfa(nfa);
 
-	std::cout << "WELL DONE 2" << std::endl;
 	dfa.pretty_printing_DFA();
 	
 	return 0;

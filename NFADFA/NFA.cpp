@@ -277,7 +277,7 @@ std::vector<NFA_node*> NFA::merge_vec(const std::vector<NFA_node*> &vec1, const 
 	merged.insert(merged.end(), vec1.begin(), vec1.end());
 	merged.insert(merged.end(), vec2.begin(), vec2.end());
 	std::sort(merged.begin(), merged.end(), [](NFA_node* &a, NFA_node* &b){return a->n < b->n;});
-	merged.erase(unique(merged.begin(), merged.end(), [](NFA_node* &a, NFA_node* &b){return a->n < b->n;}), merged.end());
+	merged.erase(unique(merged.begin(), merged.end(), [](NFA_node* &a, NFA_node* &b){return a->n == b->n;}), merged.end());
 	return merged;
 }
 
