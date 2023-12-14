@@ -33,53 +33,70 @@ struct head_NFA_node
 	list_NFA_node *next;   // the list_NFA_node of this NFA node
 };
 
-static std::vector<head_NFA_node*> NFA_list;
-
-// Two stacks are used for construct the NFA
-static std::stack<NFA_node*> st;
-static std::stack<NFA_node*> en;
-
-std::vector<char> str2set(const std::string str);
-std::string set2str(const std::vector<char> &char_vec);
-
 class NFA
 {
 private:
+	// the global serial number
+	int NFA_series; 
+	
+	// Two stacks are used for construct the NFA
+	std::stack<NFA_node*> st;
+	std::stack<NFA_node*> en;
+	
+	// Create a new NFA node
+	NFA_node *create_new_NFA_node();
+	
+	// Connect two nodes
+	void connect_NFA_nodes(NFA_node *p, std::string str, NFA_node *q);
+	
+	// Calculate all nodes that can be reached through epsilon edges from current node
+	std::vector<NFA_node*> epsilon_closure(NFA_node *current_node);
+	
+	// Transform a string(maybe a char or a char set) into a vector containing all chars
+	std::vector<char> str2set(const std::string str);
+	
+	// Transform a vector containing some chars into a string
+	std::string set2str(const std::vector<char> &char_vec);
+	
+	// Split the original set of strings into pairwise disjoint sets of strings
+	std::vector<std::string> split_str_set(const std::vector<std::string> &str_vec);
+	
+	// Merge two vectors and remove duplicate elements 
+	std::vector<NFA_node*> merge_vec(const std::vector<NFA_node*> &vec1, const std::vector<NFA_node*> &vec2); 
+	
 public:
-	// build a class of NFA(finish the below class and corresponding functions)
-	// Implement the following functions
+	// Date structure for NFA
+	std::vector<head_NFA_node*> NFA_list;
+	
+	// Declaration
+	NFA(); 
+	
+	// Merge all NFAs and return the overall NFA_list
+	std::vector<head_NFA_node*> merge_nodes();
+	
+	// Transform the RE tree into an NFA
+	std::vector<head_NFA_node*> Tree2NFA(tree_node *root, std::string end_info, int priority);
+	
+	// Pretty printing for NFA
+	void pretty_printing_NFA(std::vector<head_NFA_node*> NFA_list);
 
 
+	// Functions for getting DFA
 	// input a vec of epsilon closure NFA nodes, 
 	// output a vec of strings that this closure NFA nodes can absorb
 	// these strings must be different
 	std::vector<std::string> get_NFAvec_next_strings(const std::vector<NFA_node*> ClosNFAvec);
 
-
 	// input 2 vec of NFA node(epsilon closure),
 	// output a bool value to determine if these 2 vec are the same
 	bool compare_NFA_vec(std::vector<NFA_node*> NFAv1, std::vector<NFA_node*> NFAv2);
-
 
 	// input a vector of NFA nodes(epsilon closure), and a string, the NFA vec absorb the string, 
 	// output the epsilon closure of the new NFA vec, the new NFA vec was the epsilon closure of the NFA vec absorb the string
 	std::vector<NFA_node*> get_new_NFAvec(std::vector<NFA_node*> NFAvec, std::string str);
 
-
 	// output the init epsilon closure of the NFA
 	std::vector<NFA_node*> get_init_NFAvec();
-	
-	NFA(){}
 };
-
-// Functions
-// Merge all NFAs and return the overall NFA_list
-std::vector<head_NFA_node*> merge_nodes(std::vector<head_NFA_node*> NFA_list);
-
-// Transform the RE tree into an NFA
-std::vector<head_NFA_node*> Tree2NFA(tree_node *root, std::string end_info, int priority);
-
-// Pretty printing for NFA
-void pretty_printing_NFA(std::vector<head_NFA_node*> NFA_list);
 
 #endif

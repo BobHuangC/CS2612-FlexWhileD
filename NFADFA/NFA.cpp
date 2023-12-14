@@ -5,8 +5,6 @@
 #include <algorithm>
 #include "NFA.h"
 
-int NFA_series = 0; // the global serial number
-
 // To simplify the following codes, several functions are implemented
 // Return and pop the top value of node_stack 
 NFA_node *pop(std::stack<NFA_node*> &s)
@@ -34,8 +32,21 @@ std::vector<std::string> tree_analysis(tree_node *t, std::vector<bool> &isleaf)
     return order;
 }
 
+
+// Functions for Class NFA
+// Constructor
+NFA::NFA()
+{
+	std::vector<head_NFA_node*> NFA_vec;
+	std::stack<NFA_node*> start, end;
+	NFA_list = NFA_vec;
+	st = start;
+	en = end;
+	NFA_series = 0;
+}
+
 // Create a new NFA node
-NFA_node *create_new_NFA_node()
+NFA_node *NFA::create_new_NFA_node()
 {
 	NFA_node *p = new NFA_node;
 	p->n = NFA_series++;
@@ -49,7 +60,7 @@ NFA_node *create_new_NFA_node()
 }
 
 // Connect two nodes
-void connect_NFA_nodes(NFA_node *p, std::string str, NFA_node *q)
+void NFA::connect_NFA_nodes(NFA_node *p, std::string str, NFA_node *q)
 {
 	list_NFA_node *p_next = new list_NFA_node;
 	p_next->edge_info = str;
@@ -59,24 +70,42 @@ void connect_NFA_nodes(NFA_node *p, std::string str, NFA_node *q)
 	NFA_list[p->n]->next = p_next;
 }
 
-// Merge all NFAs and return the overall NFA_list
-std::vector<head_NFA_node*> merge_nodes(std::vector<head_NFA_node*> NFA_list)
+// Calculate all nodes that can be reached through epsilon edges from current node
+std::vector<NFA_node*> NFA::epsilon_closure(NFA_node *current_node)
 {
-	std::cout << "nimei" << std::endl;
+	std::vector<NFA_node*> closure;
+	std::stack<NFA_node*> epsilon_stack;
+	epsilon_stack.push(current_node);
+	
+	while (!epsilon_stack.empty())
+	{
+		NFA_node *q = pop(epsilon_stack);
+		closure.push_back(q);
+		
+		list_NFA_node *q_next = NFA_list[q->n]->next;
+		while (q_next)
+		{
+			if (q_next->edge_info == EPSILON)
+				epsilon_stack.push(NFA_list[q_next->n]->node);
+			q_next = q_next->next;
+		}
+	}
+	return closure;
+}
+
+// Merge all NFAs and return the overall NFA_list
+std::vector<head_NFA_node*> NFA::merge_nodes()
+{
 	NFA_node *init_node = NFA_list[0]->node;
-	std::cout << "ninainaide" << std::endl;
 	
 	while (!st.empty())
-	{
-		std::cout << "nima" << std::endl;
-		NFA_node *st_top_node = pop(st);
-		connect_NFA_nodes(init_node, EPSILON, st_top_node);
-	}
+		connect_NFA_nodes(init_node, EPSILON, pop(st));
+
 	return NFA_list;
 }
 
 // Transform the RE tree into an NFA
-std::vector<head_NFA_node*> Tree2NFA(tree_node *root, std::string end_info, int priority)
+std::vector<head_NFA_node*> NFA::Tree2NFA(tree_node *root, std::string end_info, int priority)
 {
 	std::vector<bool> isleaf;
 	std::vector<std::string> order = tree_analysis(root, isleaf);
@@ -140,7 +169,7 @@ std::vector<head_NFA_node*> Tree2NFA(tree_node *root, std::string end_info, int 
 }
 
 // Pretty printing for NFA
-void pretty_printing_NFA(std::vector<head_NFA_node*> NFA_list)
+void NFA::pretty_printing_NFA(std::vector<head_NFA_node*> NFA_list)
 {
 	for (int k = 0; k < NFA_list.size(); k++)
 	{
@@ -154,29 +183,6 @@ void pretty_printing_NFA(std::vector<head_NFA_node*> NFA_list)
 			p = p->next;
 		}
 	}
-}
-
-// Calculate all nodes that can be reached through epsilon edges from current node
-std::vector<NFA_node*> epsilon_closure(NFA_node *current_node)
-{
-	std::vector<NFA_node*> closure;
-	std::stack<NFA_node*> epsilon_stack;
-	epsilon_stack.push(current_node);
-	
-	while (!epsilon_stack.empty())
-	{
-		NFA_node *q = pop(st);
-		closure.push_back(q);
-		
-		list_NFA_node *q_next = NFA_list[q->n]->next;
-		while (q_next)
-		{
-			if (q_next->edge_info == EPSILON)
-				epsilon_stack.push(NFA_list[q_next->n]->node);
-			q_next = q_next->next;
-		}
-	}
-	return closure;
 }
 
 // Compare if two vectors are equal
@@ -195,7 +201,7 @@ bool NFA::compare_NFA_vec(std::vector<NFA_node*> NFAv1, std::vector<NFA_node*> N
 }
 
 // Transform a string(maybe a char or a char set) into a vector containing all chars
-std::vector<char> str2set(const std::string str)
+std::vector<char> NFA::str2set(const std::string str)
 {
 	std::vector<char> result;
     for (int k = 0; k < str.size(); k++)
@@ -209,11 +215,11 @@ std::vector<char> str2set(const std::string str)
     return result;
 }
 
-//  
-std::string set2str(const std::vector<char> &char_vec) {
-    if (char_vec.empty()) {
+// Transform a vector containing some chars into a string
+std::string NFA::set2str(const std::vector<char> &char_vec)
+{
+    if (char_vec.empty())
         return "";
-    }
     
     std::string result;
     char start = char_vec[0];
@@ -247,7 +253,7 @@ std::string set2str(const std::vector<char> &char_vec) {
 }
 
 // Split the original set of strings into pairwise disjoint sets of strings
-std::vector<std::string> split_str_set(const std::vector<std::string> &str_vec)
+std::vector<std::string> NFA::split_str_set(const std::vector<std::string> &str_vec)
 {
 	std::vector<std::string> split;
 	for (int k = 0; k < str_vec.size(); k++)
@@ -260,13 +266,12 @@ std::vector<std::string> split_str_set(const std::vector<std::string> &str_vec)
 			if (!count(split.begin(), split.end(), s))
 				split.push_back(s);
 		}
-			
 	}
 	return split;	
 }
 
 // Merge two vectors and remove duplicate elements 
-std::vector<NFA_node*> merge_vec(const std::vector<NFA_node*> &vec1, const std::vector<NFA_node*> &vec2)
+std::vector<NFA_node*> NFA::merge_vec(const std::vector<NFA_node*> &vec1, const std::vector<NFA_node*> &vec2)
 {
 	std::vector<NFA_node*> merged;
 	merged.insert(merged.end(), vec1.begin(), vec1.end());
@@ -318,4 +323,3 @@ std::vector<NFA_node*> NFA::get_init_NFAvec()
 {
 	return epsilon_closure(NFA_list[0]->node);
 }
-
