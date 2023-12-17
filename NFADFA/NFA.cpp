@@ -201,54 +201,41 @@ bool NFA::compare_NFA_vec(std::vector<NFA_node*> NFAv1, std::vector<NFA_node*> N
 }
 
 // Transform a string(maybe a char or a char set) into a vector containing all chars
-std::vector<char> NFA::str2set(const std::string str)
+std::vector<std::string> NFA::str2set(const std::string str)
 {
-	std::vector<char> result;
+	std::vector<std::string> result;
     for (int k = 0; k < str.size(); k++)
 	{
         if (str[k] == '-') 
             for (char i = str[k-1] + 1; i != str[k+1]; i++)
-                result.push_back(i);
+                result.push_back(char2str(i));
 		else
-            result.push_back(str[k]);
+            result.push_back(char2str(str[k]));
     }
     return result;
 }
 
 // Transform a vector containing some chars into a string
-std::string NFA::set2str(const std::vector<char> &char_vec)
+std::string NFA::set2str(const std::vector<std::string> &str_vec)
 {
-    if (char_vec.empty())
+    if (str_vec.empty())
         return "";
     
-    std::string result;
-    char start = char_vec[0];
-    char end = start;
+    std::string result, start, end;
+    end = start = str_vec[0];
     
-    for (int i = 1; i < char_vec.size(); i++) {
-        if (char_vec[i] == end + 1) {
-            end = char_vec[i];
-        } else {
-            if (start == end) {
-                result.push_back(start);
-            } else {
-                result.push_back(start);
-				result.push_back('-');
-				result.push_back(end);
-            }
-            start = char_vec[i];
+    for (int i = 1; i < str_vec.size(); i++)
+	{
+        if (str_vec[i][0] == end[0] + 1)
+            end = str_vec[i];
+        else 
+		{
+            result += (start == end) ? start : start + "-" + end;
+            start = str_vec[i];
             end = start;
         }
     }
-
-    if (start == end) {
-        result.push_back(start);
-    } else {
-        result.push_back(start);
-		result.push_back('-');
-		result.push_back(end);
-    }
-
+    result += (start == end) ? start : start + "-" + end;
     return result;
 }
 
@@ -257,16 +244,9 @@ std::vector<std::string> NFA::split_str_set(const std::vector<std::string> &str_
 {
 	std::vector<std::string> split;
 	for (int k = 0; k < str_vec.size(); k++)
-	{
-		std::vector<char> char_vec = str2set(str_vec[k]);
-		for (char c : char_vec)
-		{
-			std::string s = "";
-			s.push_back(c); 
-			if (!count(split.begin(), split.end(), s))
-				split.push_back(s);
-		}
-	}
+		for (std::string c : str2set(str_vec[k]))
+			if (!count(split.begin(), split.end(), c))
+				split.push_back(c);
 	return split;	
 }
 
@@ -295,7 +275,6 @@ std::vector<std::string> NFA::get_NFAvec_next_strings(const std::vector<NFA_node
 			q = q->next;
 		}
 	}
-	
 	return split_str_set(str_set);
 }
 
@@ -308,10 +287,13 @@ std::vector<NFA_node*> NFA::get_new_NFAvec(std::vector<NFA_node*> NFAvec, std::s
 		list_NFA_node *q = NFA_list[NFAvec[k]->n]->next;
 		while (q)
 		{
-			std::vector<char> edgeset = str2set(q->edge_info);
-			std::vector<char> strset  = str2set(str);
+			std::vector<std::string> edgeset = str2set(q->edge_info);
+			std::vector<std::string> strset  = str2set(str);
+			std::sort(edgeset.begin(), edgeset.end());
+			std::sort(strset.begin(), strset.end());
+
 			if (std::includes(edgeset.begin(), edgeset.end(), strset.begin(), strset.end()))
-				new_NFAvec = merge_vec(new_NFAvec, epsilon_closure(NFA_list[q->n]->node));
+				new_NFAvec = merge_vec(new_NFAvec, epsilon_closure(NFA_list[q->n]->node));	
 			q = q->next;
 		}
 	}

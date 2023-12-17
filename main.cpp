@@ -23,24 +23,24 @@ int main(int argc, char* argv[])
     for (int k = 0; k < rules.size(); k++)
 	{
 		tree_node *RE_tree_root = RE2Tree(rules[k].regex);
-		// std::cout << "--------------------------------------------" << std::endl;
+		std::cout << "--------------------------------------------" << std::endl;
 		// pretty_printing_RE_tree(RE_tree_root);
 		std::vector<head_NFA_node*> NFA_list = nfa.Tree2NFA(RE_tree_root, rules[k].syntax, k);
 		// nfa.pretty_printing_NFA(NFA_list);
 	}
 
 
-	// std::cout << "WELL DONE 0.5" << std::endl;
+	//std::cout << "WELL DONE 0.5" << std::endl;
 	
 	std::vector<head_NFA_node*> NFA_vec = nfa.merge_nodes();
 	
-	// std::cout << "--------------------------------------------" << std::endl;
+	std::cout << "--------------------------------------------" << std::endl;
 	nfa.pretty_printing_NFA(NFA_vec);
 
 
 	DFA dfa(nfa);
 
-	dfa.pretty_printing_DFA();
+	dfa.pretty_printing_DFA(nfa);
 	
 	return 0;
 } 

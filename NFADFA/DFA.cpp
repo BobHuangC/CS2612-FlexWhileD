@@ -23,9 +23,10 @@ DFA::DFA(NFA nfa)
 	DFA_waiting_queue.push(start_DFA_node);
 
 	int tmp_cnt = 0;
+	DFA_node* p;
 	while (!DFA_waiting_queue.empty())
 	{
-		DFA_node* p = DFA_waiting_queue.front();
+		p = DFA_waiting_queue.front();
 		DFA_waiting_queue.pop();
 
 		// iterate over all strings that can be absorbed from this node
@@ -36,7 +37,8 @@ DFA::DFA(NFA nfa)
 
 			// determine if this NFA vector has appeared before
 			bool found = false;
-			for (int j = 0; j < DFA_nodes_list.size(); j++)
+			int j;
+			for (j = 0; j < DFA_nodes_list.size(); j++)
 			{	
 				if (nfa.compare_NFA_vec(next_NFA_node_set, DFA_nodes_list[j]->NFA_node_set))
 				{
@@ -45,7 +47,14 @@ DFA::DFA(NFA nfa)
 				}
 			}
 			
-			if (found) continue;
+			if (found)
+			{
+				for (int k = 0; k < DFA_trans_list[p->n].size(); k++)
+					if (DFA_trans_list[p->n][k].second == j)
+						DFA_trans_list[p->n][k].first.push_back(DFA_node_next_strings[p->n][i]);
+				continue;
+			}
+			
 			
 			// if not found, create a new DFA node
 			DFA_node* q = new_DFA_node_from_NFAvec(nfa, next_NFA_node_set);
@@ -53,15 +62,12 @@ DFA::DFA(NFA nfa)
 			DFA_nodes_list.push_back(q);
 			// add the node to the queue
 			DFA_waiting_queue.push(q);
-			//	add the trans
-			pair<string, int> tmp_pair = make_pair(DFA_node_next_strings[p->n][i], q->n);
-			DFA_trans_list[p->n].push_back(tmp_pair);
+			// add the trans
+			std::vector<string> v = {DFA_node_next_strings[p->n][i]};
+			DFA_trans_list[p->n].push_back(make_pair(v, q->n));
 		}
 	}
 }
-
-
-
 
 
 // new a DFA node from a NFA vector
@@ -91,39 +97,36 @@ DFA_node* DFA::new_DFA_node_from_NFAvec(NFA nfa, std::vector<NFA_node*> NFAvec)
 	}
 	
 	// record the characters that this node can absorb next
-
-
 	std::vector<std::string> tmp = nfa.get_NFAvec_next_strings(NFAvec);
 	
-
 	DFA_node_next_strings.push_back(tmp);
-	// DFA_node_next_strings.push_back(nfa.get_NFAvec_next_strings(NFAvec));
-	DFA_trans_list.push_back(vector<pair<string, int>>());
+	DFA_trans_list.push_back(vector<pair<std::vector<string>, int>>());
 	return p;
 }
 
 
-void DFA::pretty_printing_DFA()
+// Pretty printing for DFA
+void DFA::pretty_printing_DFA(NFA nfa)
 {
 	// print the nodes
 	for (int i = 0; i < DFA_nodes_list.size(); i++)
 	{
-		cout << "DFA node " << i << " : ";
-		std::cout << "The NFA nodes of this DFA node are:" << endl;
+		std::cout << "DFA node " << i << " : ";
+		std::cout << "The NFA nodes of this DFA node are:" << std::endl;
 		for (int j = 0; j < DFA_nodes_list[i]->NFA_node_set.size(); j++)
 		{
-			cout << DFA_nodes_list[i]->NFA_node_set[j]->n << " ";
+			std::cout << DFA_nodes_list[i]->NFA_node_set[j]->n << " ";
 		}
-		cout << endl;
+		std::cout << std::endl;
 	}
 
 	// print all the transitions
+	// 遍历DFA_trans_list
 	for (int i = 0; i < DFA_trans_list.size(); i++)
 	{
-		std::cout << "The transitions of DFA node " << i << " are:" << endl;
-		for (int j = 0; j < DFA_trans_list[i].size(); j++){
-			std::cout << i << " ---- " << DFA_trans_list[i][j].first << " ----- " << DFA_trans_list[i][j].second << endl;
-		}
-		std::cout << "\n"<<endl;
+		std::cout << "The transitions of DFA node " << i << " are:" << std::endl;
+		for (int j = 0; j < DFA_trans_list[i].size(); j++)
+			std::cout << i << " ---- " << nfa.set2str(DFA_trans_list[i][j].first) << " ----- " << DFA_trans_list[i][j].second << std::endl;
+		std::cout << std::endl;
 	}
 }

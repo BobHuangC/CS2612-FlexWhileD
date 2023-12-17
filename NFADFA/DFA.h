@@ -28,28 +28,28 @@ public:
 	
 	// store all the strings that DFA_node can absorb
 	// DFA_node_next_strings[i][j] represents the jth string that the ith DFA node can absorb
-	std::vector<vector<string>> DFA_node_next_strings;
+	std::vector<std::vector<string>> DFA_node_next_strings;
 
 	// DFA_nodes_list to record all the DFA nodes
 	std::vector<DFA_node*> DFA_nodes_list;
 
 	// DFA_trans_list to record all the transitions of DFA
 	// DFA_trans_list[i][j] is a pair of string and int,
-	// means that the j-th transition rule of i-the DFA node is:
+	// means that the j-th transition rule of i-th DFA node is:
 	// i-th DFA node absorb the string, and trans to the int-th node.
-	std::vector<std::vector<std::pair<string, int>>> DFA_trans_list;
+	std::vector<std::vector<std::pair<std::vector<string>, int>>> DFA_trans_list;
 	
 
-	DFA(){
-		DFA_node_index = 0;
-	}
+	DFA(){ DFA_node_index = 0; }
 
 	DFA(NFA nfa);
 
 	// input a epsilon closure NFA node, 
 	// output a DFA_node built from this NFA node
 	DFA_node* new_DFA_node_from_NFAvec(NFA nfa, std::vector<NFA_node*> NFAvec);
-	void pretty_printing_DFA();
+	
+	// Pretty printing for DFA
+	void pretty_printing_DFA(NFA nfa);
 
 };
 

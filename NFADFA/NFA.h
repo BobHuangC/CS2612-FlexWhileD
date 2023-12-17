@@ -53,10 +53,7 @@ private:
 	std::vector<NFA_node*> epsilon_closure(NFA_node *current_node);
 	
 	// Transform a string(maybe a char or a char set) into a vector containing all chars
-	std::vector<char> str2set(const std::string str);
-	
-	// Transform a vector containing some chars into a string
-	std::string set2str(const std::vector<char> &char_vec);
+	std::vector<std::string> str2set(const std::string str);
 	
 	// Split the original set of strings into pairwise disjoint sets of strings
 	std::vector<std::string> split_str_set(const std::vector<std::string> &str_vec);
@@ -70,6 +67,9 @@ public:
 	
 	// Declaration
 	NFA(); 
+	
+	// Transform a vector containing some chars into a string
+	std::string set2str(const std::vector<std::string> &char_vec);
 	
 	// Merge all NFAs and return the overall NFA_list
 	std::vector<head_NFA_node*> merge_nodes();
