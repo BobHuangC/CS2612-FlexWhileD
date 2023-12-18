@@ -4,6 +4,7 @@
 #include <vector>
 #include <queue>
 #include "DFA.h"
+#include <cassert>
 
 // after transfer to the next NFA vector, 
 // first determine whether this NFA vector has appeared before,
@@ -35,23 +36,36 @@ DFA::DFA(NFA nfa)
 			// calculate the next NFA vector of this node after absorbing the string
 			vector<NFA_node*> next_NFA_node_set = nfa.get_new_NFAvec(p->NFA_node_set, DFA_node_next_strings[p->n][i]);
 
-			// determine if this NFA vector has appeared before
-			bool found = false;
+			// new_NFA_vec represents whether this NFA vector has appeared before
+			bool new_NFA_vec = false;
+			// found_index is the index of the node in the list(if it is found)
+			int new_NFA_vec_index = -1;
 			int j;
 			for (j = 0; j < DFA_nodes_list.size(); j++)
 			{	
 				if (nfa.compare_NFA_vec(next_NFA_node_set, DFA_nodes_list[j]->NFA_node_set))
 				{
-					found = true;
+					new_NFA_vec = true;
+					new_NFA_vec_index = j;
 					break;
 				}
 			}
 			
-			if (found)
+			if (new_NFA_vec)
 			{
+				assert(new_NFA_vec_index != -1);
+				bool already_exist_relation = false;
 				for (int k = 0; k < DFA_trans_list[p->n].size(); k++)
-					if (DFA_trans_list[p->n][k].second == j)
+					if (DFA_trans_list[p->n][k].second == new_NFA_vec_index)
+					{
+						already_exist_relation = true;
 						DFA_trans_list[p->n][k].first.push_back(DFA_node_next_strings[p->n][i]);
+						break;
+					}
+				if (!already_exist_relation){
+					DFA_trans_list[p->n].push_back(make_pair(vector<string>{DFA_node_next_strings[p->n][i]}, new_NFA_vec_index));
+				}
+
 				continue;
 			}
 			
