@@ -2,3 +2,7 @@ gcc: (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0
 g++: (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0
 flex: 2.6.4
 bison: (GNU Bison) 3.8.2
+Distributor ID: Ubuntu
+Description:    Ubuntu 22.04.2 LTS
+Release:        22.04
+Codename:       jammy

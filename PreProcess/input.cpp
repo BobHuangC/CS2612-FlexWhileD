@@ -22,6 +22,9 @@ int countSubstring(const std::string& str, const std::string& sub) {
     return count;
 }
 
+
+// the inference of C and C++ about ast
+// Note:
 // special processing
 // if the input syntax is empty, then the output ast is empty
 std::string str_get_abstract_syntax_tree(const std::string& syntax){
@@ -34,6 +37,13 @@ std::string str_get_abstract_syntax_tree(const std::string& syntax){
     return ast;
 }
 
+
+// algorithm abstract:
+// each time input a line, first judge whether this line is in the syntax, 
+// if this line is in the syntax, the syntax absorbes this line
+// if this line is not in the syntax, judge whether syntax begins in this line
+// if syntax begins in this line, the regex absorbes part of this line, and the syntax absorbes the rest of this line
+// each time absorbe a line, judge whether the syntax is complete
 std::vector<rule> processFlexFile(const std::string&filename){
 
     std::vector<rule> rules;
