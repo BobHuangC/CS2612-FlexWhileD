@@ -106,6 +106,7 @@ DFA_node* DFA::new_DFA_node_from_NFAvec(NFA nfa, std::vector<NFA_node*> NFAvec)
 			{
 				p->endinfo = NFAvec[k]->endinfo;
 				priority = NFAvec[k]->priority;
+				p->ast = NFAvec[k]->ast;
 			}
 		}
 	}
@@ -133,7 +134,8 @@ void DFA::pretty_printing_DFA(NFA nfa)
 		for (std::pair<std::vector<string>, int> dfa_trans : DFA_trans_list[i])
 			std::cout << i << " ----> " << dfa_trans.second << "   " << nfa.set2str(dfa_trans.first) << std::endl;
 		if (DFA_nodes_list[i]->isend)
-			std::cout << "This DFA node is a final state. Endinfo:\n" << DFA_nodes_list[i]->endinfo;
+			std::cout << "This DFA node is a final state. Endinfo:\n" << DFA_nodes_list[i]->endinfo
+					  << "The AST of the endinfo:\n" << DFA_nodes_list[i]->ast;
 		else
 			std::cout << "This DFA node is not a final state." << std::endl;
 		std::cout << std::endl;

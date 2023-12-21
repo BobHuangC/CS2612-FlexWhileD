@@ -11,9 +11,10 @@ using namespace std;
 struct DFA_node
 {
 	int n;          // serial number of DFA node
-	vector<NFA_node*> NFA_node_set;  // original NFA nodes included in this DFA node
+	std::vector<NFA_node*> NFA_node_set;  // original NFA nodes included in this DFA node
 	bool isend;     // true if there exists a node in original NFA is a final state
-	string endinfo; // returned information when isend=true
+	std::string endinfo; // returned information when isend=true
+	std::string ast;
 };
 
 
