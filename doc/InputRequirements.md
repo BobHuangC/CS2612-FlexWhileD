@@ -4,7 +4,7 @@ The input of this program should be a .l file, below is some requirements for th
 
 ## Requirements
 
-1. The .l file should only contain the second part of the .l file, which is the rules part.
+1. The .l file should only contain the second part of the classical .l file, which is the rules part. That means the .l file should begin with %% and end with %%.
 
 2. For each rule, the syntax part (which explains the rule to process the regular expression) should starts with a  "{" and ends with a"}".
 
@@ -12,4 +12,4 @@ The input of this program should be a .l file, below is some requirements for th
 
 4. For each rule, the length of the syntax should be less than 1000 characters.
 
-5. The syntax shouldn't be empty.
+5. The syntax shouldn't be empty(which is also the requirement of valid WhileDeref program).

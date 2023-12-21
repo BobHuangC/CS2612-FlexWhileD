@@ -1,8 +1,5 @@
 <div id="top"></div>
 
-
-
-
 <!-- ABOUT THE PROJECT -->
 # Flex specified for WhileDeref
 

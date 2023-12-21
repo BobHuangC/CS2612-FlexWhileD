@@ -5,6 +5,9 @@
 #include <string>
 #include <vector>
 
+// rule
+// rule is a data structure that contains a regular expression and a syntax and an abstract syntax tree 
+// each rule corresponds to a rule of the .l rule parts
 class rule
 {
     public:
@@ -16,8 +19,12 @@ class rule
         std::string ast;
 };
 
-// 输入一个字符串流(.l文件), 然后返回一个vector, vector中的每一个元素都是一个rule
-// 一个是正则表达式, 一个是语法规则
+
+// processFlexFile
+// input: 
+//      filename: the path of the input .l file
+// output:
+//      rules: a vector of rules, while rule is a data structure that contains a regular expression and a syntax and an abstract syntax tree corresponding to a rule of .l rule part
 std::vector<rule> processFlexFile(const std::string& filename);
 
 #endif // INPUT_H

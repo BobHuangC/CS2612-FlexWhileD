@@ -1,24 +1,25 @@
-%option noyywrap yylineno
-%option outfile="lexer.c" header-file="lexer.h"
-%{
-#include "lang.h"
-#include "parser.h"
-#include "lib.h"
-%}
-
 %%
 "struct" {
     n = 100;
     m = 10;
-    m = - n * n;
-    m = * n - 1
+    while (m > 0)
+    do {
+        m = m - 1;
+        n = n + 1
+    }
 }
 
 "enum" {
     n = 100;
-    m = 10;
-    m = - n * n;
-    m = * n - 1
+    if (n > 0)
+    then {
+        n = n - 1;
+        m = m + 1
+    }
+    else {
+        n = n + 1;
+        m = m - 1
+    }
 }
 
 "union" {
@@ -29,10 +30,8 @@
 }
 
 "typedef" {
-    n = 100;
-    m = 10;
-    m = - n * n;
-    m = * n - 1
+    m = 100;
+    *(*n) = *****(*m);
 }
 
 "int" {

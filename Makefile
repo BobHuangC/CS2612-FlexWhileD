@@ -46,6 +46,9 @@ DFAtest.o: test/DFAtest.cpp PreProcess/input.h NFADFA/DFA.h NFADFA/NFA.h
 main.o: main.cpp PreProcess/input.h NFADFA/DFA.h NFADFA/NFA.h
 	g++ -c main.cpp
 
+lang_test.o: lang_test.cpp PreProcess/input.h NFADFA/DFA.h NFADFA/NFA.h
+	g++ -c lang_test.cpp
+
 # input: PreProcess/input.cpp lang.o parser.o lexer.o analysis.o
 # 	g++ PreProcess/input.cpp lang.o parser.o lexer.o analysis.o -o bin/input
 
@@ -60,6 +63,9 @@ DFAtest: DFAtest.o DFA.o NFA.o RE.o lang.o parser.o lexer.o analysis.o input.o
 
 main: main.o DFA.o NFA.o RE.o lang.o parser.o lexer.o analysis.o input.o
 	g++ main.o DFA.o NFA.o RE.o lang.o parser.o lexer.o analysis.o input.o -o bin/flexWhileD
+
+lang_test: lang_test.o DFA.o NFA.o RE.o lang.o parser.o lexer.o analysis.o input.o
+	g++ lang_test.o DFA.o NFA.o RE.o lang.o parser.o lexer.o analysis.o input.o -o bin/lang_test
 
 flexWhileD: main.o DFA.o NFA.o RE.o lang.o parser.o lexer.o analysis.o input.o
 	g++ main.o DFA.o NFA.o RE.o lang.o parser.o lexer.o analysis.o input.o -o bin/flexWhileD

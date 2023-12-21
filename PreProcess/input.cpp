@@ -8,9 +8,9 @@
 #include <vector>
 #include <cassert>
 
+// Count the number of substrings in a string
 int countSubstring(const std::string& str, const std::string& sub);
 
-// Count the number of substrings in a string
 int countSubstring(const std::string& str, const std::string& sub) {
     std::size_t pos = 0;
     int count = 0;
