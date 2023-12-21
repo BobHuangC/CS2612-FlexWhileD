@@ -79,7 +79,6 @@ std::vector<rule> processFlexFile(const std::string&filename){
                     while (tmp_syntax.back() != '}'){
                         tmp_syntax.pop_back();
                     }
-                    // tmp_syntax.pop_back();
                     assert(tmp_syntax.back() == '}');
                     tmp_syntax.pop_back();
 
