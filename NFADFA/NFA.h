@@ -6,6 +6,7 @@
 #include <vector>
 
 #include "RE.h"
+#include "../PreProcess/input.h"
 #define EPSILON u8"\u03B5" // the epsilon edge
 
 // The structure of nodes in NFA
@@ -16,6 +17,7 @@ struct NFA_node
 	std::string endinfo; // returned information when isend=true
 	int priority;   // returned priority of the endinfo when isend=true
 					// The smaller the number, the higher the priority
+	std::string ast;// the ast of the endinfo
 };
 
 // Adjacency list used for NFA
@@ -66,7 +68,7 @@ public:
 	std::vector<head_NFA_node*> NFA_list;
 	
 	// Declaration
-	NFA(); 
+	NFA(std::vector<rule> rules); 
 	
 	// Transform a vector containing some chars into a string
 	std::string set2str(const std::vector<std::string> &char_vec);
@@ -75,10 +77,10 @@ public:
 	std::vector<head_NFA_node*> merge_nodes();
 	
 	// Transform the RE tree into an NFA
-	std::vector<head_NFA_node*> Tree2NFA(tree_node *root, std::string end_info, int priority);
+	std::vector<head_NFA_node*> Tree2NFA(tree_node *root, std::string end_info, std::string ast, int priority);
 	
 	// Pretty printing for NFA
-	void pretty_printing_NFA(std::vector<head_NFA_node*> NFA_list);
+	void pretty_printing_NFA();
 
 
 	// Functions for getting DFA

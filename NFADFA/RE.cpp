@@ -139,8 +139,17 @@ tree_node *RE2Tree(std::string RE, bool isstr)
 				if (!isstr)
 				{
 					std::string str = "";
-					while (RE[++i] != DOUBLE_QUOTA)
+					while (true)
+					{
+						if (RE[++i] == DOUBLE_QUOTA)
+						{
+							int count = 0;
+							for (int k = str.length() - 1; str[k] == '\\' && k >= 0; k--)
+								count++;
+							if (count % 2 == 0) break;
+						}
 						str.push_back(RE[i]);
+					}
 						
 					if (node_stack_size - op_stack_size >= 1)
 					{
@@ -158,8 +167,23 @@ tree_node *RE2Tree(std::string RE, bool isstr)
 				std::string str = "";
 				
 				if (RE[i] == LEFT_BRACK && !isstr)
-					while (RE[++i] != RIGHT_BRACK)
+					while (true)
+					{
+						if (RE[++i] == RIGHT_BRACK)
+						{
+							int count = 0;
+							for (int k = str.length() - 1; str[k] == '\\' && k >= 0; k--)
+								count++;
+							if (count % 2 == 0) break;
+						}
 						str.push_back(RE[i]);
+					}
+				
+				else if (RE[i] == '\\' && isstr)
+				{
+					str.push_back(RE[i]);
+        			str.push_back(RE[++i]);
+				}
 				
 				else
 					str.push_back(RE[i]);

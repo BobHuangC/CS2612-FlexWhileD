@@ -35,14 +35,16 @@ std::vector<std::string> tree_analysis(tree_node *t, std::vector<bool> &isleaf)
 
 // Functions for Class NFA
 // Constructor
-NFA::NFA()
+NFA::NFA(std::vector<rule> rules)
 {
-	std::vector<head_NFA_node*> NFA_vec;
 	std::stack<NFA_node*> start, end;
-	NFA_list = NFA_vec;
 	st = start;
 	en = end;
 	NFA_series = 0;
+	
+	for (int k = 0; k < rules.size(); k++)
+		NFA_list = Tree2NFA(RE2Tree(rules[k].regex), rules[k].syntax, rules[k].ast, k);
+	NFA_list = merge_nodes();
 }
 
 // Create a new NFA node
@@ -105,7 +107,7 @@ std::vector<head_NFA_node*> NFA::merge_nodes()
 }
 
 // Transform the RE tree into an NFA
-std::vector<head_NFA_node*> NFA::Tree2NFA(tree_node *root, std::string end_info, int priority)
+std::vector<head_NFA_node*> NFA::Tree2NFA(tree_node *root, std::string end_info, std::string ast, int priority)
 {
 	std::vector<bool> isleaf;
 	std::vector<std::string> order = tree_analysis(root, isleaf);
@@ -164,17 +166,19 @@ std::vector<head_NFA_node*> NFA::Tree2NFA(tree_node *root, std::string end_info,
 	en_top->isend = true;
 	en_top->endinfo = end_info;
 	en_top->priority = priority;
+	en_top->ast = ast;
 
 	return NFA_list;
 }
 
 // Pretty printing for NFA
-void NFA::pretty_printing_NFA(std::vector<head_NFA_node*> NFA_list)
+void NFA::pretty_printing_NFA()
 {
 	for (int k = 0; k < NFA_list.size(); k++)
 	{
-		if (NFA_list[k]->node->isend) std::cout << (k < 10 ? " " : "") << k << " is a final state. Endinfo: " 
-										        << NFA_list[k]->node->endinfo << std::endl;
+		if (NFA_list[k]->node->isend) std::cout << (k < 10 ? " " : "") << k << " is a final state. Endinfo:\n" 
+										        << NFA_list[k]->node->endinfo << "The AST of the endinfo:\n"
+												<< NFA_list[k]->node->ast << std::endl;
 		list_NFA_node *p = NFA_list[k]->next;
 		while (p)
 		{
@@ -209,6 +213,12 @@ std::vector<std::string> NFA::str2set(const std::string str)
         if (str[k] == '-') 
             for (char i = str[k-1] + 1; i != str[k+1]; i++)
                 result.push_back(char2str(i));
+        else if (str[k] == '\\')
+        {
+        	std::string tmp = char2str(str[k]);
+        	tmp += char2str(str[++k]);
+        	result.push_back(tmp);
+		}
 		else
             result.push_back(char2str(str[k]));
     }
@@ -230,12 +240,12 @@ std::string NFA::set2str(const std::vector<std::string> &str_vec)
             end = str_vec[i];
         else 
 		{
-            result += (start == end) ? start : start + "-" + end;
+            result += (start == end) ? start : ((start[0] + 1 == end[0]) ? start + end : start + "-" + end);
             start = str_vec[i];
             end = start;
         }
     }
-    result += (start == end) ? start : start + "-" + end;
+    result += (start == end) ? start : ((start[0] + 1 == end[0]) ? start + end : start + "-" + end);
     return result;
 }
 

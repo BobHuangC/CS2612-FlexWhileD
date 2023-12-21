@@ -122,25 +122,20 @@ DFA_node* DFA::new_DFA_node_from_NFAvec(NFA nfa, std::vector<NFA_node*> NFAvec)
 // Pretty printing for DFA
 void DFA::pretty_printing_DFA(NFA nfa)
 {
-	// print the nodes
 	for (int i = 0; i < DFA_nodes_list.size(); i++)
 	{
-		std::cout << "DFA node " << i << " : ";
-		std::cout << "The NFA nodes of this DFA node are:" << std::endl;
-		for (int j = 0; j < DFA_nodes_list[i]->NFA_node_set.size(); j++)
-		{
-			std::cout << DFA_nodes_list[i]->NFA_node_set[j]->n << " ";
-		}
-		std::cout << std::endl;
-	}
-
-	// print all the transitions
-	// 遍历DFA_trans_list
-	for (int i = 0; i < DFA_trans_list.size(); i++)
-	{
-		std::cout << "The transitions of DFA node " << i << " are:" << std::endl;
-		for (int j = 0; j < DFA_trans_list[i].size(); j++)
-			std::cout << i << " ---- " << nfa.set2str(DFA_trans_list[i][j].first) << " ----- " << DFA_trans_list[i][j].second << std::endl;
+		std::cout << "-------------- DFA node " << i << " --------------" << std::endl;
+		std::cout << "The NFA node set: {";
+		for (NFA_node* nfa_node : DFA_nodes_list[i]->NFA_node_set)
+			std::cout << " " << nfa_node->n;	
+		std::cout << " }" << std::endl;
+		std::cout << "The transitions:" << std::endl;
+		for (std::pair<std::vector<string>, int> dfa_trans : DFA_trans_list[i])
+			std::cout << i << " ----> " << dfa_trans.second << "   " << nfa.set2str(dfa_trans.first) << std::endl;
+		if (DFA_nodes_list[i]->isend)
+			std::cout << "This DFA node is a final state. Endinfo:\n" << DFA_nodes_list[i]->endinfo;
+		else
+			std::cout << "This DFA node is not a final state." << std::endl;
 		std::cout << std::endl;
 	}
 }
