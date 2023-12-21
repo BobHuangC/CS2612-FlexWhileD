@@ -6,6 +6,8 @@ The .l file should only contain the second part of the classical .l file, which 
 
 The rules part should contain at least one rule, while one rule is defined as a regular expression and a syntax part, the requirements for the regular expression and the syntax part are listed below.
 
+Two rules can't occur in the same line, AKA, if the before rule ends in some line, the next rule must begin at least in the next line, but can't begin in the same line with the end of the before rule.
+
 ## Regular Expression Requirements
 
 1. For each rule, if the regular expression contains a "{" or a "}", it should be escaped by a "\", for example, the regular expression "a{1" should be written as "a\\{1".
@@ -56,6 +58,6 @@ C :: = SKIP |
        while (E) do { C }
 ```
 
-4. For each rule, the length of the syntax should be less than 1000 characters.
+4. For each rule, the length of the ast of syntax should be less than 3000 characters(for we only apply 3000 characters to store the ast of each rule).
 
 5. The syntax shouldn't be empty(which is also the requirement of valid WhileDeref program).
