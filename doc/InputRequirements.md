@@ -8,6 +8,8 @@ The rules part should contain at least one rule, while one rule is defined as a 
 
 Two rules can't occur in the same line, AKA, if the before rule ends in some line, the next rule must begin at least in the next line, but can't begin in the same line with the end of the before rule.
 
+For each rule, the regular expression and the syntax part must be separated by at least a space.
+
 ## Regular Expression Requirements
 
 1. For each rule, if the regular expression contains a "{" or a "}", it should be escaped by a "\", for example, the regular expression "a{1" should be written as "a\\{1".
