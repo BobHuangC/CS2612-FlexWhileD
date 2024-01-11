@@ -12,6 +12,10 @@
     return TM_NAT;
 }
 
+"var" {
+    return TM_VAR;
+}
+
 "skip" {
     return TM_SKIP;
 }

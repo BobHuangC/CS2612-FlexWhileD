@@ -23,7 +23,7 @@ void * none;
 %token <none> TM_LEFT_PAREN TM_RIGHT_PAREN
 %token <none> TM_SEMICOL
 %token <none> TM_MALLOC TM_RI TM_RC TM_WI TM_WC
-%token <none> TM_IF TM_THEN TM_ELSE TM_WHILE TM_DO
+%token <none> TM_VAR TM_IF TM_THEN TM_ELSE TM_WHILE TM_DO
 %token <none> TM_ASGNOP
 %token <none> TM_OR
 %token <none> TM_AND
@@ -64,6 +64,10 @@ NT_CMD:
   TM_SKIP
   {
     $$ = (TSkip());
+  }
+| TM_VAR TM_IDENT
+  {
+    $$ = (TDecl($2));
   }
 |  NT_EXPR TM_ASGNOP NT_EXPR
   {

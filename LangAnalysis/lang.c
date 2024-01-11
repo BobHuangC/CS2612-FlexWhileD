@@ -65,6 +65,13 @@ struct cmd * TSkip() {
   return res;
 }
 
+struct cmd * TDecl(char * name) {
+  struct cmd * res = new_cmd_ptr();
+  res -> t = T_DECL;
+  res -> d.DECL.name = name;
+  return res;
+}
+
 struct cmd * TAsgn(struct expr * left, struct expr * right) {
   struct cmd * res = new_cmd_ptr();
   res -> t = T_ASGN;
@@ -198,6 +205,11 @@ void* get_cmd(struct cmd * c, char* cmd_return) {
   switch (c -> t) {
   case T_SKIP:
     strcat(ret, "SKIP");
+    break;
+  case T_DECL:
+    strcat(ret, "DECL(");
+    strcat(ret, c -> d.DECL.name);
+    strcat(ret, ")");
     break;
   case T_ASGN:    
     strcat(ret, "ASGN(");
