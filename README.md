@@ -34,7 +34,9 @@ GeneralAnalyzer usage:
 make
 ./bin/flexWhileD examples/input_file3.l
 ```
-   
+
+Then the output will be in the file "examples/input_file3.l-result.txt".
+
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 

@@ -44,9 +44,7 @@ Inductive com : Type :=
 
 
 具体包含的表达式如下:
-E :: = N | 
-       V | 
-       E+E | E-E | E*E | E/E | E%E |
+E :: = N | V | -E | E+E | E-E | E*E | E/E | E%E |
        E<E | E<=E | E==E | E!=E | E>=E | E>E |
        E&&E | E||E | !E |
        *E
