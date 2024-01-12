@@ -96,9 +96,9 @@ DFA_node* DFA::new_DFA_node_from_NFAvec(NFA nfa, std::vector<NFA_node*> NFAvec)
 	p->isend = false;
 
 	// Determine if the node is a final state and set the priority to mark the corresponding processing syntax
+	int priority = INF;
 	for (int k = 0; k < NFAvec.size(); k++)
 	{
-		int priority = INF;
 		if (NFAvec[k]->isend)
 		{
 			p->isend = true;
