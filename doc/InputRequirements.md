@@ -2,13 +2,13 @@
 
 The input of this program should be a .l file, below is some requirements for the input file.
 
-The .l file should only contain the second part of the classical .l file, which is the rules part. That means the .l file should begin with %% and end with %%.
+1. The .l file should only contain the second part of the classical .l file, which is the rules part. That means the .l file should begin with %% and end with %%.
 
-The rules part should contain at least one rule, while one rule is defined as a regular expression and a syntax part, the requirements for the regular expression and the syntax part are listed below.
+2. The rules part should contain at least one rule, while one rule is defined as a regular expression and a syntax part, the requirements for the regular expression and the syntax part are listed below.
 
-Two rules can't occur in the same line, AKA, if the before rule ends in some line, the next rule must begin at least in the next line, but can't begin in the same line with the end of the before rule.
+3. Two rules can't occur in the same line, AKA, if the before rule ends in some line, the next rule must begin at least in the next line, but can't begin in the same line with the end of the before rule.
 
-For each rule, the regular expression and the syntax part must be separated by at least a space.
+4. For each rule, the regular expression and the syntax part must be separated by at least a space.
 
 ## Regular Expression Requirements
 

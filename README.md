@@ -16,7 +16,7 @@
 
 ## Test
 
-input module usage:    
+<!-- input module usage:    
 ```sh
 ./input examples/input_file.l
 ```
@@ -26,14 +26,14 @@ Test the LanguageAnalyzer usage:
 cd LangAnalysis
 make
 ./LAtest2
-```
+``` -->
 
 
 GeneralAnalyzer usage:    
 ```sh
-./main /home/bob/CScode/PLCode/Project/SelfProject/SelfFlex0926/sample_src00.c
+make
+./bin/flexWhileD examples/input_file3.l
 ```
-   <!-- To generate new images, run InST.ipynb -->
    
 <p align="right">(<a href="#top">back to top</a>)</p>
 
