@@ -14,6 +14,10 @@ The input of this program should be a .l file, below is some requirements for th
 
 1. For each rule, if the regular expression contains a "{" or a "}", it should be escaped by a "\", for example, the regular expression "a{1" should be written as "a\\{1".
 
+2. The regular expression cannot contain Spaces. If you must, the final result will have an edge containing Spaces, please note that this is not an output error.
+
+3. The escape characters we implement are as follows: "\\[", "\\]", "\\{", "\\}", "\\\\", "\\"", "\\t", "\\n", "\\r".
+
 ## Syntax Requirements
 
 1. For each rule, the syntax part (which explains the rule to process the regular expression) should starts with a  "{" and ends with a"}".
@@ -62,3 +66,24 @@ C :: = SKIP |
 4. For each rule, the length of the ast of syntax should be less than 3000 characters(for we only apply 3000 characters to store the ast of each rule).
 
 5. The syntax shouldn't be empty(which is also the requirement of valid WhileDeref program).
+
+## Note
+
+1. The output NFA has the form as follows:
+260 ----> 261   _A-Za-z
+261 ----> 262   ε
+262 ----> 264   ε
+262 ----> 263   _A-Za-z0-9
+263 ----> 262   ε
+264 is a final state. Endinfo:
+{
+    n = 100;
+    m = 10;
+    m = - n * n;
+    m = * n - 1
+}
+The AST of the endinfo:
+SEQ(ASGN(VAR(n),CONST(100)),SEQ(ASGN(VAR(m),CONST(10)),SEQ(ASGN(VAR(m),MUL(UMINUS(VAR(n)),VAR(n))),ASGN(VAR(m),MINUS(DEREF(VAR(n)),CONST(1))))))
+
+For each edge x ----> y s, s is a single char or a char set,
+such as ε, a or \t\n\r.

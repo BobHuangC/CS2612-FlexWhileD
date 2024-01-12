@@ -1,28 +1,23 @@
-"liu_tianyu" {
-    liu_tianyu = 666;
-    l521030910075 = nb
-}
-
-"huang_bo" {
-    programming_languages = wonderful_and_interesting; compliers = attactive && amazing
-}
-
 "enum" {
-    skip; skip; skip 
+    skip; skip; skip
 }
 
 "int" {
     n = 100;
     m = 10;
-    m = - n * n + n - n / n % n;
-    m = * n - 1
+    *m = - n * n + n - n / n % n;
+    m = * n - 1;
+    m = -n;
+    m = !n;
+    n = --------m;
+    n = EOF
 }
 
 "typedef" {
     **n = **(**q * (n+*****m))
 }
 
-"long_int" {
+"int_long_long" {
     while(k != ll)
     do{
         ll = ll + 1;
@@ -31,19 +26,19 @@
 }
 
 "char" {
-    if (n == 0)
+    if (n == 0 || n == 1)
     then
         {n = n < 0}
     else
         {n = n > 0}
     ;
-    if (m == 0)
+    if (m == 0 && m == 1)
     then
         {m = m == 0}
     else
         {m = m != 0}
     ;
-    if (l == 0)
+    if (!(l == 0))
     then
         {l = l <= 0}
     else
@@ -51,7 +46,12 @@
 }
 
 "*" {
-    n = m
+    var n;
+    var m;
+    var aaa;
+    var bbb;
+    m = - n * n;
+    m = * n - 1
 }
 
 "[" {
@@ -97,6 +97,31 @@
     m = 10
 }
 
+0|[1-9][0-9]* {
+    while (n != n)
+    do {
+        if (s == s)
+        then {while ( l == l + 123)
+                do{
+                    k = k + 1
+                }
+        }
+        
+        else {while ( l == l - 123)
+                do{
+                    k = k * 1; skip; skip
+                }
+        }
+    }
+}
+
+[_A-Za-z][_A-Za-z0-9]* {
+    n2 = 100;
+    m2 = 10;
+    m2 = - n * n;
+    m2 = * n - 1
+}
+
 "," {
     while (n != n)
     do {
@@ -113,20 +138,6 @@
                 }
         }
     }
-}
-
-0|[1-9][0-9]* {
-    n1 = 100;
-    m1 = 10;
-    m1 = - n1 * n1;
-    m1 = * n1 - 1
-}
-
-[_A-Za-z][_A-Za-z0-9]* {
-    n2 = 100;
-    m2 = 10;
-    m2 = - n * n;
-    m2 = * n - 1
 }
 
 ";" {
