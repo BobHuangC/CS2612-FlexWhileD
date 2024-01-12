@@ -1,55 +1,49 @@
-"liu" {
-    var a;
-    var b;
-    liu_tianyu = 666;
-    nb = l521030910075
+"caoqinxiang@sjtu.edu.cn" {
+    var caoqinxiang;
+    caoqinxiang = handsome
 }
 
-"88" {
-    var n;
+"114514\\1919810" {
     var m;
-    var aaa;
-    var bbb;
-    m = - n * n;
-    m = * n - 1
-}
-
-"888" {
     var n;
-    var m;
-    var aaa;
-    var bbb;
-    m = - n * n;
-    m = * n - 1
+    m = 1 + 1 * 4 + 5 * (1 + 4);
+    n = m * m
 }
 
-"liu_tianyu" {
-    var a;
-    var b;
-    liu_tianyu = 666;
-    nb = l521030910075
+"\[wc,o!\\\}" {
+    var o;
+    var op;
+    var p;
+    op = o + p
 }
 
-"huang_bo" {
+"\"The_World!\"" {
+    var dio;
+    dio = wryyyyyyyyyyyyyy
+}
+
+"I_love_programming_languages\n" {
     programming_languages = wonderful_and_interesting; compliers = attactive && amazing
 }
 
-"enum" {
-    skip; skip; skip 
+"\\\\\{auh?\}\\\\" {
+    skip; skip; skip;
+    var auh
 }
 
-"int" {
-    n = 100;
-    m = 10;
-    m = - n * n + n - n / n % n;
-    m = * n - 1
+"www" {
+    var str;
+    while(1 == 1)
+    do{
+        str = str + w
+    }
 }
 
-"typedef" {
+oo*h {
     **n = **(**q * (n+*****m))
 }
 
-"long_int" {
+"cqx_is_best"* {
     while(k != ll)
     do{
         ll = ll + 1;
@@ -57,7 +51,7 @@
     }
 }
 
-"char" {
+"**" {
     if (n == 0)
     then
         {n = n < 0}
@@ -77,11 +71,11 @@
         {l = l >= 0}
 }
 
-"*" {
+"*"* {
     n = m
 }
 
-"[" {
+"*\"*"* {
     while (n != n)
     do {
         while (l != l)
@@ -95,7 +89,7 @@
     }
 }
 
-"]" {
+"\[" {
     if (m != m && m == m)
     then {
         if (l != l || l == l)
@@ -124,7 +118,7 @@
     m = 10
 }
 
-"," {
+"[\[[" {
     while (n != n)
     do {
         if (s == s)
@@ -156,7 +150,7 @@
     m = * n - 1
 }
 
-";" {
+[\[\"*\"\]] {
     n = 100;
     m = 10;
     m = - n * n;
