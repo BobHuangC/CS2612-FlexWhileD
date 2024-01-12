@@ -1,0 +1,1074 @@
+--------------------------------------------
+ 0 ----> 1    ε
+ 0 ----> 21   ε
+ 0 ----> 37   ε
+ 0 ----> 45   ε
+ 0 ----> 51   ε
+ 0 ----> 65   ε
+ 0 ----> 71   ε
+ 0 ----> 79   ε
+ 0 ----> 81   ε
+ 0 ----> 83   ε
+ 0 ----> 85   ε
+ 0 ----> 94   ε
+ 0 ----> 96   ε
+ 0 ----> 101   ε
+ 0 ----> 103   ε
+ 0 ----> 105   ε
+ 0 ----> 107   ε
+ 0 ----> 109   ε
+ 0 ----> 111   ε
+ 0 ----> 113   ε
+ 1 ----> 2    l
+ 2 ----> 3    ε
+ 3 ----> 4    i
+ 4 ----> 5    ε
+ 5 ----> 6    u
+ 6 ----> 7    ε
+ 7 ----> 8     
+ 8 ----> 9    ε
+ 9 ----> 10   t
+10 ----> 11   ε
+11 ----> 12   i
+12 ----> 13   ε
+13 ----> 14   a
+14 ----> 15   ε
+15 ----> 16   n
+16 ----> 17   ε
+17 ----> 18   y
+18 ----> 19   ε
+19 ----> 20   u
+20 is a final state. Endinfo:
+{
+    666 = liu_tianyu;
+    l521030910075 = nb
+}
+The AST of the endinfo:
+SEQ(ASGN(CONST(666),VAR(liu_tianyu)),ASGN(VAR(l521030910075),VAR(nb)))
+21 ----> 22   h
+22 ----> 23   ε
+23 ----> 24   u
+24 ----> 25   ε
+25 ----> 26   a
+26 ----> 27   ε
+27 ----> 28   n
+28 ----> 29   ε
+29 ----> 30   g
+30 ----> 31   ε
+31 ----> 32    
+32 ----> 33   ε
+33 ----> 34   b
+34 ----> 35   ε
+35 ----> 36   o
+36 is a final state. Endinfo:
+{
+    programming_languages = wonderful_and_interesting; compliers = attactive && amazing
+}
+The AST of the endinfo:
+SEQ(ASGN(VAR(programming_languages),VAR(wonderful_and_interesting)),ASGN(VAR(compliers),AND(VAR(attactive),VAR(amazing))))
+37 ----> 38   e
+38 ----> 39   ε
+39 ----> 40   n
+40 ----> 41   ε
+41 ----> 42   u
+42 ----> 43   ε
+43 ----> 44   m
+44 is a final state. Endinfo:
+{
+    skip; skip; skip 
+}
+The AST of the endinfo:
+SEQ(SKIP,SEQ(SKIP,SKIP))
+45 ----> 46   i
+46 ----> 47   ε
+47 ----> 48   n
+48 ----> 49   ε
+49 ----> 50   t
+50 is a final state. Endinfo:
+{
+    n = 100;
+    m = 10;
+    m = - n * n + n - n / n % n;
+    m = * n - 1
+}
+The AST of the endinfo:
+SEQ(ASGN(VAR(n),CONST(100)),SEQ(ASGN(VAR(m),CONST(10)),SEQ(ASGN(VAR(m),MINUS(PLUS(MUL(UMINUS(VAR(n)),VAR(n)),VAR(n)),MOD(DIV(VAR(n),VAR(n)),VAR(n)))),ASGN(VAR(m),MINUS(DEREF(VAR(n)),CONST(1))))))
+51 ----> 52   t
+52 ----> 53   ε
+53 ----> 54   y
+54 ----> 55   ε
+55 ----> 56   p
+56 ----> 57   ε
+57 ----> 58   e
+58 ----> 59   ε
+59 ----> 60   d
+60 ----> 61   ε
+61 ----> 62   e
+62 ----> 63   ε
+63 ----> 64   f
+64 is a final state. Endinfo:
+{
+    **n = **(**q * (n+*****m))
+}
+The AST of the endinfo:
+ASGN(DEREF(DEREF(VAR(n))),DEREF(DEREF(MUL(DEREF(DEREF(VAR(q))),PLUS(VAR(n),DEREF(DEREF(DEREF(DEREF(DEREF(VAR(m)))))))))))
+65 ----> 66   i
+66 ----> 67   ε
+67 ----> 68   n
+68 ----> 69   ε
+69 ----> 70   t
+70 is a final state. Endinfo:
+{
+    while(k != ll)
+    do{
+        ll = ll + 1;
+        k = k + *(ll)
+    }
+}
+The AST of the endinfo:
+WHILE(NE(VAR(k),VAR(ll)),SEQ(ASGN(VAR(ll),PLUS(VAR(ll),CONST(1))),ASGN(VAR(k),PLUS(VAR(k),DEREF(VAR(ll))))))
+71 ----> 72   c
+72 ----> 73   ε
+73 ----> 74   h
+74 ----> 75   ε
+75 ----> 76   a
+76 ----> 77   ε
+77 ----> 78   r
+78 is a final state. Endinfo:
+{
+    if (n == 0)
+    then
+        {n = n < 0}
+    else
+        {n = n > 0}
+    ;
+    if (m == 0)
+    then
+        {m = m == 0}
+    else
+        {m = m != 0}
+    ;
+    if (l == 0)
+    then
+        {l = l <= 0}
+    else
+        {l = l >= 0}
+}
+The AST of the endinfo:
+SEQ(IF(EQ(VAR(n),CONST(0)),ASGN(VAR(n),LT(VAR(n),CONST(0))),ASGN(VAR(n),GT(VAR(n),CONST(0)))),SEQ(IF(EQ(VAR(m),CONST(0)),ASGN(VAR(m),EQ(VAR(m),CONST(0))),ASGN(VAR(m),NE(VAR(m),CONST(0)))),IF(EQ(VAR(l),CONST(0)),ASGN(VAR(l),LE(VAR(l),CONST(0))),ASGN(VAR(l),GE(VAR(l),CONST(0))))))
+79 ----> 80   *
+80 is a final state. Endinfo:
+{
+    n = m
+}
+The AST of the endinfo:
+ASGN(VAR(n),VAR(m))
+81 ----> 82   [
+82 is a final state. Endinfo:
+{
+    while (n != n)
+    do {
+        while (l != l)
+        do{
+            while (m != m)
+            do
+            {
+                m = m != m
+            }
+        }
+    }
+}
+The AST of the endinfo:
+WHILE(NE(VAR(n),VAR(n)),WHILE(NE(VAR(l),VAR(l)),WHILE(NE(VAR(m),VAR(m)),ASGN(VAR(m),NE(VAR(m),VAR(m))))))
+83 ----> 84   ]
+84 is a final state. Endinfo:
+{
+    if (m != m && m == m)
+    then {
+        if (l != l || l == l)
+        then {
+            if ( ! k != k)
+            then {
+                if (! (n != n))
+                then {
+                    n = n + 1
+                }
+                else{
+                    n = n - 1; skip; skip
+                }
+            }
+            else{
+                n = n - 1; skip; skip
+            }
+        }
+        else{
+            n = n - 1; skip; skip
+        }
+    }
+    else{
+        n = n - 1; skip; skip
+    };
+    m = 10
+}
+The AST of the endinfo:
+SEQ(IF(AND(NE(VAR(m),VAR(m)),EQ(VAR(m),VAR(m))),IF(OR(NE(VAR(l),VAR(l)),EQ(VAR(l),VAR(l))),IF(NE(NOT(VAR(k)),VAR(k)),IF(NOT(NE(VAR(n),VAR(n))),ASGN(VAR(n),PLUS(VAR(n),CONST(1))),SEQ(ASGN(VAR(n),MINUS(VAR(n),CONST(1))),SEQ(SKIP,SKIP))),SEQ(ASGN(VAR(n),MINUS(VAR(n),CONST(1))),SEQ(SKIP,SKIP))),SEQ(ASGN(VAR(n),MINUS(VAR(n),CONST(1))),SEQ(SKIP,SKIP))),SEQ(ASGN(VAR(n),MINUS(VAR(n),CONST(1))),SEQ(SKIP,SKIP))),ASGN(VAR(m),CONST(10)))
+85 ----> 86   ,
+86 is a final state. Endinfo:
+{
+    while (n != n)
+    do {
+        if (s == s)
+        then {while ( l == l + 123)
+                do{
+                    k = k + 1
+                }
+        }
+        
+        else {while ( l == l - 123)
+                do{
+                    k = k * 1
+                }
+        }
+    }
+}
+The AST of the endinfo:
+WHILE(NE(VAR(n),VAR(n)),IF(EQ(VAR(s),VAR(s)),WHILE(EQ(VAR(l),PLUS(VAR(l),CONST(123))),ASGN(VAR(k),PLUS(VAR(k),CONST(1)))),WHILE(EQ(VAR(l),MINUS(VAR(l),CONST(123))),ASGN(VAR(k),MUL(VAR(k),CONST(1))))))
+87 ----> 88   0
+88 ----> 95   ε
+89 ----> 90   1-9
+90 ----> 91   ε
+91 ----> 93   ε
+91 ----> 92   0-9
+92 ----> 91   ε
+93 ----> 95   ε
+94 ----> 89   ε
+94 ----> 87   ε
+95 is a final state. Endinfo:
+{
+    n = 100;
+    m = 10;
+    m = - n * n;
+    m = * n - 1
+}
+The AST of the endinfo:
+SEQ(ASGN(VAR(n),CONST(100)),SEQ(ASGN(VAR(m),CONST(10)),SEQ(ASGN(VAR(m),MUL(UMINUS(VAR(n)),VAR(n))),ASGN(VAR(m),MINUS(DEREF(VAR(n)),CONST(1))))))
+96 ----> 97   _A-Za-z
+97 ----> 98   ε
+98 ----> 100   ε
+98 ----> 99   _A-Za-z0-9
+99 ----> 98   ε
+100 is a final state. Endinfo:
+{
+    n = 100;
+    m = 10;
+    m = - n * n;
+    m = * n - 1
+}
+The AST of the endinfo:
+SEQ(ASGN(VAR(n),CONST(100)),SEQ(ASGN(VAR(m),CONST(10)),SEQ(ASGN(VAR(m),MUL(UMINUS(VAR(n)),VAR(n))),ASGN(VAR(m),MINUS(DEREF(VAR(n)),CONST(1))))))
+101 ----> 102   ;
+102 is a final state. Endinfo:
+{
+    n = 100;
+    m = 10;
+    m = - n * n;
+    m = * n - 1
+    }
+The AST of the endinfo:
+SEQ(ASGN(VAR(n),CONST(100)),SEQ(ASGN(VAR(m),CONST(10)),SEQ(ASGN(VAR(m),MUL(UMINUS(VAR(n)),VAR(n))),ASGN(VAR(m),MINUS(DEREF(VAR(n)),CONST(1))))))
+103 ----> 104   (
+104 is a final state. Endinfo:
+{
+    n = 100;
+    m = 10;
+    m = - n * n;
+    m = * n - 1
+    }
+The AST of the endinfo:
+SEQ(ASGN(VAR(n),CONST(100)),SEQ(ASGN(VAR(m),CONST(10)),SEQ(ASGN(VAR(m),MUL(UMINUS(VAR(n)),VAR(n))),ASGN(VAR(m),MINUS(DEREF(VAR(n)),CONST(1))))))
+105 ----> 106   )
+106 is a final state. Endinfo:
+{
+    n = 100;
+    m = 10;
+    m = - n * n;
+    m = * n - 1
+    }
+The AST of the endinfo:
+SEQ(ASGN(VAR(n),CONST(100)),SEQ(ASGN(VAR(m),CONST(10)),SEQ(ASGN(VAR(m),MUL(UMINUS(VAR(n)),VAR(n))),ASGN(VAR(m),MINUS(DEREF(VAR(n)),CONST(1))))))
+107 ----> 108   \{
+108 is a final state. Endinfo:
+{
+    n = 100;
+    m = 10;
+    m = - n * n;
+    m = * n - 1
+    }
+The AST of the endinfo:
+SEQ(ASGN(VAR(n),CONST(100)),SEQ(ASGN(VAR(m),CONST(10)),SEQ(ASGN(VAR(m),MUL(UMINUS(VAR(n)),VAR(n))),ASGN(VAR(m),MINUS(DEREF(VAR(n)),CONST(1))))))
+109 ----> 110   \}
+110 is a final state. Endinfo:
+{
+    n = 100;
+    m = 10;
+    m = - n * n;
+    m = * n - 1
+    }
+The AST of the endinfo:
+SEQ(ASGN(VAR(n),CONST(100)),SEQ(ASGN(VAR(m),CONST(10)),SEQ(ASGN(VAR(m),MUL(UMINUS(VAR(n)),VAR(n))),ASGN(VAR(m),MINUS(DEREF(VAR(n)),CONST(1))))))
+111 ----> 112    \t\n\r
+112 is a final state. Endinfo:
+{ };
+The AST of the endinfo:
+
+113 ----> 114   .
+114 is a final state. Endinfo:
+{  n = 100;
+  m = 10;
+  m = - n * n;
+  m = * n - 1 }
+The AST of the endinfo:
+SEQ(ASGN(VAR(n),CONST(100)),SEQ(ASGN(VAR(m),CONST(10)),SEQ(ASGN(VAR(m),MUL(UMINUS(VAR(n)),VAR(n))),ASGN(VAR(m),MINUS(DEREF(VAR(n)),CONST(1))))))
+
+
+
+
+
+
+
+
+
+
+
+The following is the pretty printing of the DFA.
+
+-------------- DFA node 0 --------------
+The NFA node set: { 0 113 111 109 107 105 103 101 96 94 87 89 85 83 81 79 71 65 51 45 37 21 1 }
+The transitions:
+0 ----> 1   .
+0 ----> 2    \t\n\r
+0 ----> 3   \}
+0 ----> 4   \{
+0 ----> 5   )
+0 ----> 6   (
+0 ----> 7   ;
+0 ----> 8   _A-Zabdfgjkm-su-z
+0 ----> 9   c
+0 ----> 10   e
+0 ----> 11   h
+0 ----> 12   i
+0 ----> 13   l
+0 ----> 14   t
+0 ----> 15   0
+0 ----> 16   1-9
+0 ----> 17   ,
+0 ----> 18   ]
+0 ----> 19   [
+0 ----> 20   *
+This DFA node is not a final state.
+
+
+-------------- DFA node 1 --------------
+The NFA node set: { 114 }
+The transitions:
+This DFA node is a final state. Endinfo:
+{  n = 100;
+  m = 10;
+  m = - n * n;
+  m = * n - 1 }
+The AST of the endinfo:
+SEQ(ASGN(VAR(n),CONST(100)),SEQ(ASGN(VAR(m),CONST(10)),SEQ(ASGN(VAR(m),MUL(UMINUS(VAR(n)),VAR(n))),ASGN(VAR(m),MINUS(DEREF(VAR(n)),CONST(1))))))
+
+-------------- DFA node 2 --------------
+The NFA node set: { 112 }
+The transitions:
+This DFA node is a final state. Endinfo:
+{ };
+The AST of the endinfo:
+
+
+-------------- DFA node 3 --------------
+The NFA node set: { 110 }
+The transitions:
+This DFA node is a final state. Endinfo:
+{
+    n = 100;
+    m = 10;
+    m = - n * n;
+    m = * n - 1
+    }
+The AST of the endinfo:
+SEQ(ASGN(VAR(n),CONST(100)),SEQ(ASGN(VAR(m),CONST(10)),SEQ(ASGN(VAR(m),MUL(UMINUS(VAR(n)),VAR(n))),ASGN(VAR(m),MINUS(DEREF(VAR(n)),CONST(1))))))
+
+-------------- DFA node 4 --------------
+The NFA node set: { 108 }
+The transitions:
+This DFA node is a final state. Endinfo:
+{
+    n = 100;
+    m = 10;
+    m = - n * n;
+    m = * n - 1
+    }
+The AST of the endinfo:
+SEQ(ASGN(VAR(n),CONST(100)),SEQ(ASGN(VAR(m),CONST(10)),SEQ(ASGN(VAR(m),MUL(UMINUS(VAR(n)),VAR(n))),ASGN(VAR(m),MINUS(DEREF(VAR(n)),CONST(1))))))
+
+-------------- DFA node 5 --------------
+The NFA node set: { 106 }
+The transitions:
+This DFA node is a final state. Endinfo:
+{
+    n = 100;
+    m = 10;
+    m = - n * n;
+    m = * n - 1
+    }
+The AST of the endinfo:
+SEQ(ASGN(VAR(n),CONST(100)),SEQ(ASGN(VAR(m),CONST(10)),SEQ(ASGN(VAR(m),MUL(UMINUS(VAR(n)),VAR(n))),ASGN(VAR(m),MINUS(DEREF(VAR(n)),CONST(1))))))
+
+-------------- DFA node 6 --------------
+The NFA node set: { 104 }
+The transitions:
+This DFA node is a final state. Endinfo:
+{
+    n = 100;
+    m = 10;
+    m = - n * n;
+    m = * n - 1
+    }
+The AST of the endinfo:
+SEQ(ASGN(VAR(n),CONST(100)),SEQ(ASGN(VAR(m),CONST(10)),SEQ(ASGN(VAR(m),MUL(UMINUS(VAR(n)),VAR(n))),ASGN(VAR(m),MINUS(DEREF(VAR(n)),CONST(1))))))
+
+-------------- DFA node 7 --------------
+The NFA node set: { 102 }
+The transitions:
+This DFA node is a final state. Endinfo:
+{
+    n = 100;
+    m = 10;
+    m = - n * n;
+    m = * n - 1
+    }
+The AST of the endinfo:
+SEQ(ASGN(VAR(n),CONST(100)),SEQ(ASGN(VAR(m),CONST(10)),SEQ(ASGN(VAR(m),MUL(UMINUS(VAR(n)),VAR(n))),ASGN(VAR(m),MINUS(DEREF(VAR(n)),CONST(1))))))
+
+-------------- DFA node 8 --------------
+The NFA node set: { 97 98 100 }
+The transitions:
+8 ----> 21   _A-Za-z0-9
+This DFA node is a final state. Endinfo:
+{
+    n = 100;
+    m = 10;
+    m = - n * n;
+    m = * n - 1
+}
+The AST of the endinfo:
+SEQ(ASGN(VAR(n),CONST(100)),SEQ(ASGN(VAR(m),CONST(10)),SEQ(ASGN(VAR(m),MUL(UMINUS(VAR(n)),VAR(n))),ASGN(VAR(m),MINUS(DEREF(VAR(n)),CONST(1))))))
+
+-------------- DFA node 9 --------------
+The NFA node set: { 72 73 97 98 100 }
+The transitions:
+9 ----> 22   h
+9 ----> 21   _A-Za-gi-z0-9
+This DFA node is a final state. Endinfo:
+{
+    n = 100;
+    m = 10;
+    m = - n * n;
+    m = * n - 1
+}
+The AST of the endinfo:
+SEQ(ASGN(VAR(n),CONST(100)),SEQ(ASGN(VAR(m),CONST(10)),SEQ(ASGN(VAR(m),MUL(UMINUS(VAR(n)),VAR(n))),ASGN(VAR(m),MINUS(DEREF(VAR(n)),CONST(1))))))
+
+-------------- DFA node 10 --------------
+The NFA node set: { 38 39 97 98 100 }
+The transitions:
+10 ----> 23   n
+10 ----> 21   _A-Za-mo-z0-9
+This DFA node is a final state. Endinfo:
+{
+    n = 100;
+    m = 10;
+    m = - n * n;
+    m = * n - 1
+}
+The AST of the endinfo:
+SEQ(ASGN(VAR(n),CONST(100)),SEQ(ASGN(VAR(m),CONST(10)),SEQ(ASGN(VAR(m),MUL(UMINUS(VAR(n)),VAR(n))),ASGN(VAR(m),MINUS(DEREF(VAR(n)),CONST(1))))))
+
+-------------- DFA node 11 --------------
+The NFA node set: { 22 23 97 98 100 }
+The transitions:
+11 ----> 24   u
+11 ----> 21   _A-Za-tv-z0-9
+This DFA node is a final state. Endinfo:
+{
+    n = 100;
+    m = 10;
+    m = - n * n;
+    m = * n - 1
+}
+The AST of the endinfo:
+SEQ(ASGN(VAR(n),CONST(100)),SEQ(ASGN(VAR(m),CONST(10)),SEQ(ASGN(VAR(m),MUL(UMINUS(VAR(n)),VAR(n))),ASGN(VAR(m),MINUS(DEREF(VAR(n)),CONST(1))))))
+
+-------------- DFA node 12 --------------
+The NFA node set: { 46 47 66 67 97 98 100 }
+The transitions:
+12 ----> 25   n
+12 ----> 21   _A-Za-mo-z0-9
+This DFA node is a final state. Endinfo:
+{
+    n = 100;
+    m = 10;
+    m = - n * n;
+    m = * n - 1
+}
+The AST of the endinfo:
+SEQ(ASGN(VAR(n),CONST(100)),SEQ(ASGN(VAR(m),CONST(10)),SEQ(ASGN(VAR(m),MUL(UMINUS(VAR(n)),VAR(n))),ASGN(VAR(m),MINUS(DEREF(VAR(n)),CONST(1))))))
+
+-------------- DFA node 13 --------------
+The NFA node set: { 2 3 97 98 100 }
+The transitions:
+13 ----> 26   i
+13 ----> 21   _A-Za-hj-z0-9
+This DFA node is a final state. Endinfo:
+{
+    n = 100;
+    m = 10;
+    m = - n * n;
+    m = * n - 1
+}
+The AST of the endinfo:
+SEQ(ASGN(VAR(n),CONST(100)),SEQ(ASGN(VAR(m),CONST(10)),SEQ(ASGN(VAR(m),MUL(UMINUS(VAR(n)),VAR(n))),ASGN(VAR(m),MINUS(DEREF(VAR(n)),CONST(1))))))
+
+-------------- DFA node 14 --------------
+The NFA node set: { 52 53 97 98 100 }
+The transitions:
+14 ----> 27   y
+14 ----> 21   _A-Za-xz0-9
+This DFA node is a final state. Endinfo:
+{
+    n = 100;
+    m = 10;
+    m = - n * n;
+    m = * n - 1
+}
+The AST of the endinfo:
+SEQ(ASGN(VAR(n),CONST(100)),SEQ(ASGN(VAR(m),CONST(10)),SEQ(ASGN(VAR(m),MUL(UMINUS(VAR(n)),VAR(n))),ASGN(VAR(m),MINUS(DEREF(VAR(n)),CONST(1))))))
+
+-------------- DFA node 15 --------------
+The NFA node set: { 88 95 }
+The transitions:
+This DFA node is a final state. Endinfo:
+{
+    n = 100;
+    m = 10;
+    m = - n * n;
+    m = * n - 1
+}
+The AST of the endinfo:
+SEQ(ASGN(VAR(n),CONST(100)),SEQ(ASGN(VAR(m),CONST(10)),SEQ(ASGN(VAR(m),MUL(UMINUS(VAR(n)),VAR(n))),ASGN(VAR(m),MINUS(DEREF(VAR(n)),CONST(1))))))
+
+-------------- DFA node 16 --------------
+The NFA node set: { 90 91 93 95 }
+The transitions:
+16 ----> 28   0-9
+This DFA node is a final state. Endinfo:
+{
+    n = 100;
+    m = 10;
+    m = - n * n;
+    m = * n - 1
+}
+The AST of the endinfo:
+SEQ(ASGN(VAR(n),CONST(100)),SEQ(ASGN(VAR(m),CONST(10)),SEQ(ASGN(VAR(m),MUL(UMINUS(VAR(n)),VAR(n))),ASGN(VAR(m),MINUS(DEREF(VAR(n)),CONST(1))))))
+
+-------------- DFA node 17 --------------
+The NFA node set: { 86 }
+The transitions:
+This DFA node is a final state. Endinfo:
+{
+    while (n != n)
+    do {
+        if (s == s)
+        then {while ( l == l + 123)
+                do{
+                    k = k + 1
+                }
+        }
+        
+        else {while ( l == l - 123)
+                do{
+                    k = k * 1
+                }
+        }
+    }
+}
+The AST of the endinfo:
+WHILE(NE(VAR(n),VAR(n)),IF(EQ(VAR(s),VAR(s)),WHILE(EQ(VAR(l),PLUS(VAR(l),CONST(123))),ASGN(VAR(k),PLUS(VAR(k),CONST(1)))),WHILE(EQ(VAR(l),MINUS(VAR(l),CONST(123))),ASGN(VAR(k),MUL(VAR(k),CONST(1))))))
+
+-------------- DFA node 18 --------------
+The NFA node set: { 84 }
+The transitions:
+This DFA node is a final state. Endinfo:
+{
+    if (m != m && m == m)
+    then {
+        if (l != l || l == l)
+        then {
+            if ( ! k != k)
+            then {
+                if (! (n != n))
+                then {
+                    n = n + 1
+                }
+                else{
+                    n = n - 1; skip; skip
+                }
+            }
+            else{
+                n = n - 1; skip; skip
+            }
+        }
+        else{
+            n = n - 1; skip; skip
+        }
+    }
+    else{
+        n = n - 1; skip; skip
+    };
+    m = 10
+}
+The AST of the endinfo:
+SEQ(IF(AND(NE(VAR(m),VAR(m)),EQ(VAR(m),VAR(m))),IF(OR(NE(VAR(l),VAR(l)),EQ(VAR(l),VAR(l))),IF(NE(NOT(VAR(k)),VAR(k)),IF(NOT(NE(VAR(n),VAR(n))),ASGN(VAR(n),PLUS(VAR(n),CONST(1))),SEQ(ASGN(VAR(n),MINUS(VAR(n),CONST(1))),SEQ(SKIP,SKIP))),SEQ(ASGN(VAR(n),MINUS(VAR(n),CONST(1))),SEQ(SKIP,SKIP))),SEQ(ASGN(VAR(n),MINUS(VAR(n),CONST(1))),SEQ(SKIP,SKIP))),SEQ(ASGN(VAR(n),MINUS(VAR(n),CONST(1))),SEQ(SKIP,SKIP))),ASGN(VAR(m),CONST(10)))
+
+-------------- DFA node 19 --------------
+The NFA node set: { 82 }
+The transitions:
+This DFA node is a final state. Endinfo:
+{
+    while (n != n)
+    do {
+        while (l != l)
+        do{
+            while (m != m)
+            do
+            {
+                m = m != m
+            }
+        }
+    }
+}
+The AST of the endinfo:
+WHILE(NE(VAR(n),VAR(n)),WHILE(NE(VAR(l),VAR(l)),WHILE(NE(VAR(m),VAR(m)),ASGN(VAR(m),NE(VAR(m),VAR(m))))))
+
+-------------- DFA node 20 --------------
+The NFA node set: { 80 }
+The transitions:
+This DFA node is a final state. Endinfo:
+{
+    n = m
+}
+The AST of the endinfo:
+ASGN(VAR(n),VAR(m))
+
+-------------- DFA node 21 --------------
+The NFA node set: { 98 99 100 }
+The transitions:
+21 ----> 21   _A-Za-z0-9
+This DFA node is a final state. Endinfo:
+{
+    n = 100;
+    m = 10;
+    m = - n * n;
+    m = * n - 1
+}
+The AST of the endinfo:
+SEQ(ASGN(VAR(n),CONST(100)),SEQ(ASGN(VAR(m),CONST(10)),SEQ(ASGN(VAR(m),MUL(UMINUS(VAR(n)),VAR(n))),ASGN(VAR(m),MINUS(DEREF(VAR(n)),CONST(1))))))
+
+-------------- DFA node 22 --------------
+The NFA node set: { 74 75 98 99 100 }
+The transitions:
+22 ----> 29   a
+22 ----> 21   _A-Zb-z0-9
+This DFA node is a final state. Endinfo:
+{
+    n = 100;
+    m = 10;
+    m = - n * n;
+    m = * n - 1
+}
+The AST of the endinfo:
+SEQ(ASGN(VAR(n),CONST(100)),SEQ(ASGN(VAR(m),CONST(10)),SEQ(ASGN(VAR(m),MUL(UMINUS(VAR(n)),VAR(n))),ASGN(VAR(m),MINUS(DEREF(VAR(n)),CONST(1))))))
+
+-------------- DFA node 23 --------------
+The NFA node set: { 40 41 98 99 100 }
+The transitions:
+23 ----> 30   u
+23 ----> 21   _A-Za-tv-z0-9
+This DFA node is a final state. Endinfo:
+{
+    n = 100;
+    m = 10;
+    m = - n * n;
+    m = * n - 1
+}
+The AST of the endinfo:
+SEQ(ASGN(VAR(n),CONST(100)),SEQ(ASGN(VAR(m),CONST(10)),SEQ(ASGN(VAR(m),MUL(UMINUS(VAR(n)),VAR(n))),ASGN(VAR(m),MINUS(DEREF(VAR(n)),CONST(1))))))
+
+-------------- DFA node 24 --------------
+The NFA node set: { 24 25 98 99 100 }
+The transitions:
+24 ----> 31   a
+24 ----> 21   _A-Zb-z0-9
+This DFA node is a final state. Endinfo:
+{
+    n = 100;
+    m = 10;
+    m = - n * n;
+    m = * n - 1
+}
+The AST of the endinfo:
+SEQ(ASGN(VAR(n),CONST(100)),SEQ(ASGN(VAR(m),CONST(10)),SEQ(ASGN(VAR(m),MUL(UMINUS(VAR(n)),VAR(n))),ASGN(VAR(m),MINUS(DEREF(VAR(n)),CONST(1))))))
+
+-------------- DFA node 25 --------------
+The NFA node set: { 48 49 68 69 98 99 100 }
+The transitions:
+25 ----> 32   t
+25 ----> 21   _A-Za-su-z0-9
+This DFA node is a final state. Endinfo:
+{
+    n = 100;
+    m = 10;
+    m = - n * n;
+    m = * n - 1
+}
+The AST of the endinfo:
+SEQ(ASGN(VAR(n),CONST(100)),SEQ(ASGN(VAR(m),CONST(10)),SEQ(ASGN(VAR(m),MUL(UMINUS(VAR(n)),VAR(n))),ASGN(VAR(m),MINUS(DEREF(VAR(n)),CONST(1))))))
+
+-------------- DFA node 26 --------------
+The NFA node set: { 4 5 98 99 100 }
+The transitions:
+26 ----> 33   u
+26 ----> 21   _A-Za-tv-z0-9
+This DFA node is a final state. Endinfo:
+{
+    n = 100;
+    m = 10;
+    m = - n * n;
+    m = * n - 1
+}
+The AST of the endinfo:
+SEQ(ASGN(VAR(n),CONST(100)),SEQ(ASGN(VAR(m),CONST(10)),SEQ(ASGN(VAR(m),MUL(UMINUS(VAR(n)),VAR(n))),ASGN(VAR(m),MINUS(DEREF(VAR(n)),CONST(1))))))
+
+-------------- DFA node 27 --------------
+The NFA node set: { 54 55 98 99 100 }
+The transitions:
+27 ----> 34   p
+27 ----> 21   _A-Za-oq-z0-9
+This DFA node is a final state. Endinfo:
+{
+    n = 100;
+    m = 10;
+    m = - n * n;
+    m = * n - 1
+}
+The AST of the endinfo:
+SEQ(ASGN(VAR(n),CONST(100)),SEQ(ASGN(VAR(m),CONST(10)),SEQ(ASGN(VAR(m),MUL(UMINUS(VAR(n)),VAR(n))),ASGN(VAR(m),MINUS(DEREF(VAR(n)),CONST(1))))))
+
+-------------- DFA node 28 --------------
+The NFA node set: { 91 92 93 95 }
+The transitions:
+28 ----> 28   0-9
+This DFA node is a final state. Endinfo:
+{
+    n = 100;
+    m = 10;
+    m = - n * n;
+    m = * n - 1
+}
+The AST of the endinfo:
+SEQ(ASGN(VAR(n),CONST(100)),SEQ(ASGN(VAR(m),CONST(10)),SEQ(ASGN(VAR(m),MUL(UMINUS(VAR(n)),VAR(n))),ASGN(VAR(m),MINUS(DEREF(VAR(n)),CONST(1))))))
+
+-------------- DFA node 29 --------------
+The NFA node set: { 76 77 98 99 100 }
+The transitions:
+29 ----> 35   r
+29 ----> 21   _A-Za-qs-z0-9
+This DFA node is a final state. Endinfo:
+{
+    n = 100;
+    m = 10;
+    m = - n * n;
+    m = * n - 1
+}
+The AST of the endinfo:
+SEQ(ASGN(VAR(n),CONST(100)),SEQ(ASGN(VAR(m),CONST(10)),SEQ(ASGN(VAR(m),MUL(UMINUS(VAR(n)),VAR(n))),ASGN(VAR(m),MINUS(DEREF(VAR(n)),CONST(1))))))
+
+-------------- DFA node 30 --------------
+The NFA node set: { 42 43 98 99 100 }
+The transitions:
+30 ----> 36   m
+30 ----> 21   _A-Za-ln-z0-9
+This DFA node is a final state. Endinfo:
+{
+    n = 100;
+    m = 10;
+    m = - n * n;
+    m = * n - 1
+}
+The AST of the endinfo:
+SEQ(ASGN(VAR(n),CONST(100)),SEQ(ASGN(VAR(m),CONST(10)),SEQ(ASGN(VAR(m),MUL(UMINUS(VAR(n)),VAR(n))),ASGN(VAR(m),MINUS(DEREF(VAR(n)),CONST(1))))))
+
+-------------- DFA node 31 --------------
+The NFA node set: { 26 27 98 99 100 }
+The transitions:
+31 ----> 37   n
+31 ----> 21   _A-Za-mo-z0-9
+This DFA node is a final state. Endinfo:
+{
+    n = 100;
+    m = 10;
+    m = - n * n;
+    m = * n - 1
+}
+The AST of the endinfo:
+SEQ(ASGN(VAR(n),CONST(100)),SEQ(ASGN(VAR(m),CONST(10)),SEQ(ASGN(VAR(m),MUL(UMINUS(VAR(n)),VAR(n))),ASGN(VAR(m),MINUS(DEREF(VAR(n)),CONST(1))))))
+
+-------------- DFA node 32 --------------
+The NFA node set: { 50 70 98 99 100 }
+The transitions:
+32 ----> 21   _A-Za-z0-9
+This DFA node is a final state. Endinfo:
+{
+    n = 100;
+    m = 10;
+    m = - n * n;
+    m = * n - 1
+}
+The AST of the endinfo:
+SEQ(ASGN(VAR(n),CONST(100)),SEQ(ASGN(VAR(m),CONST(10)),SEQ(ASGN(VAR(m),MUL(UMINUS(VAR(n)),VAR(n))),ASGN(VAR(m),MINUS(DEREF(VAR(n)),CONST(1))))))
+
+-------------- DFA node 33 --------------
+The NFA node set: { 6 7 98 99 100 }
+The transitions:
+33 ----> 38    
+33 ----> 21   _A-Za-z0-9
+This DFA node is a final state. Endinfo:
+{
+    n = 100;
+    m = 10;
+    m = - n * n;
+    m = * n - 1
+}
+The AST of the endinfo:
+SEQ(ASGN(VAR(n),CONST(100)),SEQ(ASGN(VAR(m),CONST(10)),SEQ(ASGN(VAR(m),MUL(UMINUS(VAR(n)),VAR(n))),ASGN(VAR(m),MINUS(DEREF(VAR(n)),CONST(1))))))
+
+-------------- DFA node 34 --------------
+The NFA node set: { 56 57 98 99 100 }
+The transitions:
+34 ----> 39   e
+34 ----> 21   _A-Za-df-z0-9
+This DFA node is a final state. Endinfo:
+{
+    n = 100;
+    m = 10;
+    m = - n * n;
+    m = * n - 1
+}
+The AST of the endinfo:
+SEQ(ASGN(VAR(n),CONST(100)),SEQ(ASGN(VAR(m),CONST(10)),SEQ(ASGN(VAR(m),MUL(UMINUS(VAR(n)),VAR(n))),ASGN(VAR(m),MINUS(DEREF(VAR(n)),CONST(1))))))
+
+-------------- DFA node 35 --------------
+The NFA node set: { 78 98 99 100 }
+The transitions:
+35 ----> 21   _A-Za-z0-9
+This DFA node is a final state. Endinfo:
+{
+    n = 100;
+    m = 10;
+    m = - n * n;
+    m = * n - 1
+}
+The AST of the endinfo:
+SEQ(ASGN(VAR(n),CONST(100)),SEQ(ASGN(VAR(m),CONST(10)),SEQ(ASGN(VAR(m),MUL(UMINUS(VAR(n)),VAR(n))),ASGN(VAR(m),MINUS(DEREF(VAR(n)),CONST(1))))))
+
+-------------- DFA node 36 --------------
+The NFA node set: { 44 98 99 100 }
+The transitions:
+36 ----> 21   _A-Za-z0-9
+This DFA node is a final state. Endinfo:
+{
+    n = 100;
+    m = 10;
+    m = - n * n;
+    m = * n - 1
+}
+The AST of the endinfo:
+SEQ(ASGN(VAR(n),CONST(100)),SEQ(ASGN(VAR(m),CONST(10)),SEQ(ASGN(VAR(m),MUL(UMINUS(VAR(n)),VAR(n))),ASGN(VAR(m),MINUS(DEREF(VAR(n)),CONST(1))))))
+
+-------------- DFA node 37 --------------
+The NFA node set: { 28 29 98 99 100 }
+The transitions:
+37 ----> 40   g
+37 ----> 21   _A-Za-fh-z0-9
+This DFA node is a final state. Endinfo:
+{
+    n = 100;
+    m = 10;
+    m = - n * n;
+    m = * n - 1
+}
+The AST of the endinfo:
+SEQ(ASGN(VAR(n),CONST(100)),SEQ(ASGN(VAR(m),CONST(10)),SEQ(ASGN(VAR(m),MUL(UMINUS(VAR(n)),VAR(n))),ASGN(VAR(m),MINUS(DEREF(VAR(n)),CONST(1))))))
+
+-------------- DFA node 38 --------------
+The NFA node set: { 8 9 }
+The transitions:
+38 ----> 41   t
+This DFA node is not a final state.
+
+
+-------------- DFA node 39 --------------
+The NFA node set: { 58 59 98 99 100 }
+The transitions:
+39 ----> 42   d
+39 ----> 21   _A-Za-ce-z0-9
+This DFA node is a final state. Endinfo:
+{
+    n = 100;
+    m = 10;
+    m = - n * n;
+    m = * n - 1
+}
+The AST of the endinfo:
+SEQ(ASGN(VAR(n),CONST(100)),SEQ(ASGN(VAR(m),CONST(10)),SEQ(ASGN(VAR(m),MUL(UMINUS(VAR(n)),VAR(n))),ASGN(VAR(m),MINUS(DEREF(VAR(n)),CONST(1))))))
+
+-------------- DFA node 40 --------------
+The NFA node set: { 30 31 98 99 100 }
+The transitions:
+40 ----> 43    
+40 ----> 21   _A-Za-z0-9
+This DFA node is a final state. Endinfo:
+{
+    n = 100;
+    m = 10;
+    m = - n * n;
+    m = * n - 1
+}
+The AST of the endinfo:
+SEQ(ASGN(VAR(n),CONST(100)),SEQ(ASGN(VAR(m),CONST(10)),SEQ(ASGN(VAR(m),MUL(UMINUS(VAR(n)),VAR(n))),ASGN(VAR(m),MINUS(DEREF(VAR(n)),CONST(1))))))
+
+-------------- DFA node 41 --------------
+The NFA node set: { 10 11 }
+The transitions:
+41 ----> 44   i
+This DFA node is not a final state.
+
+
+-------------- DFA node 42 --------------
+The NFA node set: { 60 61 98 99 100 }
+The transitions:
+42 ----> 45   e
+42 ----> 21   _A-Za-df-z0-9
+This DFA node is a final state. Endinfo:
+{
+    n = 100;
+    m = 10;
+    m = - n * n;
+    m = * n - 1
+}
+The AST of the endinfo:
+SEQ(ASGN(VAR(n),CONST(100)),SEQ(ASGN(VAR(m),CONST(10)),SEQ(ASGN(VAR(m),MUL(UMINUS(VAR(n)),VAR(n))),ASGN(VAR(m),MINUS(DEREF(VAR(n)),CONST(1))))))
+
+-------------- DFA node 43 --------------
+The NFA node set: { 32 33 }
+The transitions:
+43 ----> 46   b
+This DFA node is not a final state.
+
+
+-------------- DFA node 44 --------------
+The NFA node set: { 12 13 }
+The transitions:
+44 ----> 47   a
+This DFA node is not a final state.
+
+
+-------------- DFA node 45 --------------
+The NFA node set: { 62 63 98 99 100 }
+The transitions:
+45 ----> 48   f
+45 ----> 21   _A-Za-eg-z0-9
+This DFA node is a final state. Endinfo:
+{
+    n = 100;
+    m = 10;
+    m = - n * n;
+    m = * n - 1
+}
+The AST of the endinfo:
+SEQ(ASGN(VAR(n),CONST(100)),SEQ(ASGN(VAR(m),CONST(10)),SEQ(ASGN(VAR(m),MUL(UMINUS(VAR(n)),VAR(n))),ASGN(VAR(m),MINUS(DEREF(VAR(n)),CONST(1))))))
+
+-------------- DFA node 46 --------------
+The NFA node set: { 34 35 }
+The transitions:
+46 ----> 49   o
+This DFA node is not a final state.
+
+
+-------------- DFA node 47 --------------
+The NFA node set: { 14 15 }
+The transitions:
+47 ----> 50   n
+This DFA node is not a final state.
+
+
+-------------- DFA node 48 --------------
+The NFA node set: { 64 98 99 100 }
+The transitions:
+48 ----> 21   _A-Za-z0-9
+This DFA node is a final state. Endinfo:
+{
+    n = 100;
+    m = 10;
+    m = - n * n;
+    m = * n - 1
+}
+The AST of the endinfo:
+SEQ(ASGN(VAR(n),CONST(100)),SEQ(ASGN(VAR(m),CONST(10)),SEQ(ASGN(VAR(m),MUL(UMINUS(VAR(n)),VAR(n))),ASGN(VAR(m),MINUS(DEREF(VAR(n)),CONST(1))))))
+
+-------------- DFA node 49 --------------
+The NFA node set: { 36 }
+The transitions:
+This DFA node is a final state. Endinfo:
+{
+    programming_languages = wonderful_and_interesting; compliers = attactive && amazing
+}
+The AST of the endinfo:
+SEQ(ASGN(VAR(programming_languages),VAR(wonderful_and_interesting)),ASGN(VAR(compliers),AND(VAR(attactive),VAR(amazing))))
+
+-------------- DFA node 50 --------------
+The NFA node set: { 16 17 }
+The transitions:
+50 ----> 51   y
+This DFA node is not a final state.
+
+
+-------------- DFA node 51 --------------
+The NFA node set: { 18 19 }
+The transitions:
+51 ----> 52   u
+This DFA node is not a final state.
+
+
+-------------- DFA node 52 --------------
+The NFA node set: { 20 }
+The transitions:
+This DFA node is a final state. Endinfo:
+{
+    666 = liu_tianyu;
+    l521030910075 = nb
+}
+The AST of the endinfo:
+SEQ(ASGN(CONST(666),VAR(liu_tianyu)),ASGN(VAR(l521030910075),VAR(nb)))

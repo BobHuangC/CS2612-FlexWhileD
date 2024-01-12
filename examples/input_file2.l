@@ -1,3 +1,19 @@
+"liu" {
+    var a;
+    var b;
+    666 = liu_tianyu;
+    l521030910075 = nb
+}
+
+"88" {
+    var n;
+    var m;
+    var aaa;
+    var bbb;
+    m = - n * n;
+    m = * n - 1
+}
+
 "888" {
     var n;
     var m;

@@ -125,7 +125,7 @@ void DFA::pretty_printing_DFA(NFA nfa)
 {
 	for (int i = 0; i < DFA_nodes_list.size(); i++)
 	{
-		std::cout << "-------------- DFA node " << i << " --------------" << std::endl;
+		std::cout << "\n-------------- DFA node " << i << " --------------" << std::endl;
 		std::cout << "The NFA node set: {";
 		for (NFA_node* nfa_node : DFA_nodes_list[i]->NFA_node_set)
 			std::cout << " " << nfa_node->n;	
