@@ -23,14 +23,14 @@
     m = * n - 1
 }
 
-"liu tianyu" {
+"liu_tianyu" {
     var a;
     var b;
-    666 = liu_tianyu;
-    l521030910075 = nb
+    liu_tianyu = 666;
+    nb = l521030910075
 }
 
-"huang bo" {
+"huang_bo" {
     programming_languages = wonderful_and_interesting; compliers = attactive && amazing
 }
 

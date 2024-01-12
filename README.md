@@ -32,13 +32,15 @@ make
 GeneralAnalyzer usage:    
 ```sh
 make
-./bin/flexWhileD examples/input_file3.l
+./bin/flexWhileD examples/input_file.l
 ```
 
-Then the output will be in the file "examples/input_file3.l-result.txt".
+Then the output will be in the file "examples/input_file.l-result.txt".
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
+
+The requirements for the input file are listed in the `doc/InputRequirements.md` file.
 
 ## Contact
 
@@ -46,7 +48,7 @@ Please feel free to open an issue or contact us personally if you have questions
 
 huang2003bo@sjtu.edu.cn
 
-
+railgun18@sjtu.edu.cn
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 

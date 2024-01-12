@@ -1,9 +1,9 @@
-"liu tianyu" {
-    666 = liu_tianyu;
+"liu_tianyu" {
+    liu_tianyu = 666;
     l521030910075 = nb
 }
 
-"huang bo" {
+"huang_bo" {
     programming_languages = wonderful_and_interesting; compliers = attactive && amazing
 }
 
@@ -22,7 +22,7 @@
     **n = **(**q * (n+*****m))
 }
 
-"int" {
+"long_int" {
     while(k != ll)
     do{
         ll = ll + 1;
@@ -116,24 +116,24 @@
 }
 
 0|[1-9][0-9]* {
-    n = 100;
-    m = 10;
-    m = - n * n;
-    m = * n - 1
+    n1 = 100;
+    m1 = 10;
+    m1 = - n1 * n1;
+    m1 = * n1 - 1
 }
 
 [_A-Za-z][_A-Za-z0-9]* {
-    n = 100;
-    m = 10;
-    m = - n * n;
-    m = * n - 1
+    n2 = 100;
+    m2 = 10;
+    m2 = - n * n;
+    m2 = * n - 1
 }
 
 ";" {
-    n = 100;
-    m = 10;
-    m = - n * n;
-    m = * n - 1
+    n3 = 100;
+    m3 = 10;
+    m3 = - n * n;
+    m3 = * n - 1
     }
 
 "(" {
