@@ -3,6 +3,39 @@
     caoqinxiang = handsome
 }
 
+"\\\{\\\}\\\{\{\{\{\\\}\\\{\\\\\\\{\\\\\}\\\{\\\\\\\\\{\\\}\}\\\}\}\}\{\\" {
+    **nnnn = **(**qqqq * (ncdcdccdcdcd+*****mlmlmlmlmlmllm))
+    }
+
+[\"\[]"[]\"]"[\]\"]"\"\\"[\]\"] {
+        if (m != m && m == m)
+    then {
+        if (l != l || l == l)
+        then {
+            if ( ! k != k)
+            then {
+                if (! (n != n))
+                then {
+                    n = n + 1
+                }
+                else{
+                    n = n - 1
+                }
+            }
+            else{
+                n = n - 1
+            }
+        }
+        else{
+            n = n - 1
+        }
+    }
+    else{
+        n = n - 1
+    };
+    m = 10
+    }
+
 "114514\\1919810" {
     var m;
     var n;
@@ -23,7 +56,9 @@
 }
 
 "I_love_programming_languages\n" {
-    programming_languages = wonderful_and_interesting; compliers = attactive && amazing
+    programming_languages = wonderful_and_interesting; 
+    compliers = attactive && amazing;
+    Lizhen =  (XueBao_Let_us_go != LiTangDingZhen)
 }
 
 "\\\\\{auh?\}\\\\" {
@@ -51,7 +86,7 @@ oo*h {
     }
 }
 
-"**" {
+"[\}\}\{\}"[\}\"\{]"[\"\}\"\]" {
     if (n == 0)
     then
         {n = n < 0}
@@ -71,7 +106,7 @@ oo*h {
         {l = l >= 0}
 }
 
-"*"* {
+"*"*"*\"*\"*"*"*" {
     n = m
 }
 
@@ -157,20 +192,6 @@ oo*h {
     m = * n - 1
     }
 
-"(" {
-    n = 100;
-    m = 10;
-    m = - n * n;
-    m = * n - 1
-    }
-
-")" {
-    n = 100;
-    m = 10;
-    m = - n * n;
-    m = * n - 1
-    }
-
 "\{" {
     n = 100;
     m = 10;
@@ -189,13 +210,6 @@ oo*h {
   m2003 = 10;
   m02 = - n * n;
   m20 = * n - 1 }
-
-[\"\[]"[]\"]"[\]\"]"\"\\"[\]\"] {
-    n007 = 100;
-    m2003 = 10;
-    m03 = - n * n;
-    m30 = * n - 1
-}
 
 [ \t\n\r]    { };
 
